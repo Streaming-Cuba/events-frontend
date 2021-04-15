@@ -1,0 +1,37 @@
+name: Deploy
+ 
+on:
+  push:
+    tags:
+      - 'v*'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+        with:
+         node-version: 14.x
+         
+      - name: Install dependencies 🏗
+        run: npm install 
+        
+      - name: Build 🛠
+        run: npm build
+
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.4
+        with:        
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          timeout: 60s
+          debug: true
+          script: sh /home/streaming/webapps/events/deploy.sh ${{ secrets.GIT_USERNAME }} ${{ secrets.GIT_PASSWORD }} 
