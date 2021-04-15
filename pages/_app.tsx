@@ -35,7 +35,9 @@ function MyApp(props: MyAppProps) {
           type: 'website',
           locale: 'es',
           url: 'https://eventos.streamingcuba.com',
-          site_name: 'Eventos: StreamingCuba',
+          site_name: 'Eventos',
+          title: 'Eventos',
+          description: 'SEO made easy for Next.js projects',
         }}
       />
       <ThemeProvider theme={theme}>
