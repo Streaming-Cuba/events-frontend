@@ -1,0 +1,36 @@
+import { Button, makeStyles } from '@material-ui/core';
+import { useRouter } from 'next/router';
+
+function OutlinedButton(props: { children: React.ReactNode; href?: string }) {
+  const classes = useStyles();
+  const router = useRouter();
+
+  const onClick = () => {
+    if (props.href) return router.push(props.href);
+  };
+
+  return (
+    <Button className={classes.root} onClick={onClick}>
+      {props.children}
+    </Button>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: '0 0',
+    border: '2px solid #fff',
+    color: '#fff',
+    textTransform: 'uppercase',
+    fontWeight: 500,
+    padding: '11px 40px',
+    display: 'inline-block',
+    borderRadius: '25px',
+
+    '&:hover': {
+      background: '#0006',
+    },
+  },
+}));
+
+export default OutlinedButton;
