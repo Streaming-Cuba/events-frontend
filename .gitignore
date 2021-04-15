@@ -22,3 +22,5 @@ package-lock.json
 #IDEs and code editors
 /.vscode
 /.idea
+
+yarn.lock
