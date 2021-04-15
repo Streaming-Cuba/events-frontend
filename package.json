@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "node server.js",
+    "start": "next start",
     "eslint:fix": "eslint src/** --fix",
     "eslint:check": "eslint src/**",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
