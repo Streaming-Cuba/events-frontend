@@ -1,8 +1,8 @@
 # CrowdCuba - App
 
-[![Deploy to Azure App Service (Production)](https://github.com/Crowdfunding-Cuba/CrowdCuba-App/actions/workflows/deploy%20to%20production.yml/badge.svg)](https://github.com/Crowdfunding-Cuba/CrowdCuba-App/actions/workflows/deploy%20to%20production.yml)
-
-[![Continuous integration tests](https://github.com/Crowdfunding-Cuba/CrowdCuba-App/actions/workflows/continuos%20integration.yml/badge.svg)](https://github.com/Crowdfunding-Cuba/CrowdCuba-App/actions/workflows/continuos%20integration.yml)
+<div>
+  [![Continuos Integration](https://github.com/Streaming-Cuba/events-frontend/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/Streaming-Cuba/events-frontend/actions/workflows/main.yml)
+ </div>
 
 ## How set up local environment
 To set up your local development environment you only need download
