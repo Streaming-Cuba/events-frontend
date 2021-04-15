@@ -13,7 +13,8 @@ interface LinkProps  {
   naked?: boolean,
   onClick?: () => void,
   prefetch?: boolean,
-  children?: React.ReactNode | React.ReactNodeArray,
+  children?: any,
+  [item: string]: any
 }
 
 
@@ -53,4 +54,4 @@ function Link(props: LinkProps) {
 	);
 }
 
-export default React.forwardRef((props, ref: Exclude<string, string>) => <Link {...props} innerRef={ref} />);
+export default React.forwardRef<any, LinkProps>((props, ref: Exclude<string, string>) => <Link {...props} innerRef={ref} />);

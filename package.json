@@ -4,6 +4,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
+    "prebuild": "rimraf .next",
     "dev": "next",
     "build": "next build",
     "start": "next start",
