@@ -40,6 +40,13 @@ const useStyles = makeStyles((theme) => ({
 
     transition: 'all 3s cubic-bezier(0, 0, 0.2, 1) 0s',
   },
+  carouselImage: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    bottom: 0,
+    right: 0,
+  },
   carouselItemOpacity: {
     display: 'block',
     position: 'absolute',

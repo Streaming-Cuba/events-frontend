@@ -1,5 +1,4 @@
 :root {
-
 }
 
 html,
@@ -9,6 +8,13 @@ body {
   background: #fff;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
 }

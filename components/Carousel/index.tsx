@@ -1,13 +1,24 @@
-import clsx from 'clsx';
-import React, { useEffect, useRef, useState } from 'react';
-import useStyles from './styles';
-import { Chip } from '@material-ui/core';
-import { OutlinedButton } from '../Buttons';
+import clsx from "clsx";
+import React, { useEffect, useRef, useState } from "react";
+import useStyles from "./styles";
+import { Chip } from "@material-ui/core";
+import { OutlinedButton } from "../Buttons";
+import Image from "next/image";
 
 const data = [
-  { id: 1, title: 'Cubadisco 2021', image: '/images/cubadisco.jpg', identifier: "cubadisco2021" },
-  { id: 2, title: 'Gaucala 2020', image: '/images/event1.webp', identifier: "evento1" },
-  { id: 3, title: 'ASdaguaca 2020', image: '/images/event2.webp', identifier: "evento2" },
+  {
+    id: 1,
+    title: "Cubadisco 2021",
+    image: "/image/upload/v1618678938/cubadisco-2021-cover.jpg",
+    identifier: "cubadisco2021",
+  },
+  // {
+  //   id: 2,
+  //   title: "Gaucala 2020",
+  //   image: "/image/upload/v1617844957/samples/cloudinary-group.jpg",
+  //   identifier: "evento1",
+  // },
+  // { id: 3, title: 'ASdaguaca 2020', image: '/images/event2.webp', identifier: "evento2" },
 ];
 
 function Carousel() {
@@ -36,10 +47,16 @@ function Carousel() {
           key={item.id}
           className={classes.carouselItem}
           style={{
-            backgroundImage: `url(${item.image})`,
+            // backgroundImage: `url(${item.image})`,
             opacity: index === active ? 1 : 0,
           }}
         >
+          <Image
+            src={item.image}
+            alt="Picture of the author"
+            className={classes.carouselImage}
+            layout="fill"
+          />
           <div className={classes.carouselItemOpacity} />
           <div className={classes.carouselItemContent}>
             <div className={classes.title}>{item.title}</div>
@@ -49,7 +66,7 @@ function Carousel() {
             <div className={classes.actions}>
               <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
-                </OutlinedButton>
+              </OutlinedButton>
             </div>
           </div>
         </div>
@@ -63,7 +80,8 @@ function Carousel() {
 
   const renderNavigationOptions = () => {
     return items.map((item, index) => (
-      <span key={item.id}
+      <span
+        key={item.id}
         onClick={() => goTo(index)}
         className={clsx(classes.bullet, {
           [classes.bulletActive]: index === active,
