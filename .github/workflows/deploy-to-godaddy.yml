@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to StreamingCuba VPS
  
 on:
   push:
@@ -20,13 +20,13 @@ jobs:
         with:
          node-version: 14.x
          
-      - name: Install dependencies 🏗
+      - name: Installing dependencies 🏗
         run: npm install 
         
-      - name: Build 🛠
+      - name: Building 🛠
         run: npm run build
 
-      - name: Copy build assets
+      - name: Copying build assets
         uses: garygrossgarten/github-action-scp@release
         with:
           local: .next
@@ -40,7 +40,7 @@ jobs:
           dotfiles: true
           verbose: true
 
-      - name: SSH Remote Commands
+      - name: Post deploy SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.4
         with:        
           host: ${{ secrets.SSH_HOST }}
@@ -49,4 +49,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           timeout: 60s
           debug: true
-          script: sh /home/streaming/webapps/events/deploy.sh
+          script: sh /home/streaming/apps/events/deploy.sh
