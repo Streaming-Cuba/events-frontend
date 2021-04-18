@@ -15,6 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Send Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
+          token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
+          args: The ${{ github.event_name }} event triggered the pipeline.
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
         with:
