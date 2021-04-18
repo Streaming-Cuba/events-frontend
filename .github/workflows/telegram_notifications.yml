@@ -2,6 +2,8 @@ name: Send Telegram notifications
  
 on:
   workflow_run:
+    workflows:
+      - "Deploy to StreamingCuba VPS"
     types: [completed]
 
 jobs:
