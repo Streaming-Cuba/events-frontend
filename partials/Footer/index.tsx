@@ -73,7 +73,7 @@ function Footer() {
       <div className={classes.copyright}>
         <div className={clsx(classes.container, classes.copyrightContent)}>
           <a href="https://streamingcuba.com" className={classes.logo}>
-            <span>StreamingCuba</span>
+            <span>StreamingCuba y la vieja del hacha</span>
           </a>
           <p>
             Copyright © {new Date().getFullYear()} StreamingCuba - All rights
