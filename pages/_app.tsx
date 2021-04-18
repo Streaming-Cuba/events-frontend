@@ -6,6 +6,9 @@ import Navbar from "../partials/Navbar";
 import Footer from "../partials/Footer";
 import { DefaultSeo } from "next-seo";
 import { NextWebVitalsMetric } from "next/app";
+import Sidebar from "../partials/Sidebar";
+import { Provider } from "react-redux";
+import {store} from "../apis/redux";
 
 class MyApp extends React.Component<MyAppProps> {
   constructor(props: MyAppProps) {
@@ -47,22 +50,25 @@ class MyApp extends React.Component<MyAppProps> {
         {this.props.error ? (
           <this.props.Component {...this.props.pageProps} />
         ) : (
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Navbar />
-            <this.props.Component {...this.props.pageProps} />
-            <Footer />
-          </ThemeProvider>
+          <Provider store={store}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Navbar />
+              <Sidebar />
+              <this.props.Component {...this.props.pageProps} />
+              <Footer />
+            </ThemeProvider>
+          </Provider>
         )}
       </>
     );
   }
 
-  static async getInitialProps({ err, ctx }){
+  static async getInitialProps({ err, ctx }) {
     const req = ctx.req;
     const pathname = ctx.pathname;
     const res = ctx.res;
-  
+
     /**
      * Abort if one var is not present.
      * For example, the req obj will be undefined if we don't
@@ -72,11 +78,9 @@ class MyApp extends React.Component<MyAppProps> {
       return {};
     }
 
-    
     const hasError = res && res.statusCode >= 400;
-    return {error: hasError};
-  };
-  
+    return { error: hasError };
+  }
 }
 
 interface MyAppProps {
@@ -89,6 +93,6 @@ interface MyAppProps {
 export default MyApp;
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
-  console.log(metric)
+  console.log(metric);
   //TODO: Send it to GOogle Analytics
 }

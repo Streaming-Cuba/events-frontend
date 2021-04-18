@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '90px',
   },
   titleBackground: {
-    backgroundImage: 'url(/images/breadcrumbs-bg.jpg)',
+    backgroundImage: 'url(https://res.cloudinary.com/streaming-cuba/image/upload/v1618700290/breadcrumbs-bg_si63ie.webp)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     position: 'absolute',

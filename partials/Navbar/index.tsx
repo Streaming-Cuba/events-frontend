@@ -1,14 +1,29 @@
-import React from 'react';
-import ElevationScroll from '../../components/ElevationScroll';
+import React from "react";
+import ElevationScroll from "../../components/ElevationScroll";
 
-import { AppBar, Grid, Toolbar, Typography } from '@material-ui/core';
-import clsx from 'clsx';
-import Link from 'next/link';
+import {
+  AppBar,
+  Grid,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import clsx from "clsx";
+import Link from "next/link";
+import { Menu as MenuIcon } from "mdi-material-ui";
 
-import useStyles from './styles';
+import useStyles from "./styles";
+import { useDispatch } from "react-redux";
+import { toggleSidebar } from "../../apis/redux/reducers/layout/layout.actions";
 
 function Navbar() {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const onSidebarClick = () => {
+    dispatch(toggleSidebar());
+  };
 
   return (
     <>
@@ -24,15 +39,16 @@ function Navbar() {
               <Grid container>
                 <Grid
                   item
+                  xs={11}
                   sm={3}
-                  style={{ display: 'flex', alignItems: 'center' }}
+                  style={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="h5" style={{ marginLeft: '5px' }}>
+                  <Typography variant="h5" style={{ marginLeft: "5px" }}>
                     Eventos
                   </Typography>
                 </Grid>
-                <Grid item sm={9} className={classes.columnRoot}>
-                  <nav>
+                <Grid item xs={1} sm={9} className={classes.columnRoot}>
+                  <nav className={classes.desktopNavigation}>
                     <ul className={classes.navbarNav}>
                       <li className={clsx(classes.menuItem)}>
                         <Link href="/">Inicio</Link>
@@ -45,6 +61,11 @@ function Navbar() {
                       </li>
                     </ul>
                   </nav>
+                  <div className={classes.mobileNavigation}>
+                    <IconButton onClick={onSidebarClick} color="inherit">
+                      <MenuIcon />
+                    </IconButton>
+                  </div>
                 </Grid>
               </Grid>
             </div>

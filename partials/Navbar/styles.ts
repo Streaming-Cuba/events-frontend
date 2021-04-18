@@ -13,7 +13,10 @@ export default makeStyles((theme: Theme) => ({
       '& > a': {
         color: theme.palette.primary.main,
       }
-    }
+    },
+    "& $mobileNavigation": {
+      color: theme.palette.primary.main,
+    },
   },
   toolbar: {
     paddingLeft: 0,
@@ -34,6 +37,18 @@ export default makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     color: 'white',
+  },
+  mobileNavigation: {
+    display: "none",
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+    },
+  },
+  desktopNavigation: {
+    display: "block",
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
   navbarNav: {
     listStyle: 'none',

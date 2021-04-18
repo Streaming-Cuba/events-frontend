@@ -9,7 +9,7 @@ const data = [
   {
     id: 1,
     title: "Cubadisco 2021",
-    image: "/image/upload/v1618678938/cubadisco-2021-cover.jpg",
+    image: "/image/upload/v1618678938/cubadisco-2021-cover.webp",
     identifier: "cubadisco2021",
   },
   // {

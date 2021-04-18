@@ -65,7 +65,7 @@ function EventById() {
               <div className={classes.pageContent}>
                 <div className={clsx(classes.contentHeader)}>
                   <img
-                    src="https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-14-1130x650.jpg"
+                    src="https://res.cloudinary.com/streaming-cuba/image/upload/v1618700376/event-14-1130x650_m35gng.webp"
                     className={classes.image}
                     alt=""
                     loading="lazy"
@@ -141,8 +141,6 @@ function EventById() {
               style={{
                 paddingTop: "0px",
                 paddingBottom: "1px",
-                position: "absolute",
-                maxWidth: "400px",
               }}
             >
               <div className={classes.detailWidget}>
@@ -453,7 +451,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: "90px",
   },
   titleBackground: {
-    backgroundImage: "url(/images/breadcrumbs-bg.jpg)",
+    backgroundImage: "url(https://res.cloudinary.com/streaming-cuba/image/upload/v1618700290/breadcrumbs-bg_si63ie.webp)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     position: "absolute",
