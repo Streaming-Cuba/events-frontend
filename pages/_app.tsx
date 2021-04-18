@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { theme } from "../config";
+import {GetStaticProps } from 'next';
+import { NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
+import { DefaultSeo } from "next-seo";
+import { Provider } from "react-redux";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import Navbar from "../partials/Navbar";
 import Footer from "../partials/Footer";
-import { DefaultSeo } from "next-seo";
-import { NextWebVitalsMetric } from "next/app";
 import Sidebar from "../partials/Sidebar";
-import { Provider } from "react-redux";
 import {store} from "../apis/redux";
 
 class MyApp extends React.Component<MyAppProps> {
@@ -23,12 +24,17 @@ class MyApp extends React.Component<MyAppProps> {
   }
 
   render() {
-    return (
+
+   return (
       <>
         <Head>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
+          />
+          <meta
+            name="version"
+            content={this.props.version}
           />
           <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
           <link rel="stylesheet" href="/styles/pace.css"></link>
@@ -88,6 +94,7 @@ interface MyAppProps {
   pageProps: any;
   user: any;
   error: boolean;
+  version: string;
 }
 
 export default MyApp;

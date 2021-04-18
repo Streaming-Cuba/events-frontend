@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, IconButton } from '@material-ui/core';
+import { Grid, IconButton, Link } from '@material-ui/core';
 import clsx from 'clsx';
 
 import useStyles from './styles';
@@ -8,10 +8,12 @@ import {
   Email as EmailIcon,
   LocationOn as LocationIcon,
   Phone as PhoneIcon,
-  Twitter as TwitterIcon,
+  Instagram as InstagramIcon,
   Facebook as FacebookIcon,
   YouTube as YoutubeIcon,
 } from '@material-ui/icons';
+
+import info from '../../data/info.json';
 
 function Footer() {
   const classes = useStyles();
@@ -27,35 +29,35 @@ function Footer() {
                 <div>
                   <div className={classes.item}>
                     <LocationIcon />
-                    Remangalatuerca. Santiago de Cuba.
+                    {info.address}
                   </div>
                   <div className={classes.item}>
                     <EmailIcon />
-                    streamingcuba@gmail.com
+                    {info.email}
                   </div>
                   <div className={classes.item}>
                     <PhoneIcon />
-                    +53 5X XXX XXX
+                    {info.cellphone}
                   </div>
                 </div>
                 <div className={classes.socials}>
-                  <IconButton color="inherit">
+                  <Link href={info.socials.facebook} color="inherit">
                     <FacebookIcon />
-                  </IconButton>
-                  <IconButton color="inherit">
+                  </Link>
+                  <Link href={info.socials.youtube} color="inherit">
                     <YoutubeIcon />
-                  </IconButton>
-                  <IconButton color="inherit">
-                    <TwitterIcon />
-                  </IconButton>
+                  </Link>
+                  <Link href={info.socials.instagram} color="inherit">
+                    <InstagramIcon />
+                  </Link>
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <div className={classes.wrapper}>
+            <Grid item xs={false} sm={4}>
+              {/* <div className={classes.wrapper}>
                 <div className={classes.title}>Eventos notables</div>
                 <div></div>
-              </div>
+              </div> */}
             </Grid>
             <Grid item xs={12} sm={4}>
               <div className={classes.wrapper}>
@@ -73,7 +75,7 @@ function Footer() {
       <div className={classes.copyright}>
         <div className={clsx(classes.container, classes.copyrightContent)}>
           <a href="https://streamingcuba.com" className={classes.logo}>
-            <span>StreamingCuba v222</span>
+            <span>StreamingCuba</span>
           </a>
           <p>
             Copyright © {new Date().getFullYear()} StreamingCuba - All rights
