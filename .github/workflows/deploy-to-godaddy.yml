@@ -30,7 +30,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: .next
-          remote: /home/streaming/apps/events-frontend
+          remote: /home/streaming/apps/events-frontend/.next
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
