@@ -1,4 +1,4 @@
-name: Deploy to StreamingCuba VPS
+name: Send Telegram notifications
  
 on:
   workflow_run:
