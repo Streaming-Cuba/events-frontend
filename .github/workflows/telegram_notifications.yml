@@ -16,7 +16,7 @@ jobs:
       with:
         to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
         token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
-        args: The ${{ github.GITHUB_WORKFLOW }} result status is succeess.
+        args: The ${{ github.event.worflow_run.name }} result status is succeess.
         
   on-failure:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       with:
         to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
         token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
-        args: The ${{ github.GITHUB_WORKFLOW }} result status is failed.
+        args: The ${{ github.event.worflow_run.name }} result status is failed.
 
 
       

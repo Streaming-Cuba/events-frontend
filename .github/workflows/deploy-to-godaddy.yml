@@ -20,7 +20,7 @@ jobs:
         with:
           to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
           token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
-          args: The ${{ github.event_name }} event triggered the pipeline.
+          args: The ${{ github.event_name }} event triggered the ${{ github.GITHUB_WORKFLOW }} workflow.
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
