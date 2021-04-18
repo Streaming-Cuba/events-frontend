@@ -1,0 +1,34 @@
+name: Deploy to StreamingCuba VPS
+ 
+on:
+  workflow_run:
+    types: [completed]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    - name: Send succeeded Telegram notification
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
+        token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
+        args: The ${{ github.GITHUB_WORKFLOW }} result status is succeess.
+        
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+    - name: Send failure Telegram notification
+      if: ${{ success() }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
+        token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
+        args: The ${{ github.GITHUB_WORKFLOW }} result status is failed.
+
+
+      
+
+      
