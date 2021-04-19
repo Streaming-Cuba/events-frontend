@@ -1,9 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { Container, makeStyles } from '@material-ui/core';
-import clsx from 'clsx';
-import { NextSeo } from 'next-seo';
-import Carousel from '../components/Carousel';
+import {
+  Container,
+  GridList,
+  GridListTile,
+  makeStyles,
+} from "@material-ui/core";
+import clsx from "clsx";
+import { NextSeo } from "next-seo";
+import Carousel from "../components/Carousel";
+import EmptySpace from "../components/EmptySpace";
+import Separator from "../components/Separator";
+import EventCard from "../components/EventCard";
 
 function IndexPage() {
   const classes = useStyles();
@@ -11,23 +19,38 @@ function IndexPage() {
   return (
     <>
       <NextSeo title="Eventos" description="Eventos de StreamingCuba" />
-      <div style={{ overflowX: 'hidden' }}>
+      <div style={{ overflowX: "hidden" }}>
         <section className={classes.homeSection}>
           <Carousel />
         </section>
-        {/*<section>*/}
-        {/*  <Grid container justify="space-evenly" spacing={4}>*/}
-        {/*    <Grid item xs={4}>*/}
-        {/*      <FeatureCard />*/}
-        {/*    </Grid>*/}
-        {/*    <Grid item xs={4}>*/}
-        {/*      <FeatureCard />*/}
-        {/*    </Grid>*/}
-        {/*    <Grid item xs={4}>*/}
-        {/*      <FeatureCard />*/}
-        {/*    </Grid>*/}
-        {/*  </Grid>*/}
-        {/*</section>*/}
+
+        <EmptySpace />
+        <Separator title="Próximos eventos">
+          Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+          tempor.
+        </Separator>
+
+        <EmptySpace />
+        <section className={classes.section}>
+          <GridList cellHeight="auto" cols={3}>
+            <GridListTile>
+              <EventCard />
+            </GridListTile>
+            <GridListTile>
+              <EventCard />
+            </GridListTile>
+            <GridListTile>
+              <EventCard />
+            </GridListTile>
+            <GridListTile>
+              <EventCard />
+            </GridListTile>
+            <GridListTile>
+              <EventCard />
+            </GridListTile>
+          </GridList>
+        </section>
+
         <br />
         <br />
         <br />
@@ -41,19 +64,23 @@ function IndexPage() {
 
 const useStyles = makeStyles((theme) => ({
   homeSection: {
-    position: 'relative',
+    position: "relative",
   },
   carouselContainer: {
-    maxWidth: '100vw',
-    minHeight: '100vh',
+    maxWidth: "100vw",
+    minHeight: "100vh",
     padding: 0,
-    backgroundColor: '#614da7',
+    backgroundColor: "#614da7",
 
-    alignContent: 'center',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flexWrap: 'wrap',
+    alignContent: "center",
+    boxSizing: "border-box",
+    display: "flex",
+    flexWrap: "wrap",
   },
+  section: {
+    marginLeft: "10px",
+    marginRight: "10px"
+  }
 }));
 
 export default IndexPage;

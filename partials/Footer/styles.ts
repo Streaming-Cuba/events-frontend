@@ -37,7 +37,11 @@ export default makeStyles((theme: Theme) => ({
   },
   socials: {
     color: 'white',
-    marginTop: '20px'
+    marginTop: '20px',
+
+    "& > a": {
+      marginRight: '15px',
+    }
   },
   copyright: {
     borderTop: '1px solid rgba(255,255,255,.1)',
