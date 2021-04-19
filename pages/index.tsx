@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import {
   Container,
   GridList,
   GridListTile,
   makeStyles,
+  Theme,
+  useMediaQuery,
 } from "@material-ui/core";
+import {} from "@material-ui/styles";
 import clsx from "clsx";
 import { NextSeo } from "next-seo";
 import Carousel from "../components/Carousel";
@@ -15,6 +18,17 @@ import EventCard from "../components/EventCard";
 
 function IndexPage() {
   const classes = useStyles();
+
+  const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
+  const lg = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
+
+  const cols = useMemo(() => {
+    if (sm) return 1;
+    if (md) return 2;
+    if (lg) return 3;
+    return 4;
+  }, [sm, md, lg]);
 
   return (
     <>
@@ -32,7 +46,7 @@ function IndexPage() {
 
         <EmptySpace />
         <section className={classes.section}>
-          <GridList cellHeight="auto" cols={3}>
+          <GridList cellHeight="auto" cols={cols}>
             <GridListTile>
               <EventCard />
             </GridListTile>
@@ -79,8 +93,8 @@ const useStyles = makeStyles((theme) => ({
   },
   section: {
     marginLeft: "10px",
-    marginRight: "10px"
-  }
+    marginRight: "10px",
+  },
 }));
 
 export default IndexPage;

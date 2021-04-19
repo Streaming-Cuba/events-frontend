@@ -70,6 +70,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     color: '#fff',
     marginBottom: '15px',
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: '2.9rem',
+    },
   },
   categories: {
     display: 'none',
@@ -86,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     transition: '.3s opacity',
     zIndex: 10,
 
-    bottom: '50px',
+    bottom: '10%',
     width: '100%',
     top: 'auto',
   },
