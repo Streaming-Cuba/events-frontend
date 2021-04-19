@@ -20,6 +20,7 @@ import {
 } from "mdi-material-ui";
 
 import Link from "../../components/Link";
+import TitleBar from "../../components/TitleBar";
 
 function EventById() {
   const router = useRouter();
@@ -30,27 +31,15 @@ function EventById() {
 
   return (
     <div>
-      <div className={classes.titleBar}>
-        <div className={classes.titleBackground} />
-        <div className={classes.container}>
-          <h1>{id}</h1>
-          <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
-            className={classes.breadcrumbs}
-          >
-            <Link href="/" color="inherit">
-              Inicio
-            </Link>
-            <Link href="/events" color="inherit">
-              Eventos
-            </Link>
-            <Typography color="inherit" className={classes.breadcrumbActive}>
-              {id}
-            </Typography>
-          </Breadcrumbs>
-        </div>
-      </div>
+      <TitleBar title={id as string}>
+        <Link href="/" color="inherit">
+          Inicio
+        </Link>
+        <Link href="/events" color="inherit">
+          Eventos
+        </Link>
+        <Typography color="inherit">{id}</Typography>
+      </TitleBar>
 
       <div className={classes.container}>
         <Grid container spacing={4}>
@@ -402,7 +391,12 @@ function EventById() {
                           <div className={classes.detailItemTitle}>
                             Redes sociales
                           </div>
-                          <div className={clsx(classes.detailItemInner, classes.socialLinks)}>
+                          <div
+                            className={clsx(
+                              classes.detailItemInner,
+                              classes.socialLinks
+                            )}
+                          >
                             <a
                               href="https://www.facebook.com/gloriathemes/"
                               target="_blank"
@@ -443,24 +437,6 @@ function EventById() {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  titleBar: {
-    marginTop: 0,
-    background: "#121219",
-    position: "relative",
-    padding: "120px 0",
-    marginBottom: "90px",
-  },
-  titleBackground: {
-    backgroundImage: "url(https://res.cloudinary.com/streaming-cuba/image/upload/v1618700290/breadcrumbs-bg_si63ie.webp)",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    position: "absolute",
-    opacity: 0.4,
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-  },
   container: {
     position: "relative",
     zIndex: 1,
@@ -478,12 +454,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontWeight: 600,
       wordBreak: "break-word",
     },
-  },
-  breadcrumbs: {
-    color: "#fff",
-  },
-  breadcrumbActive: {
-    borderBottom: `2px solid ${theme.palette.primary.light}`,
   },
 
   pageContent: {
@@ -577,9 +547,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       textDecoration: "none",
     },
   },
-  socialLinks: {
-
-  },
+  socialLinks: {},
   icon: {
     fontSize: "1.923rem",
     lineHeight: "1.923rem",

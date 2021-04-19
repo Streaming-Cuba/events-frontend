@@ -1,44 +1,34 @@
-import React from 'react';
-import { Breadcrumbs, Theme, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { NavigateNext as NavigateNextIcon } from '@material-ui/icons';
-import Link from '../../components/Link';
+import React from "react";
+import { Theme, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import Link from "../../components/Link";
+import TitleBar from "../../components/TitleBar";
+import EmptySpace from "../../components/EmptySpace";
+import Separator from "../../components/Separator";
 function AboutUs() {
   const classes = useStyles();
 
   return (
     <div>
-      <div className={classes.titleBar}>
-        <div className={classes.titleBackground} />
-        <div className={classes.container}>
-          <h1>Acerca de nosotros</h1>
-          <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
-            className={classes.breadcrumbs}
-          >
-            <Link href="/" color="inherit">
-              Inicio
-            </Link>
-            <Typography color="inherit" className={classes.breadcrumbActive}>
-              Acerca de
-            </Typography>
-          </Breadcrumbs>
-        </div>
-      </div>
+      <TitleBar title="Acerca de nosotros">
+        <Link href="/" color="inherit">
+          Inicio
+        </Link>
+        <Typography color="inherit">Acerca de</Typography>
+      </TitleBar>
 
       <div className={classes.container}>
         <div className={classes.textContainer}>
           <div className={classes.title}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et
-            ultrices massa, sed porta dui.{' '}
+            ultrices massa, sed porta dui.{" "}
             <span>
               Consetetur omittantur consequuntur eos et. Eleifend praesent
               iudicabit no mea tollit persequeris ex pri.
             </span>
           </div>
 
-          <div className={classes.separate}>
+          <Separator>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -55,7 +45,7 @@ function AboutUs() {
               <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
               <line x1="12" y1="22.08" x2="12" y2="12"></line>
             </svg>
-          </div>
+          </Separator>
 
           <div className={classes.text}>
             Lorem ipsum dolor sit amet, voluptua iracundia disputationi an pri,
@@ -69,100 +59,48 @@ function AboutUs() {
             alii mentitum prodesset no.
           </div>
         </div>
+
+        <EmptySpace />
       </div>
     </div>
   );
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  titleBar: {
-    marginTop: 0,
-    background: '#121219',
-    position: 'relative',
-    padding: '120px 0',
-    marginBottom: '90px',
-  },
-  titleBackground: {
-    backgroundImage: 'url(https://res.cloudinary.com/streaming-cuba/image/upload/v1618700290/breadcrumbs-bg_si63ie.webp)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    position: 'absolute',
-    opacity: 0.4,
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  },
   container: {
-    position: 'relative',
+    position: "relative",
     zIndex: 1,
-    width: '100%',
-    paddingRight: '15px',
-    paddingLeft: '15px',
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    width: "100%",
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    marginRight: "auto",
+    marginLeft: "auto",
 
-    '& > h1': {
+    "& > h1": {
       margin: 0,
-      color: '#fff',
-      fontSize: '3rem',
+      color: "#fff",
+      fontSize: "3rem",
       fontWeight: 600,
-      wordBreak: 'break-word',
+      wordBreak: "break-word",
     },
-  },
-  breadcrumbs: {
-    color: '#fff',
-  },
-  breadcrumbActive: {
-    borderBottom: `2px solid ${theme.palette.primary.light}`,
   },
   textContainer: {
-    textAlign: 'center',
-    padding: "0 20px"
+    textAlign: "center",
+    padding: "0 20px",
   },
   title: {
-    fontSize: '2.4rem',
+    fontSize: "2.4rem",
     lineHeight: 1.3,
 
-    '& > span': {
-      color: theme.palette.primary.light,
-    },
-  },
-  separate: {
-    alignItems: 'center',
-    display: 'flex',
-    margin: '40px auto 0',
-    justifyContent: 'center',
-
-    '&::before': {
-      content: '""',
-      display: 'block',
-      height: '1px',
-      width: '125px',
-      background: theme.palette.primary.light,
-      opacity: '.15',
-    },
-    '&::after': {
-      content: '""',
-      display: 'block',
-      height: '1px',
-      width: '125px',
-      background: theme.palette.primary.light,
-      opacity: '.15',
-    },
-    '& > svg': {
-      margin: '0 20px',
-      width: '23px',
-      height: 'auto',
-      opacity: '.50',
+    "& > span": {
       color: theme.palette.primary.light,
     },
   },
   text: {
-    marginTop: '40px',
-    opacity: .8,
-    fontSize: '1.077rem',
-  }
+    marginTop: "40px",
+    opacity: 0.8,
+    fontSize: "1.077rem",
+  },
 }));
 
 export default AboutUs;
