@@ -22,7 +22,11 @@ export default makeStyles((theme: Theme) => ({
       padding: "80px 20px",
     },
   },
-  wrapper: {},
+  wrapper: {
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+    },
+  },
   title: {
     fontSize: "1.385rem",
     marginBottom: "25px",
