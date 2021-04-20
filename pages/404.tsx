@@ -18,8 +18,7 @@ function Custom404() {
               <Warning />
             </div>
             <div className={classes.text}>
-              The page you are looking for does not exist; it may have been
-              moved or removed altogether.
+              Esto esta feo
             </div>
           </div>
         </div>
