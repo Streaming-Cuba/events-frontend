@@ -33,6 +33,17 @@ jobs:
       - name: Building 🛠
         run: npm run build
 
+      - name: Post deploy SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.4
+        with:        
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          timeout: 60s
+          debug: true
+          script: sudo pm2 stop events-frontend
+
       - name: Copying build assets
         uses: garygrossgarten/github-action-scp@release
         with:
