@@ -33,17 +33,6 @@ jobs:
       - name: Building 🛠
         run: npm run build
 
-      - name: Post deploy SSH Remote Commands
-        uses: appleboy/ssh-action@v0.1.4
-        with:        
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          timeout: 60s
-          debug: true
-          script: sudo pm2 stop events-frontend
-
       - name: Copying build assets
         uses: garygrossgarten/github-action-scp@release
         with:
@@ -58,20 +47,6 @@ jobs:
           dotfiles: true
           verbose: true
 
-      - name: Copying public assets
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: public
-          remote: /home/streaming/apps/events-frontend/public
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          rmRemote: true
-          atomicPut: true
-          dotfiles: true
-          verbose: true
-
       - name: Post deploy SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.4
         with:        
@@ -81,6 +56,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           timeout: 60s
           debug: true
-          script: sudo pm2 restart events-frontend
+          script: sh /home/streaming/apps/events-frontend/deploy.sh
 
 
