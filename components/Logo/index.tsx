@@ -56,6 +56,7 @@ function Logo(props: { color?: string }) {
 const useStyles = makeStyles(() => ({
   logo: {
     width: "120px",
+    userSelect: 'none',
   },
 }));
 
