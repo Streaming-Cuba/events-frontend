@@ -118,7 +118,7 @@ class MyApp extends React.Component<MyAppProps> {
             title: "Eventos StreamingCuba",            
             description: "Nuestros eventos al alcance de todos.",
             images: [
-              { url: "/icons/android-icon-48x48.png" }
+              { url: "https://eventos.streamingcuba.com/icons/android-icon-48x48.png" }
             ]
           }}
           title={undefined}
