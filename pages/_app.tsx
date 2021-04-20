@@ -121,7 +121,9 @@ class MyApp extends React.Component<MyAppProps> {
               { url: "/icons/android-icon-48x48.png" }
             ]
           }}
-          title="Eventos StreamingCuba"
+          title={undefined}
+          titleTemplate="%s | Eventos StreamingCuba"
+          defaultTitle="Eventos StreamingCuba"
         />
         {this.props.error ? (
           <this.props.Component {...this.props.pageProps} />

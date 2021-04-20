@@ -32,7 +32,6 @@ function IndexPage() {
 
   return (
     <>
-      <NextSeo title="Eventos" description="Eventos de StreamingCuba" />
       <div style={{ overflowX: "hidden" }}>
         <section className={classes.homeSection}>
           <Carousel />
