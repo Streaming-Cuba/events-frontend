@@ -11,7 +11,7 @@ import Footer from "../partials/Footer";
 import Sidebar from "../partials/Sidebar";
 import { store } from "../apis/redux";
 
-class MyApp extends App<MyAppProps> {
+class MyApp extends React.Component<MyAppProps> {
   componentDidMount() {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
