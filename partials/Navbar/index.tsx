@@ -15,6 +15,7 @@ import { Menu as MenuIcon } from "mdi-material-ui";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { toggleSidebar } from "../../apis/redux/reducers/layout/layout.actions";
+import Logo from "../../components/Logo";
 
 function Navbar() {
   const classes = useStyles();
@@ -43,9 +44,7 @@ function Navbar() {
                   sm={3}
                   style={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="h5" style={{ marginLeft: "5px" }}>
-                    Eventos
-                  </Typography>
+                  <Logo/>
                 </Grid>
                 <Grid item xs={1} sm={9} className={classes.columnRoot}>
                   <nav className={classes.desktopNavigation}>

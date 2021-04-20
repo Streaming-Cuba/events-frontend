@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { theme } from "../config";
-import {GetStaticProps } from 'next';
-import { NextWebVitalsMetric } from "next/app";
+import { GetStaticProps } from "next";
+import App, { NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
@@ -9,13 +9,9 @@ import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import Navbar from "../partials/Navbar";
 import Footer from "../partials/Footer";
 import Sidebar from "../partials/Sidebar";
-import {store} from "../apis/redux";
+import { store } from "../apis/redux";
 
-class MyApp extends React.Component<MyAppProps> {
-  constructor(props: MyAppProps) {
-    super(props);
-  }
-
+class MyApp extends App<MyAppProps> {
   componentDidMount() {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
@@ -24,21 +20,93 @@ class MyApp extends React.Component<MyAppProps> {
   }
 
   render() {
-
-   return (
+    return (
       <>
         <Head>
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
-          <meta
-            name="version"
-            content={this.props.version}
+
+          <link
+            rel="apple-touch-icon"
+            sizes="57x57"
+            href="/icons/apple-icon-57x57.png"
           />
+          <link
+            rel="apple-touch-icon"
+            sizes="60x60"
+            href="/icons/apple-icon-60x60.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="72x72"
+            href="/icons/apple-icon-72x72.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="76x76"
+            href="/icons/apple-icon-76x76.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="114x114"
+            href="/icons/apple-icon-114x114.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="120x120"
+            href="/icons/apple-icon-120x120.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="144x144"
+            href="/icons/apple-icon-144x144.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="/icons/apple-icon-152x152.png"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/icons/apple-icon-180x180.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/icons/android-icon-192x192.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/icons/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="96x96"
+            href="/icons/favicon-96x96.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/icons/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="msapplication-TileColor" content={theme.palette.primary.main} />
+          <meta
+            name="msapplication-TileImage"
+            content="/icons/ms-icon-144x144.png"
+          ></meta>
+
           <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
           <link rel="stylesheet" href="/styles/pace.css"></link>
-          <link href="/images/meeting-room.png" rel="icon" />
+
           <link href="/styles/font.css" rel="stylesheet" />
           <link href="/styles/styles.css" rel="stylesheet" />
         </Head>
@@ -47,11 +115,13 @@ class MyApp extends React.Component<MyAppProps> {
             type: "website",
             locale: "es",
             url: "https://eventos.streamingcuba.com",
-            site_name: "Eventos",
-            title: "Eventos",
-            description: "SEO made easy for Next.js projects",
+            title: "Eventos StreamingCuba",            
+            description: "Nuestros eventos al alcance de todos.",
+            images: [
+              { url: "/icons/android-icon-48x48.png" }
+            ]
           }}
-          title="Eventos"
+          title="Eventos StreamingCuba"
         />
         {this.props.error ? (
           <this.props.Component {...this.props.pageProps} />

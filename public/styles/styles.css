@@ -18,3 +18,68 @@ a {
   text-decoration: none;
   background-color: transparent;
 }
+
+
+.cls-1 {
+  font-size: 80px;
+  fill: currentColor;
+  letter-spacing: 0em;
+}
+
+.cls-1,
+.cls-3 {
+  font-family: MilestoneFreeVersion-Script, Milestone Free Version !important;
+}
+
+.cls-2 {
+  font-size: 166px;
+  letter-spacing: 0em;
+  font-family: inherit;
+}
+
+.cls-3 {
+  font-size: 210px;
+  fill: currentColor;
+  letter-spacing: -0.07em;
+  font-family: inherit;
+}
+
+.cls-4 {
+  letter-spacing: -0.01em;
+  font-family: inherit;
+}
+
+.cls-5 {
+  letter-spacing: -0.04em;
+  font-family: inherit;
+}
+
+.cls-6 {
+  letter-spacing: -0.04em;
+  font-family: inherit;
+}
+
+.cls-7 {
+  letter-spacing: 0.02em;
+  font-family: inherit;
+}
+
+.cls-8 {
+  letter-spacing: 0.01em;
+  font-family: inherit;
+}
+
+.cls-9 {
+  letter-spacing: 0.02em;
+  font-family: inherit;
+}
+
+.cls-10 {
+  font-size: 77px;
+  letter-spacing: -0.02em;
+}
+
+.cls-11 {
+  font-family: Bauhaus93, "Bauhaus 93";
+  letter-spacing: -0.02em;
+}

@@ -1,6 +1,11 @@
 
 * {
-    font-family: Montserrat, "Roboto Light", sans-serif !important;
+    font-family: Montserrat, "Roboto Light", sans-serif;
+}
+
+@font-face {
+    font-family: MilestoneFreeVersion-Script;
+    src: url("../fonts/Milestone/MilestoneFreeVersion-Script.otf") format("opentype");
 }
 
 @font-face {
