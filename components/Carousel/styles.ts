@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     color: '#fff',
     marginBottom: '15px',
+    userSelect: 'none',
 
     [theme.breakpoints.down("sm")]: {
       fontSize: '2.9rem',

@@ -9,7 +9,7 @@ const data = [
   {
     id: 1,
     title: "Cubadisco 2021",
-    image: "/image/upload/v1618678938/cubadisco-2021-cover.webp",
+    image: "/image/upload/v1619213991/events/cubadisco-2021/cubadisco2021_cover.webp",
     identifier: "cubadisco2021",
   },
   // {
@@ -56,6 +56,7 @@ function Carousel() {
             alt="Picture of the author"
             className={classes.carouselImage}
             layout="fill"
+            objectFit="cover"
           />
           <div className={classes.carouselItemOpacity} />
           <div className={classes.carouselItemContent}>
@@ -66,6 +67,9 @@ function Carousel() {
             <div className={classes.actions}>
               <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
+              </OutlinedButton>
+              <OutlinedButton href={`/event/vote/${item.identifier}`}>
+                Votar
               </OutlinedButton>
             </div>
           </div>

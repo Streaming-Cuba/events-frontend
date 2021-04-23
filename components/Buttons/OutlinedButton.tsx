@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '11px 40px',
     display: 'inline-block',
     borderRadius: '25px',
+    margin: '10px',
 
     '&:hover': {
       background: '#0006',
