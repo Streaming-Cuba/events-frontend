@@ -32,7 +32,6 @@ jobs:
 
       - name: Create env variables
         run: |
-          cp .env.local.example .env.local
           echo "API_URL=${{ secrets.API_URL }}" >> .env.local
         
       - name: Building 🛠
