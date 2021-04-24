@@ -3,11 +3,11 @@ import { makeStyles } from "@material-ui/core";
 import { Warning } from "@material-ui/icons";
 import { NextSeo } from "next-seo";
 
-function Custom500(props: { context: any }) {
+function Custom500(props: any) {
   const classes = useStyles();
 
   useEffect(() => {
-    console.error(props.context);
+    console.log(props);
   }, []);
 
   return (
@@ -92,7 +92,3 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default Custom500;
-
-Custom500.getInitialProps = (context: any) => {
-  return { context };
-};
