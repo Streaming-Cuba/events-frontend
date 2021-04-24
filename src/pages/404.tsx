@@ -12,13 +12,13 @@ function Custom404() {
         <div className={classes.container}>
           <div className={classes.alignCenter}>
             <div className={classes.title}>
-              404 <span>Page</span>
+              Error <span>404</span>
             </div>
             <div className={classes.separate}>
               <Warning />
             </div>
             <div className={classes.text}>
-              Esto esta feo
+              El recurso solicitado no existe
             </div>
           </div>
         </div>
