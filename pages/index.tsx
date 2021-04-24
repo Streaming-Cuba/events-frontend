@@ -118,12 +118,7 @@ const useStyles = makeStyles((theme) => ({
 export default IndexPage;
 
 export async function getServerSideProps(context) {
-  const httpsAgent = new https.Agent({
-    rejectUnauthorized: false,
-  });
-  const res = await fetch(`${process.env.API_URL}/event`, {
-    agent: httpsAgent,
-  })
+  const res = await fetch(`${process.env.API_URL}/event`);
   const data = await res.json()
 
   return {
