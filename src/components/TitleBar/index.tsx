@@ -1,22 +1,25 @@
-import { Breadcrumbs, Typography } from "@material-ui/core";
 import React from "react";
-import useStyles from "./styles";
+import { Breadcrumbs } from "@material-ui/core";
 import { NavigateNext as NavigateNextIcon } from "@material-ui/icons";
-import Link from "../../components/Link";
+import useStyles from "./styles";
 
 function TitleBar(props: TitleBarProps) {
   const classes = useStyles();
 
+  const { background } = props;
+
   return (
     <div className={classes.titleBar}>
-      <div className={classes.titleBackground} />
+      <div
+        className={classes.titleBackground}
+        style={{ backgroundImage: background && `url(${background}) !important` }}
+      />
       <div className={classes.container}>
-        { props.title && <h1>{props.title}</h1> }
+        {props.title && <h1>{props.title}</h1>}
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
           className={classes.breadcrumbs}
-          
         >
           {props.children}
         </Breadcrumbs>
@@ -26,9 +29,9 @@ function TitleBar(props: TitleBarProps) {
 }
 
 interface TitleBarProps {
-    title?: string;
-    children?: JSX.Element[];
+  title?: string;
+  children?: JSX.Element[];
+  background?: string;
 }
-
 
 export default TitleBar;
