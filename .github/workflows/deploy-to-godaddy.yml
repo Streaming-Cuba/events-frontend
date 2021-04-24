@@ -21,7 +21,8 @@ jobs:
           to: ${{ secrets.PERSONAL_TELEGRAM_USER_ID }}
           token: ${{ secrets.NOTIFICATIONS_TELEGRAM_BOT_TOKEN }}
           format: |
-            The ${{ github.event_name }} event triggered the \"Deploy to StreamingCuba VPS\" workflow.
+            \*Events Frontend*:\n
+            The ${{ github.event_name }} event triggered the _\"Deploy to StreamingCuba VPS\"_ workflow.
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
