@@ -5,28 +5,28 @@ import { Chip } from "@material-ui/core";
 import { OutlinedButton } from "../Buttons";
 import Image from "next/image";
 
-const data = [
-  {
-    id: 1,
-    title: "Cubadisco 2021",
-    image: "/image/upload/v1619213991/events/cubadisco-2021/cubadisco2021_cover.webp",
-    identifier: "cubadisco2021",
-  },
-  // {
-  //   id: 2,
-  //   title: "Gaucala 2020",
-  //   image: "/image/upload/v1617844957/samples/cloudinary-group.jpg",
-  //   identifier: "evento1",
-  // },
-  // { id: 3, title: 'ASdaguaca 2020', image: '/images/event2.webp', identifier: "evento2" },
-];
+// const data = [
+//   {
+//     id: 1,
+//     title: "Cubadisco 2021",
+//     image: "/image/upload/v1619213991/events/cubadisco-2021/cubadisco2021_cover.webp",
+//     identifier: "cubadisco2021",
+//   },
+//   // {
+//   //   id: 2,
+//   //   title: "Gaucala 2020",
+//   //   image: "/image/upload/v1617844957/samples/cloudinary-group.jpg",
+//   //   identifier: "evento1",
+//   // },
+//   // { id: 3, title: 'ASdaguaca 2020', image: '/images/event2.webp', identifier: "evento2" },
+// ];
 
-function Carousel() {
+function Carousel(props: { items: any[] }) {
   const classes = useStyles();
 
   const [active, setActive] = useState(0);
 
-  const items = data;
+  const { items } = props;
 
   useEffect(() => {
     let intervalId = setInterval(nextItem, 6000);
@@ -47,20 +47,13 @@ function Carousel() {
           key={item.id}
           className={classes.carouselItem}
           style={{
-            // backgroundImage: `url(${item.image})`,
+            backgroundImage: `url(${item.coverPath})`,
             opacity: index === active ? 1 : 0,
           }}
         >
-          <Image
-            src={item.image}
-            alt="Picture of the author"
-            className={classes.carouselImage}
-            layout="fill"
-            objectFit="cover"
-          />
           <div className={classes.carouselItemOpacity} />
           <div className={classes.carouselItemContent}>
-            <div className={classes.title}>{item.title}</div>
+            <div className={classes.title}>{item.name}</div>
             {/* <div className={classes.categories}>
               <Chip label="Musica cubana" className={classes.category} />
             </div> */}

@@ -29,6 +29,11 @@ jobs:
          
       - name: Installing dependencies 🏗
         run: npm install 
+
+      - name: Create env variables
+        run: |
+          cp .env.local.example .env.local
+          echo "API_URL=${{ secrets.API_URL }}" >> .env.local
         
       - name: Building 🛠
         run: npm run build
@@ -38,6 +43,20 @@ jobs:
         with:
           local: .next
           remote: /home/streaming/apps/events-frontend/.next
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          rmRemote: true
+          atomicPut: true
+          dotfiles: true
+          verbose: true
+
+      - name: Copying .env file
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: .env.local
+          remote: /home/streaming/apps/events-frontend/.env.local
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}

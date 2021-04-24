@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { Grid, IconButton, Link } from '@material-ui/core';
-import clsx from 'clsx';
+import { Grid, IconButton, Link } from "@material-ui/core";
+import clsx from "clsx";
 
-import useStyles from './styles';
+import useStyles from "./styles";
 import {
   Email as EmailIcon,
   LocationOn as LocationIcon,
@@ -11,9 +11,9 @@ import {
   Instagram as InstagramIcon,
   Facebook as FacebookIcon,
   YouTube as YoutubeIcon,
-} from '@material-ui/icons';
+} from "@material-ui/icons";
 
-import info from '../../data/info.json';
+import info from "../../data/info.json";
 
 function Footer() {
   const classes = useStyles();
@@ -64,8 +64,8 @@ function Footer() {
                 <div className={classes.title}>¿Quiénes somos?</div>
                 <div>
                   Somos un equipo especializado en el desarrollo de soluciones
-                  informáticas para el streaming de video, en el seguimiento de eventos,
-                  competencias y mucho más.
+                  informáticas para el streaming de video, en el seguimiento de
+                  eventos, competencias y mucho más.
                 </div>
               </div>
             </Grid>
@@ -78,8 +78,8 @@ function Footer() {
             <span>StreamingCuba</span>
           </a>
           <p>
-            Copyright © {new Date().getFullYear()} StreamingCuba - All rights
-            reserved.
+            Copyright © {new Date().getFullYear()} StreamingCuba - Todos los
+            derechos reservados.
           </p>
         </div>
       </div>

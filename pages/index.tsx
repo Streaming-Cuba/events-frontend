@@ -15,9 +15,13 @@ import Carousel from "../components/Carousel";
 import EmptySpace from "../components/EmptySpace";
 import Separator from "../components/Separator";
 import EventCard from "../components/EventCard";
+import { InferGetServerSidePropsType } from "next";
+const https = require('https');
 
-function IndexPage() {
+function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles();
+
+  const { carouselItems } = props;
 
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -34,7 +38,7 @@ function IndexPage() {
     <>
       <div style={{ overflowX: "hidden" }}>
         <section className={classes.homeSection}>
-          <Carousel />
+          <Carousel items={carouselItems}/>
         </section>
 
         <EmptySpace />
@@ -112,3 +116,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default IndexPage;
+
+export async function getServerSideProps(context) {
+  const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+  const res = await fetch(`${process.env.API_URL}/event`, {
+    agent: httpsAgent,
+  })
+  const data = await res.json()
+
+  return {
+    props: {
+      carouselItems: data || [],
+    },
+  }
+}
