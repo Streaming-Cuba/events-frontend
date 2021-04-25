@@ -27,23 +27,22 @@ import VoteCard from "../../components/VoteCard";
 function VoteByEvent(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  const router = useRouter();
-
   const { event } = props;
-
+  const router = useRouter();
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {
-    console.log(event);
-  }, []);
+  const category = useMemo(() => {
+    const temp = router.query.category;
+    if (typeof temp === "string") return parseInt(temp);
+
+    return 0;
+  }, [router.query.category]);
 
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const lg = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
   const xl = useMediaQuery((theme: Theme) => theme.breakpoints.down("xl"));
-
-  const [categorySelected, setCategorySelected] = useState(0);
 
   const cols = useMemo(() => {
     if (sm) return 1;
@@ -53,6 +52,10 @@ function VoteByEvent(
     return 4;
   }, [sm, md, lg]);
 
+  useEffect(() => {
+    console.log(event);
+  }, []);
+
   const handleVote = () => {
     enqueueSnackbar("¡Gracias por votar en Cubadisco 2021!", {
       variant: "success",
@@ -60,10 +63,14 @@ function VoteByEvent(
   };
 
   const renderSubgroups = () => {
-    const subgroup = event.groups[categorySelected];
+    const subgroup = event.groups[category];
     return subgroup.childGroups.map((group) => (
       <div key={group.id}>
-        <Separator title={group.name} text={group.description} innerMarginSize="small">
+        <Separator
+          title={group.name}
+          text={group.description}
+          innerMarginSize="small"
+        >
           <MusicIcon />
         </Separator>
 
@@ -83,6 +90,18 @@ function VoteByEvent(
         <EmptySpace />
       </div>
     ));
+  };
+
+  const changeCategory = (index: number) => {
+    router.push({
+      pathname: router.pathname,
+
+      query: {
+        ...router.query,
+        category: index,
+      },
+    });
+    console.log(router);
   };
 
   return (
@@ -112,9 +131,9 @@ function VoteByEvent(
           <div className={classes.chipsList}>
             {event.groups.map((group, index) => (
               <Chip
-                onClick={() => setCategorySelected(index)}
+                onClick={() => changeCategory(index)}
                 color="primary"
-                variant={categorySelected === index ? "default" : "outlined"}
+                variant={category === index ? "default" : "outlined"}
                 className={classes.chip}
                 label={group.name}
                 key={index}
@@ -150,7 +169,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   categoriesFilter: {
-    textAlign: "center"
+    textAlign: "center",
   },
   chipsList: {
     display: "flex",
