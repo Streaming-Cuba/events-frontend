@@ -107,7 +107,7 @@ function VoteByEvent(
 
         <div className={classes.categoriesFilter}>
           <Typography color="primary" variant="h4">
-            Seleccione la categoría
+            Seleccione el área
           </Typography>
           <div className={classes.chipsList}>
             {event.groups.map((group, index) => (
