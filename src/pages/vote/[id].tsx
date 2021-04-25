@@ -34,6 +34,19 @@ function VoteByEvent(
 
   const category = useMemo(() => {
     const temp = router.query.category;
+
+    if (category >= event.groups.length) {
+      router.push({
+        pathname: router.pathname,
+
+        query: {
+          ...router.query,
+          category: event.groups.length - 1,
+        },
+      });
+      return event.groups.length - 1;
+    }
+
     if (typeof temp === "string") return parseInt(temp);
 
     return 0;
@@ -101,7 +114,6 @@ function VoteByEvent(
         category: index,
       },
     });
-    console.log(router);
   };
 
   return (
