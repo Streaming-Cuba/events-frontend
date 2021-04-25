@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import {
   makeStyles,
@@ -7,6 +7,7 @@ import {
   useMediaQuery,
   GridList,
   GridListTile,
+  Chip,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -16,6 +17,7 @@ import Link from "../../components/Link";
 import TitleBar from "../../components/TitleBar";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { Music as MusicIcon } from "mdi-material-ui";
+import { VariantType, useSnackbar } from "notistack";
 
 import axios from "axios";
 import EmptySpace from "../../components/EmptySpace";
@@ -30,6 +32,7 @@ function VoteByEvent(
   const { event } = props;
 
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     console.log(event);
@@ -40,6 +43,8 @@ function VoteByEvent(
   const lg = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
   const xl = useMediaQuery((theme: Theme) => theme.breakpoints.down("xl"));
 
+  const [categorySelected, setCategorySelected] = useState(0);
+
   const cols = useMemo(() => {
     if (sm) return 1;
     if (md) return 2;
@@ -47,6 +52,38 @@ function VoteByEvent(
     if (xl) return 5;
     return 4;
   }, [sm, md, lg]);
+
+  const handleVote = () => {
+    enqueueSnackbar("¡Gracias por votar en Cubadisco 2021!", {
+      variant: "success",
+    });
+  };
+
+  const renderSubgroups = () => {
+    const subgroup = event.groups[categorySelected];
+    return subgroup.childGroups.map((group) => (
+      <div key={group.id}>
+        <Separator title={group.name} text={group.description} innerMarginSize="small">
+          <MusicIcon />
+        </Separator>
+
+        <GridList cellHeight="auto" cols={cols}>
+          {group.items &&
+            group.items.map((item) => (
+              <GridListTile key={item.id}>
+                <VoteCard
+                  id={item.id}
+                  title={item.name}
+                  coverPath={item.coverPath}
+                  onVote={handleVote}
+                />
+              </GridListTile>
+            ))}
+        </GridList>
+        <EmptySpace />
+      </div>
+    ));
+  };
 
   return (
     <>
@@ -68,25 +105,26 @@ function VoteByEvent(
           <Typography color="inherit">{event.name}</Typography>
         </TitleBar>
 
-        <div className={classes.container}>
-          {event.groups.map((group) => (
-            <div key={group.id}>
-              <Separator title={group.name} text={group.description}>
-                <MusicIcon />
-              </Separator>
-
-              <GridList cellHeight="auto" cols={cols}>
-                {group.items &&
-                  group.items.map((item) => (
-                    <GridListTile key={item.id}>
-                      <VoteCard title={item.name} coverPath={item.coverPath} />
-                    </GridListTile>
-                  ))}
-              </GridList>
-              <EmptySpace />
-            </div>
-          ))}
+        <div className={classes.categoriesFilter}>
+          <Typography color="primary" variant="h4">
+            Seleccione la categoría
+          </Typography>
+          <div className={classes.chipsList}>
+            {event.groups.map((group, index) => (
+              <Chip
+                onClick={() => setCategorySelected(index)}
+                color="primary"
+                variant={categorySelected === index ? "default" : "outlined"}
+                className={classes.chip}
+                label={group.name}
+                key={index}
+              />
+            ))}
+          </div>
+          <EmptySpace size={1} />
         </div>
+
+        <div className={classes.container}>{renderSubgroups()}</div>
       </div>
     </>
   );
@@ -111,7 +149,20 @@ const useStyles = makeStyles((theme: Theme) => ({
       wordBreak: "break-word",
     },
   },
-
+  categoriesFilter: {
+    textAlign: "center"
+  },
+  chipsList: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    listStyle: "none",
+    padding: theme.spacing(0.5),
+    margin: 0,
+  },
+  chip: {
+    margin: theme.spacing(1),
+  },
   pageContent: {
     width: "100%",
     borderRadius: "5px",

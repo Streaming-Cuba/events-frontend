@@ -14,6 +14,7 @@ import { store } from "../apis/redux";
 import "../assets/styles/pace.css";
 import "../assets/styles/styles.css";
 import "../assets/styles/font.css";
+import { SnackbarProvider } from "notistack";
 
 class MyApp extends React.Component<MyAppProps> {
   componentDidMount() {
@@ -142,11 +143,19 @@ class MyApp extends React.Component<MyAppProps> {
         ) : (
           <Provider store={store}>
             <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Navbar />
-              <Sidebar />
-              <this.props.Component {...this.props.pageProps} />
-              <Footer />
+              <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{
+                  horizontal: "center",
+                  vertical: "bottom"
+                }}
+              >
+                <CssBaseline />
+                <Navbar />
+                <Sidebar />
+                <this.props.Component {...this.props.pageProps} />
+                <Footer />
+              </SnackbarProvider>
             </ThemeProvider>
           </Provider>
         )}

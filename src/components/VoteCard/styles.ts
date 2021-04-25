@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "400px",
   },
   image: {
-    position: "relative", 
+    position: "relative",
     paddingTop: "5px",
     marginBottom: "12px",
     borderRadius: "5px",
@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "100%",
     maxHeight: "220px",
-    maxWidth: "270px",    
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    maxWidth: "270px",
+    marginLeft: "auto",
+    marginRight: "auto",
     borderRadius: "5px",
     transform: "initial",
     transition: "all 0.5s ease-in-out",
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.1rem",
     fontWeight: 700,
     lineHeight: 1.4,
-    marginBottom: "15px",
+    marginBottom: "5px",
   },
   details: {
     margin: "-5px -10px",
@@ -64,6 +64,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9231rem",
     color: "#777",
   },
+  actions: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: 'center',
+  },
+  action: {
+    margin: "0 5px",
+  }
 }));
 
 export default useStyles;

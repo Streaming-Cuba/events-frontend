@@ -1,9 +1,15 @@
 import useStyles from "./styles";
 
-function EmptySpace() {
+function EmptySpace(props: EmptySpaceProps) {
   const classes = useStyles();
 
-  return <div className={classes.root} />;
+  const size = props.size * 50;
+
+  return <div className={classes.root} style={{ height: size }} />;
+}
+
+interface EmptySpaceProps {
+  size?: number;
 }
 
 export default EmptySpace;
