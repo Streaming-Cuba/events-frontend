@@ -1,3 +1,5 @@
+import Group from "./Group";
+
 interface Event {
   id: number;
   identifier: string;
@@ -14,7 +16,7 @@ interface Event {
   coverPath: string;
   shortCoverPath: string;
   interations: null;
-  groups: null;
+  groups: Group[];
   createdAt: string;
   modifiedAt: string;
 }
