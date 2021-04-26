@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import {
+  Button,
   makeStyles,
   Theme,
   Typography,
@@ -8,6 +9,11 @@ import {
   GridList,
   GridListTile,
   Chip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -40,9 +46,17 @@ function VoteByEvent(
       if (isNaN(index)) return 0;
       return index;
     }
-
     return 0;
   }, [router.query.category]);
+
+  const isSpecialVote = useMemo(() => {
+    const temp = router.query.special;
+
+    if (typeof temp === "string") {
+      return temp !== undefined;
+    }
+    return false;
+  }, [router.query.special]);
 
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -106,6 +120,20 @@ function VoteByEvent(
     );
   };
 
+  const cancelSpecialVote = () => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          special: undefined,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
+
   return (
     <>
       <NextSeo
@@ -117,6 +145,24 @@ function VoteByEvent(
           images: [{ url: event.coverPath }],
         }}
       />
+
+      <Dialog open={isSpecialVote}>
+        <DialogTitle>Indentifíquese antes de votar</DialogTitle>
+        <DialogContent>
+          <TextField label="Nombre" fullWidth />
+          <TextField label="Institución" fullWidth />
+          <TextField label="Correo electrónico" fullWidth />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelSpecialVote} color="secondary">
+            Cancelar
+          </Button>
+          <Button color="primary" autoFocus>
+            Continuar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <div>
         <TitleBar title={event.name as string} background={event.coverPath}>
           <Link href="/" color="inherit">
