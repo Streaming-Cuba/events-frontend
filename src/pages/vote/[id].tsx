@@ -121,12 +121,13 @@ function VoteByEvent(
   };
 
   const cancelSpecialVote = () => {
+    const queries = router.query;
+    delete queries.special;
     router.push(
       {
         pathname: router.pathname,
         query: {
-          ...router.query,
-          special: undefined,
+          ...queries
         },
       },
       undefined,

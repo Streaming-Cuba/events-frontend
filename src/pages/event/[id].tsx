@@ -61,9 +61,9 @@ function EventById(
           <Link href="/" color="inherit">
             Inicio
           </Link>
-          <Link href="/events" color="inherit">
+          <Typography color="inherit">
             Eventos
-          </Link>
+          </Typography>
           <Typography color="inherit">{event.name}</Typography>
         </TitleBar>
 

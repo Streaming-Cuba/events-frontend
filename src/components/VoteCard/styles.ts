@@ -3,17 +3,20 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   inner: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
-    marginBottom: "30px",
+    margin: "7px 7px 30px 7px",
+    maxWidth: "350px",
+    minHeight: "400px",
   },
-  root: {
-    maxWidth: "400px",
+  grow: {
+    flexGrow: 1,
   },
+  content: {},
   image: {
     position: "relative",
-    paddingTop: "5px",
-    marginBottom: "12px",
-    borderRadius: "5px",
+    marginBottom: "10px",
+    borderRadius: "5px 0 0 5px",
 
     "&:hover $img": {
       transform: "scale(1.04)",
@@ -26,10 +29,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "100%",
     maxHeight: "220px",
-    maxWidth: "270px",
     marginLeft: "auto",
     marginRight: "auto",
-    borderRadius: "5px",
     transform: "initial",
     transition: "all 0.5s ease-in-out",
   },
@@ -51,12 +52,18 @@ const useStyles = makeStyles((theme) => ({
     transition: "all 0.5s ease-in-out",
   },
   title: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+
+
     color: theme.palette.primary.main,
     textAlign: "center",
-    fontSize: "1.1rem",
-    fontWeight: 700,
+    fontSize: "1rem",
+    fontWeight: 600,
     lineHeight: 1.4,
     marginBottom: "5px",
+    minHeight: '44px',
   },
   subtitle: {
     color: theme.palette.primary.light,
@@ -80,11 +87,11 @@ const useStyles = makeStyles((theme) => ({
   actions: {
     display: "flex",
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   action: {
     margin: "0 5px",
-  }
+  },
 }));
 
 export default useStyles;
