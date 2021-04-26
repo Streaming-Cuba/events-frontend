@@ -83,12 +83,7 @@ function VoteByEvent(
           {group.items &&
             group.items.map((item) => (
               <GridListTile key={item.id}>
-                <VoteCard
-                  id={item.id}
-                  title={item.name}
-                  coverPath={item.coverPath}
-                  onVote={handleVote}
-                />
+                <VoteCard data={item} onVote={handleVote} />
               </GridListTile>
             ))}
         </GridList>

@@ -5,14 +5,15 @@ import {
   Vote as VoteIcon,
 } from "mdi-material-ui";
 import { IconButton, Tooltip } from "@material-ui/core";
+import Item from "../../types/Item";
 
 function VoteCard(props: VoteCardProps) {
   const classes = useStyles();
 
-  const { title, coverPath } = props;
+  const { data } = props;
 
   const onVote = (e: MouseEvent<HTMLButtonElement>) => {
-    if (props.onVote) props.onVote(e, props.id);
+    if (props.onVote) props.onVote(e, data.id);
   };
 
   return (
@@ -26,15 +27,24 @@ function VoteCard(props: VoteCardProps) {
             <img
               width="952"
               height="579"
-              src={coverPath}
+              src={data.coverPath}
               className={classes.img}
               alt=""
               loading="lazy"
             />
           </a>
-          {/* <div className={classes.status}>Showing</div> */}
+          {data.metadata?.productorHome && (
+            <div className={classes.status}>{data.metadata?.productorHome}</div>
+          )}
         </div>
-        <div className={classes.title}>{title}</div>
+        <div className={classes.title}>{data.name}</div>
+        {data.metadata?.interpreter && (
+          <div className={classes.subtitle}>{data.metadata?.interpreter}</div>
+        )}
+        {data.metadata?.productor && (
+          <div className={classes.subtitle}>{data.metadata?.productor}</div>
+        )}
+
         <div className={classes.actions}>
           <Tooltip title="Escuchar">
             <IconButton
@@ -62,9 +72,7 @@ function VoteCard(props: VoteCardProps) {
 }
 
 interface VoteCardProps {
-  id: number
-  title?: string;
-  coverPath?: string;
+  data: Item;
   onVote?: (event: MouseEvent, id?: number) => void;
   onListen?: MouseEventHandler;
 }

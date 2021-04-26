@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover $img": {
       transform: "scale(1.04)",
     },
+    "&:hover $status": {
+      transform: "scale(1.04)",
+    },
   },
   img: {
     display: "block",
@@ -31,18 +34,21 @@ const useStyles = makeStyles((theme) => ({
     transition: "all 0.5s ease-in-out",
   },
   status: {
+    color: theme.palette.primary.main,
     position: "absolute",
     zIndex: 1,
-    bottom: "20px",
+    bottom: "10px",
     left: "20px",
-    fontSize: ".9231rem",
+    fontSize: ".8rem",
     textTransform: "uppercase",
     listStyle: "none",
     margin: 0,
     background: "#fff",
-    padding: "7px 20px",
+    padding: "5px 15px",
     borderRadius: "25px",
-    fontWeight: 500,
+    fontWeight: 700,
+    transform: "initial",
+    transition: "all 0.5s ease-in-out",
   },
   title: {
     color: theme.palette.primary.main,
@@ -51,6 +57,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     lineHeight: 1.4,
     marginBottom: "5px",
+  },
+  subtitle: {
+    color: theme.palette.primary.light,
+    textAlign: "center",
+    fontSize: "0.85rem",
+    fontWeight: 500,
+    marginBottom: "1px",
   },
   details: {
     margin: "-5px -10px",

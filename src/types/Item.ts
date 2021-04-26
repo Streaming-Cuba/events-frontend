@@ -1,3 +1,5 @@
+import Metadata from "./Metadata";
+
 interface Item {
   id: number;
   name: string;
@@ -5,7 +7,7 @@ interface Item {
   coverPath: string | null;
   votes: number;
   socials: null;
-  metadata: null;
+  metadata: Metadata | null;
   type: null;
   number: 5;
 }
