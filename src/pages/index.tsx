@@ -7,6 +7,7 @@ import {
   makeStyles,
   Theme,
   useMediaQuery,
+  Typography,
 } from "@material-ui/core";
 import {} from "@material-ui/styles";
 import clsx from "clsx";
@@ -16,9 +17,11 @@ import EmptySpace from "../components/EmptySpace";
 import Separator from "../components/Separator";
 import EventCard from "../components/EventCard";
 import { InferGetServerSidePropsType } from "next";
-const https = require('https');
+const https = require("https");
 
-function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function IndexPage(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   const classes = useStyles();
 
   const { carouselItems } = props;
@@ -38,13 +41,13 @@ function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>
     <>
       <div style={{ overflowX: "hidden" }}>
         <section className={classes.homeSection}>
-          <Carousel items={carouselItems}/>
+          <Carousel items={carouselItems} />
         </section>
 
         <EmptySpace />
         <Separator
           title="Próximos eventos"
-          text="Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor."
+          text="Actualmente no tenemos más eventos planificados. Cuando planifiquemos nuevos eventos estarán disponibles acá."
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +66,7 @@ function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>
         </Separator>
 
         <EmptySpace />
-        <section className={classes.section}>
+        {/* <section className={classes.section}>
           <GridList cellHeight="auto" cols={cols}>
             <GridListTile>
               <EventCard />
@@ -81,14 +84,7 @@ function IndexPage(props: InferGetServerSidePropsType<typeof getServerSideProps>
               <EventCard />
             </GridListTile>
           </GridList>
-        </section>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        </section> */}
       </div>
     </>
   );
@@ -119,11 +115,11 @@ export default IndexPage;
 
 export async function getServerSideProps(context) {
   const res = await fetch(`${process.env.API_URL}/event`);
-  const data = await res.json()
+  const data = await res.json();
 
   return {
     props: {
       carouselItems: data || [],
     },
-  }
+  };
 }

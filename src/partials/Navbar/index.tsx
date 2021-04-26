@@ -47,7 +47,7 @@ function Navbar() {
                   <Logo/>
                 </Grid>
                 <Grid item xs={1} sm={9} className={classes.columnRoot}>
-                  <nav className={classes.desktopNavigation}>
+                  {/* <nav className={classes.desktopNavigation}>
                     <ul className={classes.navbarNav}>
                       <li className={clsx(classes.menuItem)}>
                         <Link href="/">Inicio</Link>
@@ -64,7 +64,7 @@ function Navbar() {
                     <IconButton onClick={onSidebarClick} color="inherit">
                       <MenuIcon />
                     </IconButton>
-                  </div>
+                  </div> */}
                 </Grid>
               </Grid>
             </div>

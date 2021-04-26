@@ -32,22 +32,24 @@ function VoteByEvent(
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
+  // if (category >= event.groups.length) {
+  //   router.push({
+  //     pathname: router.pathname,
+
+  //     query: {
+  //       ...router.query,
+  //       category: event.groups.length - 1,
+  //     },
+  //   });
+
   const category = useMemo(() => {
     const temp = router.query.category;
 
-    if (category >= event.groups.length) {
-      router.push({
-        pathname: router.pathname,
-
-        query: {
-          ...router.query,
-          category: event.groups.length - 1,
-        },
-      });
-      return event.groups.length - 1;
+    if (typeof temp === "string") {
+      var index = parseInt(temp);
+      if (isNaN(index)) return 0;
+      return index;
     }
-
-    if (typeof temp === "string") return parseInt(temp);
 
     return 0;
   }, [router.query.category]);
@@ -106,14 +108,17 @@ function VoteByEvent(
   };
 
   const changeCategory = (index: number) => {
-    router.push({
-      pathname: router.pathname,
-
-      query: {
-        ...router.query,
-        category: index,
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          category: index,
+        },
       },
-    });
+      undefined,
+      { shallow: true }
+    );
   };
 
   return (

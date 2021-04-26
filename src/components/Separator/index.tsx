@@ -13,7 +13,7 @@ function Separator(props: SeparatorProps) {
       <div className={classes.separate} style={{ marginTop }}>
         {props.children}
       </div>
-      <div className={classes.text}>{props.text}</div>
+      {props.text && <div className={classes.text}>{props.text}</div>}
     </div>
   );
 }
