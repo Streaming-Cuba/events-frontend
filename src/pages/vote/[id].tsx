@@ -32,16 +32,6 @@ function VoteByEvent(
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
-  // if (category >= event.groups.length) {
-  //   router.push({
-  //     pathname: router.pathname,
-
-  //     query: {
-  //       ...router.query,
-  //       category: event.groups.length - 1,
-  //     },
-  //   });
-
   const category = useMemo(() => {
     const temp = router.query.category;
 
@@ -309,12 +299,25 @@ export default VoteByEvent;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
-    const { id } = context.params;
+    const { query, params } = context;
+    const { id } = params;
+    const { category } = query;
     const eventResponse = await axios.get<Event>(
       `${process.env.API_URL}/event/${id}`
     );
 
     const event = eventResponse.data;
+    let categoryIndex = 0;
+    if (typeof category === "string") {
+      var index = parseInt(category);
+      if (!isNaN(index)) categoryIndex = index;
+    }
+
+    if (categoryIndex >= event.groups.length)
+      return {
+        notFound: true,
+        props: {},
+      };
 
     return {
       props: {
