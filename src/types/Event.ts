@@ -19,6 +19,7 @@ interface Event {
   groups: Group[];
   createdAt: string;
   modifiedAt: string;
+  location?: string
 }
 
 export default Event;

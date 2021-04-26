@@ -11,6 +11,6 @@ export enum Formats  {
     LLL= 'LLL'
 }
 
-export function formatDate(date: string, format: Formats = Formats.LL): string {
+export function formatDate(date: string | Date, format: Formats = Formats.LL): string {
     return moment(date).format(format)
 }
