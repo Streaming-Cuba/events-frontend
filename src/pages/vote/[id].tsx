@@ -93,10 +93,10 @@ function VoteByEvent(
           <MusicIcon />
         </Separator>
 
-        <GridList cellHeight="auto" cols={cols}>
+        <GridList cellHeight="auto" cols={cols} className={classes.list}>
           {group.items &&
             group.items.map((item) => (
-              <GridListTile key={item.id}>
+              <GridListTile key={item.id} className={classes.tile}>
                 <VoteCard data={item} onVote={handleVote} />
               </GridListTile>
             ))}
@@ -127,7 +127,7 @@ function VoteByEvent(
       {
         pathname: router.pathname,
         query: {
-          ...queries
+          ...queries,
         },
       },
       undefined,
@@ -231,6 +231,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   chip: {
     margin: theme.spacing(1),
   },
+  tile: {
+    display: "flex",
+    justifyContent: "center",
+  },
   pageContent: {
     width: "100%",
     borderRadius: "5px",
@@ -238,7 +242,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "#fff",
     marginBottom: "30px",
   },
-
+  list: {
+    justifyContent: "center",
+  },
   contentHeader: {
     borderTopLeftRadius: "5px",
     borderTopRightRadius: "5px",

@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: "3rem",
     lineHeight: "1.3",
+
+    [theme.breakpoints.down('sm')]: {
+      fontSize: "1.8rem",
+    }
   },
   separate: {
     alignItems: 'center',
