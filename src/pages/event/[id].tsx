@@ -7,6 +7,7 @@ import {
   IconButton,
   Typography,
   Grid,
+  Button,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -61,9 +62,7 @@ function EventById(
           <Link href="/" color="inherit">
             Inicio
           </Link>
-          <Typography color="inherit">
-            Eventos
-          </Typography>
+          <Typography color="inherit">Eventos</Typography>
           <Typography color="inherit">{event.name}</Typography>
         </TitleBar>
 
@@ -118,7 +117,11 @@ function EventById(
                         <EndDateInfo endDate={event.endDate} />
                         <LocationInfo location={event.location} />
                         <CategoryInfo category={event.category} />
-
+                        <li className={classes.li}>
+                          <Button color="primary" variant="contained">
+                            Vote ya
+                          </Button>
+                        </li>
                         {/* <li className={classes.li}>
                           <div className={classes.icon}>
                             <svg

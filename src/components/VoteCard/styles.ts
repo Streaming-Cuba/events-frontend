@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: "7px 7px 30px 7px",
     maxWidth: "350px",
+    minWidth: '316px',
     minHeight: "400px",
   },
   grow: {
