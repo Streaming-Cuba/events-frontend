@@ -85,6 +85,7 @@ function VoteByEvent(
     setVoting(true);
     enqueueSnackbar(`Estamos procesando su voto. Por favor espere.`, {
       variant: "info",
+      autoHideDuration: 2500,
     });
     serverManager
       .voteByItem(id, "default")
