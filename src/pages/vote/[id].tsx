@@ -83,6 +83,9 @@ function VoteByEvent(
 
   const handleVote = (e: MouseEvent, id: number) => {
     setVoting(true);
+    enqueueSnackbar(`Estamos procesando su voto. Por favor espere.`, {
+      variant: "info",
+    });
     serverManager
       .voteByItem(id, "default")
       .then((response) => {
