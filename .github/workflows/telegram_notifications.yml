@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows:
       - "Deploy to StreamingCuba VPS"
+      - "Deply to Heroku"
     types: [completed]
 
 jobs:
