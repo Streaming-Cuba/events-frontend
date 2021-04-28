@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Breadcrumbs } from "@material-ui/core";
 import { NavigateNext as NavigateNextIcon } from "@material-ui/icons";
 import useStyles from "./styles";
@@ -8,12 +8,14 @@ function TitleBar(props: TitleBarProps) {
 
   const { background } = props;
 
+  const backgroundImage = useMemo(() => {
+    if (background) return `url(${background})`;
+    return "url(https://res.cloudinary.com/streaming-cuba/image/upload/v1618700290/breadcrumbs-bg_si63ie.webp)";
+  }, [background]);
+
   return (
     <div className={classes.titleBar}>
-      <div
-        className={classes.titleBackground}
-        style={{ backgroundImage: background && `url(${background}) !important` }}
-      />
+      <div className={classes.titleBackground} style={{ backgroundImage }} />
       <div className={classes.container}>
         {props.title && <h1>{props.title}</h1>}
         <Breadcrumbs
