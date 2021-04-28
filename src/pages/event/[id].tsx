@@ -45,6 +45,15 @@ function EventById(
     console.log(event);
   }, []);
 
+  const goToVote = () => {
+    router.push({
+      pathname: "/vote/[id]",
+        query: {
+          id: event.identifier
+        },
+    })
+  };
+
   return (
     <>
       <NextSeo
@@ -118,7 +127,14 @@ function EventById(
                         <LocationInfo location={event.location} />
                         <CategoryInfo category={event.category} />
                         <li className={classes.li}>
-                          <Button color="primary" variant="contained">
+                          <Button
+                            onClick={goToVote}
+                            color="primary"
+                            variant="contained"
+                            disableElevation
+                            fullWidth
+                            style={{ marginLeft: "auto", marginRight: "auto" }}
+                          >
                             Vote ya
                           </Button>
                         </li>
