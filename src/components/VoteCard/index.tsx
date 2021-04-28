@@ -16,6 +16,10 @@ function VoteCard(props: VoteCardProps) {
     if (props.onVote) props.onVote(e, data.id);
   };
 
+  const openExternalUrl = () => {
+    window.open(data.metadata.url, "__blank");
+  };
+
   return (
     <Card className={classes.inner}>
       <div className={classes.image}>
@@ -42,20 +46,16 @@ function VoteCard(props: VoteCardProps) {
       </div>
       <div className={classes.grow} />
       <div className={classes.actions}>
-        <Tooltip title="Escuchar">
-          <IconButton
-            onClick={props.onListen && props.onListen}
-            className={classes.action}
-          >
-            <HeadphonesIcon />
-          </IconButton>
-        </Tooltip>
+        {data.metadata.url && (
+          <Tooltip title="Escuchar">
+            <IconButton onClick={openExternalUrl} className={classes.action}>
+              <HeadphonesIcon />
+            </IconButton>
+          </Tooltip>
+        )}
         {!disableVote && (
           <Tooltip title="Votar">
-            <IconButton
-              onClick={onVote}
-              className={classes.action}
-            >
+            <IconButton onClick={onVote} className={classes.action}>
               <VoteIcon />
             </IconButton>
           </Tooltip>

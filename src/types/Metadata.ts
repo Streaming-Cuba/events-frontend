@@ -4,6 +4,7 @@ interface Metadata {
   interpreter: string;
   productor: string;
   support: string;
+  url: string;
 }
 
 export default Metadata;
