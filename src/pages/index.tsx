@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
 export default IndexPage;
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`${process.env.API_URL}/event`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event`);
   const data = await res.json();
 
   return {

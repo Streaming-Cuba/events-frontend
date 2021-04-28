@@ -10,7 +10,7 @@ import Item from "../../types/Item";
 function VoteCard(props: VoteCardProps) {
   const classes = useStyles();
 
-  const { data } = props;
+  const { data, disableVote } = props;
 
   const onVote = (e: MouseEvent<HTMLButtonElement>) => {
     if (props.onVote) props.onVote(e, data.id);
@@ -40,7 +40,7 @@ function VoteCard(props: VoteCardProps) {
           <div className={classes.subtitle}>{data.metadata?.productor}</div>
         )}
       </div>
-      <div className={classes.grow}/>
+      <div className={classes.grow} />
       <div className={classes.actions}>
         <Tooltip title="Escuchar">
           <IconButton
@@ -50,11 +50,16 @@ function VoteCard(props: VoteCardProps) {
             <HeadphonesIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Votar">
-          <IconButton onClick={onVote} className={classes.action}>
-            <VoteIcon />
-          </IconButton>
-        </Tooltip>
+        {!disableVote && (
+          <Tooltip title="Votar">
+            <IconButton
+              onClick={onVote}
+              className={classes.action}
+            >
+              <VoteIcon />
+            </IconButton>
+          </Tooltip>
+        )}
       </div>
     </Card>
   );
@@ -62,8 +67,12 @@ function VoteCard(props: VoteCardProps) {
 
 interface VoteCardProps {
   data: Item;
-  onVote?: (event: MouseEvent, id?: number) => void;
+  onVote?: (
+    event: MouseEvent | MouseEvent<HTMLButtonElement>,
+    id: number
+  ) => void;
   onListen?: MouseEventHandler;
+  disableVote?: boolean;
 }
 
 export default VoteCard;

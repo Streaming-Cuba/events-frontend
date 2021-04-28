@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   img: {
     display: "block",
     width: "100%",
+    minWidth: '316px',
     maxHeight: "220px",
     marginLeft: "auto",
     marginRight: "auto",

@@ -443,7 +443,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     const { id } = context.params;
     const eventResponse = await axios.get<Event>(
-      `${process.env.API_URL}/event/${id}`
+      `${process.env.NEXT_PUBLIC_API_URL}/event/${id}`
     );
 
     const event = eventResponse.data;

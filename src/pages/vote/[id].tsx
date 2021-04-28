@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, MouseEvent } from "react";
 import clsx from "clsx";
 import {
   Button,
@@ -24,11 +24,13 @@ import TitleBar from "../../components/TitleBar";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { Music as MusicIcon } from "mdi-material-ui";
 import { VariantType, useSnackbar } from "notistack";
+import { useCookies } from "react-cookie";
 
 import axios from "axios";
 import EmptySpace from "../../components/EmptySpace";
 import Separator from "../../components/Separator";
 import VoteCard from "../../components/VoteCard";
+import { useServerManager } from "../../components/ServerManagerProvider";
 
 function VoteByEvent(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -36,7 +38,11 @@ function VoteByEvent(
   const { event } = props;
   const router = useRouter();
   const classes = useStyles();
+  const serverManager = useServerManager();
+  const [cookies, setCookie] = useCookies();
   const { enqueueSnackbar } = useSnackbar();
+
+  const [voting, setVoting] = useState(false);
 
   const category = useMemo(() => {
     const temp = router.query.category;
@@ -75,35 +81,61 @@ function VoteByEvent(
     console.log(event);
   }, []);
 
-  const handleVote = () => {
-    enqueueSnackbar("¡Gracias por votar en Cubadisco 2021!", {
-      variant: "success",
-    });
+  const handleVote = (e: MouseEvent, id: number) => {
+    setVoting(true);
+    serverManager
+      .voteByItem(id, "default")
+      .then((response) => {
+        const { data } = response;
+        enqueueSnackbar(`¡Gracias por votar en ${event.name}!`, {
+          variant: "success",
+        });
+        setCookie(`vote/${data.groupId}`, "vote");
+      })
+      .catch((error) => {
+        enqueueSnackbar(
+          "¡Ha ocurrido un error al procesar su voto! Por favor intentelo más tarde.",
+          {
+            variant: "error",
+          }
+        );
+      })
+      .finally(() => {
+        setVoting(false);
+      });
   };
 
   const renderSubgroups = () => {
     const subgroup = event.groups[category];
-    return subgroup.childGroups.map((group) => (
-      <div key={group.id}>
-        <Separator
-          title={group.name}
-          text={group.description}
-          innerMarginSize="small"
-        >
-          <MusicIcon />
-        </Separator>
 
-        <GridList cellHeight="auto" cols={cols} className={classes.list}>
-          {group.items &&
-            group.items.map((item) => (
-              <GridListTile key={item.id} className={classes.tile}>
-                <VoteCard data={item} onVote={handleVote} />
-              </GridListTile>
-            ))}
-        </GridList>
-        <EmptySpace />
-      </div>
-    ));
+    return subgroup.childGroups.map((group) => {
+      const existVote = cookies[`vote/${group.id}`];
+      return (
+        <div key={group.id}>
+          <Separator
+            title={group.name}
+            text={group.description}
+            innerMarginSize="small"
+          >
+            <MusicIcon />
+          </Separator>
+
+          <GridList cellHeight="auto" cols={cols} className={classes.list}>
+            {group.items &&
+              group.items.map((item) => (
+                <GridListTile key={item.id} className={classes.tile}>
+                  <VoteCard
+                    data={item}
+                    onVote={handleVote}
+                    disableVote={existVote}
+                  />
+                </GridListTile>
+              ))}
+          </GridList>
+          <EmptySpace />
+        </div>
+      );
+    });
   };
 
   const changeCategory = (index: number) => {
@@ -351,7 +383,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { id } = params;
     const { category } = query;
     const eventResponse = await axios.get<Event>(
-      `${process.env.API_URL}/event/${id}`
+      `${process.env.NEXT_PUBLIC_API_URL}/event/${id}`
     );
 
     const event = eventResponse.data;

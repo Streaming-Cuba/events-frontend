@@ -5,6 +5,7 @@ import { NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
+import { CookiesProvider } from 'react-cookie';
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import Navbar from "../partials/Navbar";
 import Footer from "../partials/Footer";
@@ -15,6 +16,8 @@ import "../assets/styles/pace.css";
 import "../assets/styles/styles.css";
 import "../assets/styles/font.css";
 import { SnackbarProvider } from "notistack";
+import ServerManagerProvider from "../components/ServerManagerProvider";
+
 
 class MyApp extends React.Component<MyAppProps> {
   componentDidMount() {
@@ -28,6 +31,7 @@ class MyApp extends React.Component<MyAppProps> {
     return (
       <>
         <Head>
+          <meta charSet="UTF-8" />
           <meta
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width"
@@ -142,21 +146,25 @@ class MyApp extends React.Component<MyAppProps> {
           <this.props.Component {...this.props.pageProps} />
         ) : (
           <Provider store={store}>
-            <ThemeProvider theme={theme}>
-              <SnackbarProvider
-                maxSnack={3}
-                anchorOrigin={{
-                  horizontal: "center",
-                  vertical: "bottom"
-                }}
-              >
-                <CssBaseline />
-                <Navbar />
-                <Sidebar />
-                <this.props.Component {...this.props.pageProps} />
-                <Footer />
-              </SnackbarProvider>
-            </ThemeProvider>
+            <ServerManagerProvider>
+              <CookiesProvider>
+                <ThemeProvider theme={theme}>
+                  <SnackbarProvider
+                    maxSnack={3}
+                    anchorOrigin={{
+                      horizontal: "center",
+                      vertical: "bottom",
+                    }}
+                  >
+                    <CssBaseline />
+                    <Navbar />
+                    <Sidebar />
+                    <this.props.Component {...this.props.pageProps} />
+                    <Footer />
+                  </SnackbarProvider>
+                </ThemeProvider>
+              </CookiesProvider>
+            </ServerManagerProvider>
           </Provider>
         )}
       </>
@@ -193,6 +201,5 @@ interface MyAppProps {
 export default MyApp;
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
-  console.log(metric);
   //TODO: Send it to GOogle Analytics
 }
