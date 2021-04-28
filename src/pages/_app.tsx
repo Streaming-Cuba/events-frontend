@@ -5,7 +5,7 @@ import { NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider } from "react-cookie";
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import Navbar from "../partials/Navbar";
 import Footer from "../partials/Footer";
@@ -17,7 +17,6 @@ import "../assets/styles/styles.css";
 import "../assets/styles/font.css";
 import { SnackbarProvider } from "notistack";
 import ServerManagerProvider from "../components/ServerManagerProvider";
-
 
 class MyApp extends React.Component<MyAppProps> {
   componentDidMount() {
@@ -123,6 +122,20 @@ class MyApp extends React.Component<MyAppProps> {
           />
 
           <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+          `,
+            }}
+          />
         </Head>
         <DefaultSeo
           openGraph={{
