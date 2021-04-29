@@ -39,81 +39,81 @@ class MyApp extends React.Component<MyAppProps> {
           <link
             rel="apple-touch-icon"
             sizes="57x57"
-            href="/icons/apple-icon-57x57.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/apple-icon-57x57_rwhqpm.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="60x60"
-            href="/icons/apple-icon-60x60.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659240/events/icons/apple-icon-60x60_zv3nsx.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="72x72"
-            href="/icons/apple-icon-72x72.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659240/events/icons/apple-icon-72x72_ndtmsb.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="76x76"
-            href="/icons/apple-icon-76x76.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659240/events/icons/apple-icon-76x76_agmojg.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="114x114"
-            href="/icons/apple-icon-114x114.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659240/events/icons/apple-icon-114x114_ttkg7r.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="120x120"
-            href="/icons/apple-icon-120x120.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659240/events/icons/apple-icon-120x120_m2xprn.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="144x144"
-            href="/icons/apple-icon-144x144.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659240/events/icons/apple-icon-144x144_ra09ky.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="152x152"
-            href="/icons/apple-icon-152x152.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/apple-icon-152x152_n8vliz.png"
           />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="/icons/apple-icon-180x180.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/apple-icon-180x180_kqrgut.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="192x192"
-            href="/icons/android-icon-192x192.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659242/events/icons/android-icon-192x192_zwd0ys.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/icons/favicon-32x32.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/favicon-32x32_xx9bsy.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="96x96"
-            href="/icons/favicon-96x96.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/favicon-96x96_byjuvp.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/icons/favicon-16x16.png"
+            href="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/favicon-16x16_rngawd.png"
+          />
+          <meta
+            name="msapplication-TileImage"
+            content="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/ms-icon-150x150_jjo2zb.png"
           />
           <link rel="manifest" href="/manifest.json" />
           <meta
             name="msapplication-TileColor"
             content={theme.palette.primary.main}
           />
-          <meta
-            name="msapplication-TileImage"
-            content="/icons/ms-icon-144x144.png"
-          ></meta>
 
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
@@ -147,7 +147,9 @@ class MyApp extends React.Component<MyAppProps> {
             images: [
               {
                 url:
-                  "https://eventos.streamingcuba.com/icons/android-icon-48x48.png",
+                  "https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/favicon-96x96_byjuvp.png",
+                width: 96,
+                height: 96,
               },
             ],
           }}
