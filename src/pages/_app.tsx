@@ -17,6 +17,7 @@ import "../assets/styles/styles.css";
 import "../assets/styles/font.css";
 import { SnackbarProvider } from "notistack";
 import ServerManagerProvider from "../components/ServerManagerProvider";
+import { FamilyTree } from "mdi-material-ui";
 
 class MyApp extends React.Component<MyAppProps> {
   componentDidMount() {
@@ -24,6 +25,16 @@ class MyApp extends React.Component<MyAppProps> {
     if (jssStyles) {
       jssStyles.parentElement?.removeChild(jssStyles);
     }
+  }
+
+  state = {
+    error: false,
+  };
+
+  componentDidCatch() {
+    this.setState({
+      error: false
+    })
   }
 
   render() {
@@ -150,6 +161,7 @@ class MyApp extends React.Component<MyAppProps> {
                   "https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/favicon-96x96_byjuvp.png",
                 width: 96,
                 height: 96,
+                alt: "Favicon"
               },
             ],
           }}
@@ -157,7 +169,7 @@ class MyApp extends React.Component<MyAppProps> {
           defaultTitle="Eventos StreamingCuba"
           description="Nuestros eventos al alcance de todos."
         />
-        {this.props.error ? (
+        {(this.props.error || this.state.error) ? (
           <this.props.Component {...this.props.pageProps} />
         ) : (
           <Provider store={store}>

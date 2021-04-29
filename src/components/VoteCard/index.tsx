@@ -46,7 +46,7 @@ function VoteCard(props: VoteCardProps) {
       </div>
       <div className={classes.grow} />
       <div className={classes.actions}>
-        {data.metadata.url && (
+        {data.metadata?.url && (
           <Tooltip title="Escuchar">
             <IconButton onClick={openExternalUrl} className={classes.action}>
               <HeadphonesIcon />
