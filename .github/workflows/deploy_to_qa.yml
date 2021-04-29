@@ -30,6 +30,6 @@ jobs:
           useforce: true
           dynamicFiles: false
           env_file: ".env.local"
-          procfile: "yarn start:heroku"
+          procfile: "web: npm run start:heroku"
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.QA_API_URL }}
