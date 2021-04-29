@@ -7,7 +7,8 @@
     "prebuild": "rimraf .next",
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start:heroku": "next start -p $PORT",
+    "start": "next start",
     "eslint:fix": "eslint src/** --fix",
     "eslint:check": "eslint src/**"
   },
