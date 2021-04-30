@@ -48,10 +48,10 @@ function EventById(
   const goToVote = () => {
     router.push({
       pathname: "/vote/[id]",
-        query: {
-          id: event.identifier
-        },
-    })
+      query: {
+        id: event.identifier,
+      },
+    });
   };
 
   return (
@@ -76,8 +76,8 @@ function EventById(
         </TitleBar>
 
         <div className={classes.container}>
-          <Grid container spacing={4}>
-            <Grid item sm={8}>
+          <Grid container>
+            <Grid item xs={12} sm={8}>
               <div
                 style={{
                   paddingTop: "0px",
@@ -100,8 +100,9 @@ function EventById(
                 </div>
               </div>
             </Grid>
-            <Grid item sm={4}>
+            <Grid item xs={12} sm={4}>
               <div
+                className={classes.detailsSection}
                 style={{
                   paddingTop: "0px",
                   paddingBottom: "1px",
@@ -375,6 +376,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderStyle: "none",
     maxWidth: "100%",
     height: "auto",
+  },
+  detailsSection: {    
+    padding: "0 0 0 15px",
+    
+    [theme.breakpoints.down("sm")]: {
+      padding: 0,
+    },
   },
   detailWidget: {
     width: "100%",
