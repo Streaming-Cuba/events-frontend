@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 class ServerManager {
+  
   apiAxios: AxiosInstance;
 
   constructor() {    
@@ -18,6 +19,13 @@ class ServerManager {
       }
       return error;
     })*/
+  }
+
+  createSubscriber(): Promise<AxiosResponse>{
+    const url = `/event/vote`;
+    return this.apiAxios.post(url, {
+      
+    });
   }
 
   voteByItem(

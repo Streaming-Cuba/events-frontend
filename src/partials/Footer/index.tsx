@@ -25,7 +25,7 @@ function Footer() {
           <Grid container justify="space-between">
             <Grid item xs={12} sm={4}>
               <div className={classes.wrapper}>
-                <div className={classes.title}>Contácto</div>
+                <div className={classes.title}>Contacto</div>
                 <div>
                   <div className={classes.item}>
                     <LocationIcon />
@@ -63,9 +63,9 @@ function Footer() {
               <div className={classes.wrapper}>
                 <div className={classes.title}>¿Quiénes somos?</div>
                 <div>
-                  Somos un equipo especializado en el desarrollo de soluciones
-                  informáticas para el streaming de video, en el seguimiento de
-                  eventos, competencias y mucho más.
+                  Somos una productora audiovisual especializada en servicios de
+                  emisión profesional de vídeo en directo mediante streaming con
+                  sede en Santiago de Cuba, Cuba.
                 </div>
               </div>
             </Grid>

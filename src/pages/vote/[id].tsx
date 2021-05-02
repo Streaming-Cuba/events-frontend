@@ -43,6 +43,15 @@ function VoteByEvent(
   const { enqueueSnackbar } = useSnackbar();
 
   const [voting, setVoting] = useState(false);
+  const [specialVoteDialog, setSpecialVoteDialog] = useState(false);
+  const [name, setName] = useState("");
+  const [institution, setInstitution] = useState("");
+  const [email, setEmail] = useState("");
+
+  const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
+  const lg = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
+  const xl = useMediaQuery((theme: Theme) => theme.breakpoints.down("xl"));
 
   const category = useMemo(() => {
     const temp = router.query.category;
@@ -55,19 +64,13 @@ function VoteByEvent(
     return 0;
   }, [router.query.category]);
 
-  const isSpecialVote = useMemo(() => {
+  useEffect(() => {
     const temp = router.query.special;
 
-    if (typeof temp === "string") {
-      return temp !== undefined;
+    if (typeof temp === "string" && temp !== undefined) {
+      setSpecialVoteDialog(true);
     }
-    return false;
-  }, [router.query.special]);
-
-  const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
-  const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
-  const lg = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
-  const xl = useMediaQuery((theme: Theme) => theme.breakpoints.down("xl"));
+  }, []);
 
   const cols = useMemo(() => {
     if (sm) return 1;
@@ -83,10 +86,6 @@ function VoteByEvent(
 
   const handleVote = (e: MouseEvent, id: number) => {
     setVoting(true);
-    // enqueueSnackbar(`Estamos procesando su voto. Por favor espere.`, {
-    //   variant: "info",
-    //   autoHideDuration: 2500,
-    // });
     serverManager
       .voteByItem(id, "default")
       .then((response) => {
@@ -169,6 +168,17 @@ function VoteByEvent(
       undefined,
       { shallow: true }
     );
+    setSpecialVoteDialog(false);
+  };
+
+  const submitSpecialVote = () => {
+    serverManager
+      .createSubscriber()
+      .then((response) => {})
+      .catch((error) => {})
+      .finally(() => {
+        //setSpecialVoteDialog(false);
+      });
   };
 
   return (
@@ -183,18 +193,38 @@ function VoteByEvent(
         }}
       />
 
-      <Dialog open={isSpecialVote}>
+      <Dialog open={specialVoteDialog}>
         <DialogTitle>Indentifíquese antes de votar</DialogTitle>
         <DialogContent>
-          <TextField label="Nombre" fullWidth />
-          <TextField label="Institución" fullWidth />
-          <TextField label="Correo electrónico" fullWidth />
+          <TextField
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            label="Nombre"
+            fullWidth
+          />
+          <TextField
+            value={institution}
+            onChange={(e) => setInstitution(e.target.value)}
+            label="Institución"
+            fullWidth
+          />
+          <TextField
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Correo electrónico"
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={cancelSpecialVote} color="secondary">
             Cancelar
           </Button>
-          <Button color="primary" autoFocus>
+          <Button
+            onClick={submitSpecialVote}
+            color="primary"
+            variant="contained"
+            autoFocus disableElevation
+          >
             Continuar
           </Button>
         </DialogActions>
