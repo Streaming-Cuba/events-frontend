@@ -48,7 +48,7 @@ function Navbar() {
                     style={{ maxWidth: "80px", marginTop: "20px" }}
                     src="https://res.cloudinary.com/streaming-cuba/image/upload/v1619921447/events/STREAMING_EVENTOS_MAS_GRANDE_1_cst2ib.png"
                   />
-                  <Logo />
+                  {/* <Logo /> */}
                 </Grid>
                 <Grid item xs={1} sm={9} className={classes.columnRoot}>
                   {/* <nav className={classes.desktopNavigation}>
