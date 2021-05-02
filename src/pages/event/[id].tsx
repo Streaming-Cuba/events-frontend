@@ -126,7 +126,7 @@ function EventById(
                         <StartDateInfo startDate={event.startDate} />
                         <EndDateInfo endDate={event.endDate} />
                         <LocationInfo location={event.location} />
-                        <CategoryInfo category={event.category} />
+                        {/* <CategoryInfo category={event.category} /> */}
                         <li className={classes.li}>
                           <Button
                             onClick={goToVote}
