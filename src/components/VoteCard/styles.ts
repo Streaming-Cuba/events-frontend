@@ -74,6 +74,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     marginBottom: "1px",
   },
+  alterSubtitle: {
+    fontStyle: "italic",
+    fontWeight: 600,
+  },
   details: {
     margin: "-5px -10px",
     width: "100%",
@@ -86,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9231rem",
     color: "#777",
   },
+  
   actions: {
     display: "flex",
     alignItems: "center",

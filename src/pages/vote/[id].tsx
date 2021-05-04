@@ -47,6 +47,7 @@ function VoteByEvent(
   const [name, setName] = useState("");
   const [institution, setInstitution] = useState("");
   const [email, setEmail] = useState("");
+  const [voteType, setVoteType] = useState("default");
 
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -87,7 +88,7 @@ function VoteByEvent(
   const handleVote = (e: MouseEvent, id: number) => {
     setVoting(true);
     serverManager
-      .voteByItem(id, "default")
+      .voteByItem(id, voteType)
       .then((response) => {
         const { data } = response;
         enqueueSnackbar(`¡Gracias por votar en ${event.name}!`, {
@@ -173,12 +174,14 @@ function VoteByEvent(
 
   const submitSpecialVote = () => {
     serverManager
-      .createSubscriber()
-      .then((response) => {})
-      .catch((error) => {})
-      .finally(() => {
-        //setSpecialVoteDialog(false);
-      });
+      .createSubscriber(name, institution, email)
+      .then(() => {
+        setVoteType("special");
+        
+      })
+      .catch(() => {
+        setSpecialVoteDialog(false);
+      })
   };
 
   return (

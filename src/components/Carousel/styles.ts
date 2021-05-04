@@ -69,11 +69,23 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.4,
     fontWeight: 700,
     color: '#fff',
-    marginBottom: '15px',
+    
     userSelect: 'none',
 
     [theme.breakpoints.down("sm")]: {
       fontSize: '2.9rem',
+    },
+  },
+  subtitle: {
+    fontSize: '2rem',
+    fontStyle: "italic",
+    fontWeight: 700,
+    userSelect: 'none',
+    color: '#fff',
+    marginBottom: '15px',
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: '1.5rem',
     },
   },
   categories: {

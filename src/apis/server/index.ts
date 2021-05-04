@@ -1,10 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 class ServerManager {
-  
   apiAxios: AxiosInstance;
 
-  constructor() {    
+  constructor() {
     this.apiAxios = axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_URL,
     });
@@ -21,21 +20,29 @@ class ServerManager {
     })*/
   }
 
-  createSubscriber(): Promise<AxiosResponse>{
-    const url = `/event/vote`;
+  createSubscriber(
+    name: string,
+    institution: string,
+    email: string
+  ): Promise<AxiosResponse> {
+    const url = `/subscriber`;
     return this.apiAxios.post(url, {
-      
+      name,
+      institution,
+      email
     });
   }
 
   voteByItem(
     itemId: number,
     voteType = "default"
-  ): Promise<AxiosResponse<{ groupItemId: number; name: string; groupId: number }>> {
+  ): Promise<
+    AxiosResponse<{ groupItemId: number; name: string; groupId: number }>
+  > {
     const url = `/event/vote`;
     return this.apiAxios.post(url, {
       groupItemId: itemId,
-      type: voteType
+      type: voteType,
     });
   }
 }

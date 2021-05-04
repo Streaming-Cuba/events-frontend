@@ -1,11 +1,12 @@
 import React, { MouseEvent, MouseEventHandler } from "react";
-import useStyles from "./styles";
+import clsx from 'clsx';
 import {
   Headphones as HeadphonesIcon,
   Vote as VoteIcon,
 } from "mdi-material-ui";
 import { Card, IconButton, Tooltip } from "@material-ui/core";
 import Item from "../../types/Item";
+import useStyles from "./styles";
 
 function VoteCard(props: VoteCardProps) {
   const classes = useStyles();
@@ -41,7 +42,9 @@ function VoteCard(props: VoteCardProps) {
           <div className={classes.subtitle}>{data.metadata?.interpreter}</div>
         )}
         {data.metadata?.productor && (
-          <div className={classes.subtitle}>{data.metadata?.productor}</div>
+          <div className={clsx(classes.subtitle, classes.alterSubtitle)}>
+            {data.metadata?.productor}
+          </div>
         )}
       </div>
       <div className={classes.grow} />

@@ -54,6 +54,7 @@ function Carousel(props: { items: any[] }) {
           <div className={classes.carouselItemOpacity} />
           <div className={classes.carouselItemContent}>
             <div className={classes.title}>{item.name}</div>
+            <div className={classes.subtitle}>{item.subtitle}</div>
             {/* <div className={classes.categories}>
               <Chip label="Musica cubana" className={classes.category} />
             </div> */}
