@@ -120,7 +120,7 @@ class MyApp extends React.Component<MyAppProps> {
             name="msapplication-TileImage"
             content="https://res.cloudinary.com/streaming-cuba/image/upload/v1619659241/events/icons/ms-icon-150x150_jjo2zb.png"
           />
-          <link rel="manifest" href="/manifest.json" />
+          <link rel="manifest" href={`${process.env.NEXT_PUBLIC_HOSTNAME}/manifest.json`} />
           <meta
             name="msapplication-TileColor"
             content={theme.palette.primary.main}

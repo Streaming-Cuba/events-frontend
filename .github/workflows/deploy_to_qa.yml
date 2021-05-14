@@ -3,6 +3,8 @@ name: Deply to Heroku
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
+    
 
 jobs:
   deploy:
@@ -33,3 +35,4 @@ jobs:
           procfile: "web: npm run start:heroku"
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.QA_API_URL }}
+          NEXT_PUBLIC_HOSTNAME: https://apieventos.herokuapp.com
