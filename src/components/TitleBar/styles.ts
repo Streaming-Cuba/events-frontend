@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     background: "#121219",
     position: "relative",
-    padding: "120px 0",
+    padding: "100px 0",
     marginBottom: "90px",
   },
   titleBackground: {    
