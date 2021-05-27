@@ -9,6 +9,11 @@ module.exports = {
             destination: '/event/:id',
             permanent: true,
           },
+          {
+            source: '/vote/:id',
+            destination: '/event/:id',
+            permanent: true,
+          },
         ]
       },
 };

@@ -62,9 +62,9 @@ function Carousel(props: { items: any[] }) {
               <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
               </OutlinedButton>
-              <OutlinedButton href={`/vote/${item.identifier}`}>
+              {/* <OutlinedButton href={`/vote/${item.identifier}`}>
                 Votar
-              </OutlinedButton>
+              </OutlinedButton> */}
             </div>
           </div>
         </div>
