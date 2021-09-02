@@ -17,7 +17,6 @@ import EmptySpace from "../components/EmptySpace";
 import Separator from "../components/Separator";
 import EventCard from "../components/EventCard";
 import { InferGetServerSidePropsType } from "next";
-const https = require("https");
 
 function IndexPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
