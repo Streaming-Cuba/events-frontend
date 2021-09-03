@@ -38,7 +38,7 @@ export default function LosLucas2021 (): JSX.Element{
       if (
         /windows phone/i.test(userAgent) ||
           /android/i.test(userAgent) ||
-          /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
+          /iPad|iPhone|iPod/.test(userAgent)
       ) {
         return true;
       }
