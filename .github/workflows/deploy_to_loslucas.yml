@@ -3,7 +3,7 @@ name: Deply to LosLucas
 on:
   push:
     branches:
-      - dev
+      - loslucas20201_ui
     workflow_dispatch:
 
 
