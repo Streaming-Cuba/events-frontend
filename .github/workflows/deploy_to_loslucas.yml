@@ -22,7 +22,7 @@ jobs:
         with:
           heroku_api_key: "737608ea-81f9-47d0-80f3-029bf500167e"
           heroku_email: "jesus.reikel@gmail.com"
-          heroku_app_name: loslucasstreamingcuba2"
+          heroku_app_name: "loslucasstreamingcuba2"
           useforce: true
           dynamicFiles: false
           env_file: ".env.local"
