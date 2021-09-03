@@ -16,8 +16,8 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         name: Deploying to Heroku
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: "737608ea-81f9-47d0-80f3-029bf500167e"
+          heroku_email: "jesus.reikel@gmail.com"
           heroku_app_name: "loslucasstreamingcuba"
           buildpack: "https://github.com/mars/heroku-nextjs"
           branch: "loslucas20201_ui"
