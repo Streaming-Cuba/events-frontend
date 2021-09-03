@@ -56,43 +56,57 @@ export default function LosLucas2021 (): JSX.Element{
   useSetInterval(() => changeImage(), 5000);
 
   return (
-    <div
-      className={
-        clsx({
-          [classes.container]: true,
-          [classes.image1]: image === 1,
-          [classes.image2]: image === 2,
-          [classes.image3]: image === 3
-        })
-      }
-    >
-      <h1>Nominados a los Premios Lucas 2021</h1>
+    <>
       {
         isMobile? (
-          <List>
+          <List style={{
+            paddingTop:"6em",
+          }}>
+            <div style={{
+              backgroundImage: "url(\"/images/loslucas_background_1.jpg\")",
+              backgroundPosition: "center",
+              backgroundSize:"auto",
+              position:"fixed",
+              height:"100vh",
+              width: "100%",
+              zIndex: 0,
+              opacity: 0.2
+            }}/>
             {
               videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
             }
           </List>
         ) : (
-          <HorizontalScroll
-            className={classes.horizontalContainer}
-            reverseScroll
+          <div
+            className={
+              clsx({
+                [classes.container]: true,
+                [classes.image1]: image === 1,
+                [classes.image2]: image === 2,
+                [classes.image3]: image === 3
+              })
+            }
           >
-            <Grid
-              className={classes.horizontalScroll}
-              direction="row"
-              container
-              spacing={2}
-              wrap={"wrap"}
+            <h1>Nominados a los Premios Lucas 2021</h1>
+            <HorizontalScroll
+              className={classes.horizontalContainer}
+              reverseScroll
             >
-              {
-                videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
-              }
-            </Grid>
-          </HorizontalScroll>
+              <Grid
+                className={classes.horizontalScroll}
+                direction="row"
+                container
+                spacing={2}
+                wrap={"wrap"}
+              >
+                {
+                  videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
+                }
+              </Grid>
+            </HorizontalScroll>
+          </div>
         )
       }
-    </div>
+    </>
   );
 }

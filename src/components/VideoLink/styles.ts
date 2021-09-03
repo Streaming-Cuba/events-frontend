@@ -4,8 +4,10 @@ import {grey} from "@material-ui/core/colors";
 const useStyles = makeStyles((theme: Theme)=> ({
   gridLink: {
     color: "white",
-    maxWidth: "30em",
+    maxWidth: "28em",
     marginBottom: "5px",
+    marginLeft: "5px",
+    marginRight: "5px",
     height: "8em"
   },
   videoLink: {
