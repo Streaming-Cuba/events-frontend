@@ -14,6 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Create env variables
+          run: |
+            echo "NEXT_PUBLIC_API_URL=${{ secrets.QA_API_URL }}" >> .env.local
+
       - uses: akhileshns/heroku-deploy@v3.12.12
         name: Deploying to Heroku
         with:
@@ -21,6 +25,7 @@ jobs:
           heroku_email: "jesus.reikel@gmail.com"
           heroku_app_name: "loslucasstreamingcuba2"
           buildpack: "https://github.com/mars/heroku-nextjs"
+          env_file: ".env.local"
           branch: "loslucas20201_ui"
         env:
           NODE_ENV: production
