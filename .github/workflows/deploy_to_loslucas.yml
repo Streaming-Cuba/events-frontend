@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - loslucas20201_ui
-    workflow_dispatch:
+  workflow_dispatch:
 
 
 jobs:
