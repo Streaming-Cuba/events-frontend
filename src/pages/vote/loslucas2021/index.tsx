@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Grid, makeStyles} from "@material-ui/core";
+import {Box, Grid, makeStyles} from "@material-ui/core";
 import Video from "../../../types/Video";
 import VideoLink from "../../../components/VideoLink";
 import {useDispatch} from "react-redux";
@@ -7,26 +7,28 @@ import { clearAllVideos } from "../../../apis/redux/reducers/votes";
 import videos from "../../../data/videos.json";
 import clsx from "clsx";
 import useSetInterval from "../../../utils/useSetInterval";
+import HorizontalScroll from "react-scroll-horizontal";
 
 const useStyles = makeStyles(() => ({
   container: {
     paddingTop:"6em",
     paddingBottom: "4em",
-    //backgroundImage: "url(\"/images/loslucas_background_1.jpg\"), url(\"/images/loslucas_background_2.jpg\"), url(\"/images/loslucas_background_3.jpg\")",
     backgroundPosition: "center",
     backgroundSize: "cover",
     color: "white",
-    zIndex: -1
+    zIndex: -1,
+    height: "100vh"
   },
   horizontalContainer: {
-    overflowX: "auto",
-    overflowY: "hidden",
-    //height:"96vh",
+    overflow: "unset!important" as "unset",
+    position: "absolute!important" as "absolute",
+    height: "min-content!important" as "min-content",
     marginLeft: "10px",
     marginRight: "10px",
   },
   horizontalScroll: {
     minWidth: "1380em",
+    height: "min-content!important" as "min-content",
     marginTop: "10px",
     marginBottom: "10px",
   },
@@ -53,6 +55,7 @@ export default function (): JSX.Element{
     else
       setImage(prevState => prevState+1);
   };
+
   const clearVideos = () => dispatch(clearAllVideos());
 
   useEffect(()=> (() => {
@@ -73,20 +76,22 @@ export default function (): JSX.Element{
       }
     >
       <h1>Nominados a los Premios Lucas 2021</h1>
-      <div className={classes.horizontalContainer}>
-        <div className={classes.horizontalScroll}>
-          <Grid
-            direction="row"
-            container
-            spacing={2}
-            wrap={"wrap"}
-          >
-            {
-              videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
-            }
-          </Grid>
-        </div>
-      </div>
+      <HorizontalScroll
+        className={classes.horizontalContainer}
+        reverseScroll
+      >
+        <Grid
+          className={classes.horizontalScroll}
+          direction="row"
+          container
+          spacing={2}
+          wrap={"wrap"}
+        >
+          {
+            videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
+          }
+        </Grid>
+      </HorizontalScroll>
     </div>
   );
 }
