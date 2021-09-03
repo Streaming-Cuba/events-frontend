@@ -1,11 +1,10 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {Grid, List} from "@material-ui/core";
+import React, {useEffect, useState} from "react";
+import {Fade, Grid, List} from "@material-ui/core";
 import Video from "../../../types/Video";
 import VideoLink from "../../../components/VideoLink";
 import {useDispatch} from "react-redux";
 import { clearAllVideos } from "../../../apis/redux/reducers/votes";
 import videos from "../../../data/videos.json";
-import clsx from "clsx";
 import useSetInterval from "../../../utils/useSetInterval";
 import HorizontalScroll from "react-scroll-horizontal";
 import useStyles from "./styles";
@@ -53,60 +52,64 @@ export default function LosLucas2021 (): JSX.Element{
     setIsMobile(isMobile());
   }, []);
 
-  useSetInterval(() => changeImage(), 5000);
+  useSetInterval(() => changeImage(), 10000);
 
   return (
-    <>
+    <div>
       {
         isMobile? (
-          <List style={{
-            paddingTop:"6em",
-          }}>
+          <List className={classes.container}>
             <div style={{
               backgroundImage: "url(\"/images/loslucas_background_1.jpg\")",
               backgroundPosition: "center",
-              backgroundSize:"auto",
-              position:"fixed",
+              backgroundSize: "cover",
+              zIndex: -1,
               height:"100vh",
-              width: "100%",
-              zIndex: 0,
-              opacity: 0.2
+              width:"100%",
+              position: "fixed"
             }}/>
             {
-              videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
+              videos.map((video, index) => <VideoLink isMobile video={video as Video} key={index}/>)
             }
           </List>
         ) : (
-          <div
-            className={
-              clsx({
-                [classes.container]: true,
-                [classes.image1]: image === 1,
-                [classes.image2]: image === 2,
-                [classes.image3]: image === 3
-              })
-            }
-          >
-            <h1>Nominados a los Premios Lucas 2021</h1>
-            <HorizontalScroll
-              className={classes.horizontalContainer}
-              reverseScroll
-            >
-              <Grid
-                className={classes.horizontalScroll}
-                direction="row"
-                container
-                spacing={2}
-                wrap={"wrap"}
+          <>
+            <div className={classes.container}>
+              <Fade in={image === 1} timeout={1000}>
+                <div className={classes.image1}/>
+              </Fade>
+              <Fade in={image === 2} timeout={1000}>
+                <div className={classes.image2}/>
+              </Fade>
+              <Fade in={image === 3} timeout={1000}>
+                <div className={classes.image3}/>
+              </Fade>
+              <h1
+                style={{
+                  zIndex:1200,
+                  position:"absolute",
+                  marginTop: "3em"
+                }}>Nominados a los Premios Lucas 2021</h1>
+              <HorizontalScroll
+                className={classes.horizontalContainer}
+                reverseScroll
               >
-                {
-                  videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
-                }
-              </Grid>
-            </HorizontalScroll>
-          </div>
+                <Grid
+                  className={classes.horizontalScroll}
+                  direction="row"
+                  container
+                  spacing={2}
+                  wrap={"wrap"}
+                >
+                  {
+                    videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
+                  }
+                </Grid>
+              </HorizontalScroll>
+            </div>
+          </>
         )
       }
-    </>
+    </div>
   );
 }

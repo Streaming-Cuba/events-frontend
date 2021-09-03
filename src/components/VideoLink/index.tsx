@@ -1,20 +1,23 @@
 import React, {useState} from "react";
-import {Icon, IconButton, Grid, Tooltip, Typography, Fade, Modal, Backdrop} from "@material-ui/core";
+import {Icon, IconButton, Grid, Tooltip, Fade, Modal, Backdrop} from "@material-ui/core";
 import { HowToVote as HowToVoteIcon, Close as CloseIcon } from "@material-ui/icons";
 import Image from "next/image";
 import {getVideoImageURL} from "../../utils/YoutubeUtils";
 import Video from "../../types/Video";
 import {useSnackbar} from "notistack";
 import useStyles from "./styles";
+import clsx from "clsx";
 
 
 interface VideoLinkProps {
   video: Video,
+  isMobile?: boolean
 }
 
 export default function VideoLink (props: VideoLinkProps): JSX.Element{
 
   const { number, link, title, author } = props.video;
+  const { isMobile } = props;
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -59,9 +62,12 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
           </div>
         </Fade>
       </Modal>
-      <Grid item xs={2} className={classes.gridLink}>
+      <Grid item xs={2} className={clsx({
+        [classes.gridLink]: !isMobile,
+        [classes.gridMobileLink]: isMobile
+      })}>
         <div className={classes.background}>
-          <Typography
+          <div
             onClick={() => setIsModalOpen(true)}
             className={classes.videoLink}
           >
@@ -78,7 +84,7 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
               <br/>
               {title}
             </p>
-          </Typography>
+          </div>
           <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
             <IconButton
               color={"inherit"}

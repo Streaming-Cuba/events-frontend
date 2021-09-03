@@ -1,14 +1,21 @@
 import {makeStyles, Theme} from "@material-ui/core";
-import {grey} from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme)=> ({
   gridLink: {
+    color: "white",
+    maxWidth: "30em",
+    marginBottom: "5px",
+    height: "8em",
+    zIndex: 101,
+  },
+  gridMobileLink: {
     color: "white",
     maxWidth: "28em",
     marginBottom: "5px",
     marginLeft: "5px",
     marginRight: "5px",
-    height: "8em"
+    height: "8em",
+    zIndex: 101,
   },
   videoLink: {
     display: "flex",
@@ -20,7 +27,8 @@ const useStyles = makeStyles((theme: Theme)=> ({
     textDecoration: "none!important",
     "&:hover": {
       cursor: "pointer"
-    }
+    },
+    zIndex: 101
   },
   background: {
     display: "flex",
@@ -29,23 +37,18 @@ const useStyles = makeStyles((theme: Theme)=> ({
     backgroundColor: "rgba(30, 30, 30, 0.7)",
     borderRadius: "5px",
     height: "100%",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    zIndex: 101
   },
   textLink: {
     marginLeft: "5px",
     color: "white!important",
     fontWeight: 500,
+    zIndex: 101
   },
   imageLink: {
-    borderRadius: "5px"
-  },
-  checkLink: {
-    padding: 0,
-    paddingLeft: "1px",
-    color: `${grey[100]}!important`,
-    "&$checked": {
-      color: `${grey[400]}!important`,
-    },
+    borderRadius: "5px",
+    zIndex: 101
   },
   modal: {
     display: "flex",
@@ -61,7 +64,8 @@ const useStyles = makeStyles((theme: Theme)=> ({
     padding: theme.spacing(2, 4, 3),
   },
   closeButton: {
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+    zIndex: 101
   }
 }));
 

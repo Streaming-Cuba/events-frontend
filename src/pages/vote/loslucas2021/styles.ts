@@ -2,16 +2,14 @@ import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   container: {
-    paddingTop:"6em",
+    backgroundColor: "black",
     paddingBottom: "4em",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
     color: "white",
-    zIndex: -1,
     minHeight: "100vh",
-    height: "min-content"
+    height: "min-content",
   },
   horizontalContainer: {
+    paddingTop:"8em",
     overflow: "unset!important" as "unset",
     position: "absolute!important" as "absolute",
     height: "min-content!important" as "min-content",
@@ -25,13 +23,31 @@ const useStyles = makeStyles(() => ({
     marginBottom: "10px",
   },
   image1: {
-    backgroundImage: "url(\"/images/loslucas_background_1.jpg\")"
+    backgroundImage: "url(\"/images/loslucas_background_1.jpg\")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    zIndex: 0,
+    height:"100%",
+    width:"100%",
+    position: "absolute",
   },
   image2: {
-    backgroundImage: "url(\"/images/loslucas_background_2.jpg\")"
+    backgroundImage: "url(\"/images/loslucas_background_2.jpg\")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    zIndex: 0,
+    height:"100%",
+    width:"100%",
+    position: "absolute"
   },
   image3: {
-    backgroundImage: "url(\"/images/loslucas_background_3.jpg\")"
+    backgroundImage: "url(\"/images/loslucas_background_3.jpg\")",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    zIndex: 0,
+    height:"100%",
+    width:"100%",
+    position: "absolute"
   }
 }));
 
