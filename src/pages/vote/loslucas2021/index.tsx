@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Box, Grid, makeStyles} from "@material-ui/core";
+import React, {useEffect, useMemo, useState} from "react";
+import {Grid, List} from "@material-ui/core";
 import Video from "../../../types/Video";
 import VideoLink from "../../../components/VideoLink";
 import {useDispatch} from "react-redux";
@@ -8,46 +8,14 @@ import videos from "../../../data/videos.json";
 import clsx from "clsx";
 import useSetInterval from "../../../utils/useSetInterval";
 import HorizontalScroll from "react-scroll-horizontal";
+import useStyles from "./styles";
 
-const useStyles = makeStyles(() => ({
-  container: {
-    paddingTop:"6em",
-    paddingBottom: "4em",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    color: "white",
-    zIndex: -1,
-    height: "100vh"
-  },
-  horizontalContainer: {
-    overflow: "unset!important" as "unset",
-    position: "absolute!important" as "absolute",
-    height: "min-content!important" as "min-content",
-    marginLeft: "10px",
-    marginRight: "10px",
-  },
-  horizontalScroll: {
-    minWidth: "1380em",
-    height: "min-content!important" as "min-content",
-    marginTop: "10px",
-    marginBottom: "10px",
-  },
-  image1: {
-    backgroundImage: "url(\"/images/loslucas_background_1.jpg\")"
-  },
-  image2: {
-    backgroundImage: "url(\"/images/loslucas_background_2.jpg\")"
-  },
-  image3: {
-    backgroundImage: "url(\"/images/loslucas_background_3.jpg\")"
-  }
-}));
-
-export default function (): JSX.Element{
+export default function LosLucas2021 (): JSX.Element{
 
   const classes = useStyles();
   const dispatch = useDispatch();
   const [image, setImage] = useState<number>(1);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const changeImage = () => {
     if (image > 2)
@@ -56,11 +24,34 @@ export default function (): JSX.Element{
       setImage(prevState => prevState+1);
   };
 
+
   const clearVideos = () => dispatch(clearAllVideos());
 
   useEffect(()=> (() => {
     clearVideos();
   }),[]);
+
+  useEffect(() => {
+    const isMobile = ():boolean => {
+      const userAgent = window.navigator.userAgent || navigator.vendor;
+      const navInfo = window.navigator.appVersion.toLowerCase();
+      if (
+        /windows phone/i.test(userAgent) ||
+          /android/i.test(userAgent) ||
+          /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream
+      ) {
+        return true;
+      }
+      else if(
+        navInfo.indexOf("win") != -1 ||
+          navInfo.indexOf("linux") != -1 ||
+          navInfo.indexOf("mac") != -1
+      ) {
+        return false;
+      }
+    };
+    setIsMobile(isMobile());
+  }, []);
 
   useSetInterval(() => changeImage(), 5000);
 
@@ -76,22 +67,32 @@ export default function (): JSX.Element{
       }
     >
       <h1>Nominados a los Premios Lucas 2021</h1>
-      <HorizontalScroll
-        className={classes.horizontalContainer}
-        reverseScroll
-      >
-        <Grid
-          className={classes.horizontalScroll}
-          direction="row"
-          container
-          spacing={2}
-          wrap={"wrap"}
-        >
-          {
-            videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
-          }
-        </Grid>
-      </HorizontalScroll>
+      {
+        isMobile? (
+          <List>
+            {
+              videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
+            }
+          </List>
+        ) : (
+          <HorizontalScroll
+            className={classes.horizontalContainer}
+            reverseScroll
+          >
+            <Grid
+              className={classes.horizontalScroll}
+              direction="row"
+              container
+              spacing={2}
+              wrap={"wrap"}
+            >
+              {
+                videos.map((video, index) => <VideoLink video={video as Video} key={index}/>)
+              }
+            </Grid>
+          </HorizontalScroll>
+        )
+      }
     </div>
   );
 }
