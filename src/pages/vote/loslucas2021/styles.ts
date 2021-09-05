@@ -17,8 +17,10 @@ const useStyles = makeStyles(() => ({
     marginRight: "10px",
   },
   horizontalScroll: {
-    minWidth: "1380em",
-    height: "min-content!important" as "min-content",
+    //minWidth: "1380em",
+    height: "calc(100vh - 8em)",
+    width: "calc(400 * ((100vh - 8em) / 11))",
+    // height: "min-content!important" as "min-content",
     marginTop: "10px",
     marginBottom: "10px",
   },
@@ -48,6 +50,9 @@ const useStyles = makeStyles(() => ({
     height:"100%",
     width:"100%",
     position: "absolute"
+  },
+  input: {
+    color: "white"
   }
 }));
 

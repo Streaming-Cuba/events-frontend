@@ -7,6 +7,8 @@ import Video from "../../types/Video";
 import {useSnackbar} from "notistack";
 import useStyles from "./styles";
 import clsx from "clsx";
+import {useServerManager} from "../ServerManagerProvider";
+import {useCookies} from "react-cookie";
 
 
 interface VideoLinkProps {
@@ -21,9 +23,33 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
+  const serverManager = useServerManager();
+  const [voting, setVoting] = useState<boolean>(false);
+  const [cookies, setCookie] = useCookies();
+
 
   const handleVote = () => {
-    enqueueSnackbar(`Usted ha votado por ${title}`, {variant:"success" });
+    setVoting(true);
+    serverManager
+      .voteByItem(number, "default")
+      .then((response) => {
+        const { data } = response;
+        enqueueSnackbar(`¡Gracias por votar en !`, {
+          variant: "success",
+        });
+        setCookie(`vote/${data.groupId}`, "vote");
+      })
+      .catch((error) => {
+        enqueueSnackbar(
+          "¡Ha ocurrido un error al procesar su voto! Por favor intentelo más tarde.",
+          {
+            variant: "error",
+          }
+        );
+      })
+      .finally(() => {
+        setVoting(false);
+      });
   };
 
   return (

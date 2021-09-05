@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Fade, Grid, List} from "@material-ui/core";
+import {Fade, Grid, List, TextField, withStyles} from "@material-ui/core";
 import Video from "../../../types/Video";
 import VideoLink from "../../../components/VideoLink";
 import {useDispatch} from "react-redux";
@@ -29,6 +29,7 @@ export default function LosLucas2021 (): JSX.Element{
   useEffect(()=> (() => {
     clearVideos();
   }),[]);
+
 
   useEffect(() => {
     const isMobile = ():boolean => {
@@ -84,12 +85,27 @@ export default function LosLucas2021 (): JSX.Element{
               <Fade in={image === 3} timeout={1000}>
                 <div className={classes.image3}/>
               </Fade>
-              <h1
-                style={{
-                  zIndex:1200,
-                  position:"absolute",
-                  marginTop: "3em"
-                }}>Nominados a los Premios Lucas 2021</h1>
+              <div style={{
+                zIndex:1200,
+                position:"absolute",
+                marginTop: "3em",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100vw"
+              }}>
+                <h1>
+                  Nominados a los Premios Lucas 2021
+                </h1>
+                <TextField
+                  label="Outlined"
+                  variant="outlined"
+                  color={"secondary"}
+                  InputProps={{
+                    className: classes.input
+                  }}
+                />
+              </div>
               <HorizontalScroll
                 className={classes.horizontalContainer}
                 reverseScroll
