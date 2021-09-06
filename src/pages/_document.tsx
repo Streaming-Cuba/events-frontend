@@ -11,7 +11,7 @@ export default class CustomDocument extends Document {
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
         </Head>
-        <body style={{overflowX: "hidden"}}>
+        <body>
           <Main />
           <NextScript />
         </body>

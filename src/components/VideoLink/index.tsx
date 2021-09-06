@@ -1,43 +1,55 @@
-import React, {useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {Icon, IconButton, Grid, Tooltip, Fade, Modal, Backdrop} from "@material-ui/core";
-import { HowToVote as HowToVoteIcon, Close as CloseIcon } from "@material-ui/icons";
+import { HowToVote as HowToVoteIcon, Close as CloseIcon, Done as DoneIcon } from "@material-ui/icons";
 import Image from "next/image";
 import {getVideoImageURL} from "../../utils/YoutubeUtils";
 import Video from "../../types/Video";
 import {useSnackbar} from "notistack";
 import useStyles from "./styles";
-import clsx from "clsx";
 import {useServerManager} from "../ServerManagerProvider";
 import {useCookies} from "react-cookie";
-
+import ReCAPTCHA from "react-google-recaptcha";
+import clsx from "clsx";
 
 interface VideoLinkProps {
   video: Video,
-  isMobile?: boolean
 }
 
 export default function VideoLink (props: VideoLinkProps): JSX.Element{
 
-  const { number, link, title, author } = props.video;
-  const { isMobile } = props;
+  const { Number, Link, Title, Author, Id } = props.video;
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
   const serverManager = useServerManager();
   const [voting, setVoting] = useState<boolean>(false);
+  const [isReCAPTCHAOpen, setIsReCAPTCHAOpen] = useState<boolean>(false);
   const [cookies, setCookie] = useCookies();
 
+  const voted: boolean = useMemo(() => {
+    return  Object
+      .keys(cookies)
+      .some(cookie => cookie.toString().toLowerCase() === `vote/premioslucas2021/${Id}`.toLowerCase());
+  }, [cookies]);
 
-  const handleVote = () => {
+  const allVotes: boolean = useMemo(()=> {
+    return  Object
+      .keys(cookies)
+      .filter(cookie => cookie.toString().toLowerCase().includes("vote/premioslucas2021".toLowerCase()))
+      .length >= 10;
+  }, [cookies]);
+
+  const handleVote = (token: string) => {
     setVoting(true);
+    setIsReCAPTCHAOpen(false);
     serverManager
-      .voteByItem(number, "default")
+      .voteByItem(Id, "default", token)
       .then((response) => {
         const { data } = response;
-        enqueueSnackbar(`¡Gracias por votar en !`, {
+        enqueueSnackbar(`¡Usted ha votado por ${Author} ${Title}!`, {
           variant: "success",
         });
-        setCookie(`vote/${data.groupId}`, "vote");
+        setCookie(`vote/premioslucas2021/${data.groupItemId}`, Number, {expires: new Date(2031, 12, 31)});
       })
       .catch((error) => {
         enqueueSnackbar(
@@ -52,11 +64,26 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
       });
   };
 
+
+
   return (
     <>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        open={isReCAPTCHAOpen}
+        className={classes.modal}
+        onClose={() => setIsReCAPTCHAOpen(false)}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <ReCAPTCHA
+          sitekey={"6LcNay8cAAAAAH43qGJAbO37RjpMDkvxjuZPbPQI"}
+          onChange={handleVote}
+        />
+      </Modal>
+      <Modal
         className={classes.modal}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -77,50 +104,61 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
               </Icon>
             </IconButton>
             <iframe
-              width="853"
-              height="480"
-              src={`https://www.youtube.com/embed/${link?.split("https://youtu.be/")[1]}`}
+              className={classes.iframeResponsive}
+              src={`https://www.youtube.com/embed/${Link?.split("https://youtu.be/")[1]}`}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              title={title}
+              title={Title}
             />
           </div>
         </Fade>
       </Modal>
-      <Grid item xs={2} className={clsx({
-        [classes.gridLink]: !isMobile,
-        [classes.gridMobileLink]: isMobile
-      })}>
-        <div className={classes.background}>
+      <Grid item xs={12} sm={4} md={3} xl={2} className={classes.gridLink}>
+        <div className={clsx({
+          [classes.background]: true,
+          [classes.greenBackground]: voted,
+          [classes.blackBackground]: !voted,
+        })}>
           <div
             onClick={() => setIsModalOpen(true)}
             className={classes.videoLink}
           >
             <Image
-              src={getVideoImageURL(link)}
+              src={getVideoImageURL(Link)}
               height={80}
               width={80}
               className={classes.imageLink}
             />
             <p className={classes.textLink}>
-              {number}
+              {Number}
               <br/>
-              {author}
+              {Author}
               <br/>
-              {title}
+              {Title}
             </p>
           </div>
-          <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
-            <IconButton
-              color={"inherit"}
-              onClick={handleVote}
-            >
-              <Icon>
-                <HowToVoteIcon style={{color: "white"}}/>
-              </Icon>
-            </IconButton>
-          </Tooltip>
+          <>
+            {
+              voted? (
+                <Icon>
+                  <DoneIcon/>
+                </Icon>
+              ) :
+                !allVotes && <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
+                  <IconButton
+                    disabled={voting}
+                    color={"inherit"}
+                    onClick={() => setIsReCAPTCHAOpen(true)}
+                  >
+                    <Icon>
+                      <HowToVoteIcon style={{color: "white"}}/>
+                    </Icon>
+                  </IconButton>
+                </Tooltip>
+
+            }
+          </>
         </div>
       </Grid>
     </>

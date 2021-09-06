@@ -35,11 +35,12 @@ class ServerManager {
 
   voteByItem(
     itemId: number,
-    voteType = "default"
+    voteType = "default",
+    token: string
   ): Promise<
     AxiosResponse<{ groupItemId: number; name: string; groupId: number }>
   > {
-    const url = `/event/vote`;
+    const url = `/event/vote?recaptchaResponse=${token}`;
     return this.apiAxios.post(url, {
       groupItemId: itemId,
       type: voteType,

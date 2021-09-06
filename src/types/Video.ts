@@ -1,8 +1,9 @@
 interface Video {
-    title: string;
-    number: number;
-    link: string;
-    author: string;
+    Title: string;
+    Number: number;
+    Link: string;
+    Author: string;
+    Id: number
 }
 
 export default Video;

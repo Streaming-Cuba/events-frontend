@@ -88,7 +88,7 @@ function VoteByEvent(
   const handleVote = (e: MouseEvent, id: number) => {
     setVoting(true);
     serverManager
-      .voteByItem(id, voteType)
+      .voteByItem(id, voteType, "")
       .then((response) => {
         const { data } = response;
         enqueueSnackbar(`¡Gracias por votar en ${event.name}!`, {
@@ -177,7 +177,7 @@ function VoteByEvent(
       .createSubscriber(name, institution, email)
       .then(() => {
         setVoteType("special");
-        
+
       })
       .catch(() => {
         setSpecialVoteDialog(false);

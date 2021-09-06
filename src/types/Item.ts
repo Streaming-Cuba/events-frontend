@@ -8,6 +8,7 @@ interface Item {
   votes: number;
   socials: null;
   metadata: Metadata | null;
+  metadataJson: string;
   type: null;
   number: 5;
 }
