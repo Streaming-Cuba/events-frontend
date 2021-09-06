@@ -66,9 +66,9 @@ export default function PremiosLucas2021 (
                 event.groups[0].videos
                   .filter(
                     video =>
-                      video.Title.toLowerCase().includes(search.toLowerCase()) ||
-                              //  video.Author.toLowerCase().includes(search.toLowerCase()) ||
-                              video.Number.toString().toLowerCase().includes(search.toLowerCase())
+                      video.Title?.toLowerCase().includes(search.toLowerCase()) ||
+                          video.Author?.toLowerCase().includes(search.toLowerCase()) ||
+                          video.Number?.toString().toLowerCase().includes(search.toLowerCase())
                   )
                   .map((video, index) => <VideoLink video={video as Video} key={index}/>)
               }

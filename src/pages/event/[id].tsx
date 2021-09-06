@@ -34,7 +34,7 @@ import CategoryInfo from "../../components/EventDetailsInfo/CategoryInfo";
 
 function EventById(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
-) {
+): JSX.Element {
   const router = useRouter();
 
   const { event } = props;
@@ -377,9 +377,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: "100%",
     height: "auto",
   },
-  detailsSection: {    
+  detailsSection: {
     padding: "0 0 0 15px",
-    
+
     [theme.breakpoints.down("sm")]: {
       padding: 0,
     },

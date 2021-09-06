@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
 import {Icon, IconButton, Grid, Tooltip, Fade, Modal, Backdrop} from "@material-ui/core";
 import { HowToVote as HowToVoteIcon, Close as CloseIcon, Done as DoneIcon } from "@material-ui/icons";
 import Image from "next/image";
@@ -51,7 +51,7 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
         });
         setCookie(`vote/premioslucas2021/${data.groupItemId}`, Number, {expires: new Date(2031, 12, 31)});
       })
-      .catch((error) => {
+      .catch(() => {
         enqueueSnackbar(
           "¡Ha ocurrido un error al procesar su voto! Por favor intentelo más tarde.",
           {
@@ -138,14 +138,14 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
               {Title}
             </p>
           </div>
-          <>
-            {
-              voted? (
-                <Icon>
-                  <DoneIcon/>
-                </Icon>
-              ) :
-                !allVotes && <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
+          {
+            voted? (
+              <Icon>
+                <DoneIcon/>
+              </Icon>
+            ) :
+              !allVotes? (
+                <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
                   <IconButton
                     disabled={voting}
                     color={"inherit"}
@@ -156,9 +156,8 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
                     </Icon>
                   </IconButton>
                 </Tooltip>
-
-            }
-          </>
+              ): null
+          }
         </div>
       </Grid>
     </>
