@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {Box, Grid, InputAdornment, TextField, ThemeProvider} from "@material-ui/core";
-import {Search as SearchIcon} from "@material-ui/icons"
+import {Search as SearchIcon} from "@material-ui/icons";
 import VideoLink from "../../../components/VideoLink";
 import useSetInterval from "../../../utils/useSetInterval";
 import useStyles from "./styles";

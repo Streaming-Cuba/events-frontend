@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {Icon, IconButton, Grid, Fade, Modal, Backdrop, Tooltip, CircularProgress} from "@material-ui/core";
 import { HowToVote as HowToVoteIcon, Close as CloseIcon, Done as DoneIcon } from "@material-ui/icons";
 import Image from "next/image";
@@ -27,13 +27,8 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
   const [voting, setVoting] = useState<boolean>(false);
   const [isReCAPTCHAOpen, setIsReCAPTCHAOpen] = useState<boolean>(false);
   const [,setCookie] = useCookies();
+  const [voted, setVoted] = useState<boolean>(false);
 
-
-  const voted: boolean = useMemo(() => {
-    return  Object
-      .keys(cookies)
-      .some(cookie => cookie.toString().toLowerCase() === `vote/premioslucas2021/${Id}`.toLowerCase());
-  }, [cookies]);
 
   const allVotes: boolean = useMemo(()=> {
     return  Object
@@ -67,7 +62,12 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
       });
   };
 
-
+  useEffect(() => {
+    setVoted(
+      Object
+        .keys(cookies)
+        .some(cookie => cookie.toString().toLowerCase() === `vote/premioslucas2021/${Id}`.toLowerCase()));
+  }, [cookies]);
 
   return (
     <>
