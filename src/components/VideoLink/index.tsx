@@ -115,8 +115,7 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
         </Fade>
       </Modal>
       <Grid item xs={12} sm={4} md={3} xl={2} className={classes.gridLink}>
-        <div className={clsx({
-          [classes.background]: true,
+        <div className={clsx(classes.blackBackground, {
           [classes.greenBackground]: voted,
           [classes.blackBackground]: !voted,
         })}>
@@ -145,17 +144,17 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
               </Icon>
             ) :
               !allVotes? (
-                <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
-                  <IconButton
-                    disabled={voting}
-                    color={"inherit"}
-                    onClick={() => setIsReCAPTCHAOpen(true)}
-                  >
+                <IconButton
+                  disabled={voting}
+                  color={"inherit"}
+                  onClick={() => setIsReCAPTCHAOpen(true)}
+                >
+                  <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
                     <Icon>
                       <HowToVoteIcon style={{color: "white"}}/>
                     </Icon>
-                  </IconButton>
-                </Tooltip>
+                  </Tooltip>
+                </IconButton>
               ): null
           }
         </div>
