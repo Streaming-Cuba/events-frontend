@@ -8,6 +8,7 @@ import axios from "axios";
 import Event from "../../../types/Event";
 import Video from "../../../types/Video";
 import {darkTheme} from "../../../config";
+import {useCookies} from "react-cookie";
 
 export default function PremiosLucas2021 (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -17,6 +18,7 @@ export default function PremiosLucas2021 (
   const { event } = props;
   const [image, setImage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
+  const [cookies,] = useCookies();
 
   const changeImage = () => {
     if (image > 2)
@@ -74,7 +76,7 @@ export default function PremiosLucas2021 (
                           video.Author?.toLowerCase().includes(search.toLowerCase()) ||
                           video.Number?.toString().toLowerCase().includes(search.toLowerCase())
                   )
-                  .map((video, index) => <VideoLink video={video as Video} key={index}/>)
+                  .map((video, index) => <VideoLink video={video as Video} key={index} cookies={cookies}/>)
               }
             </Grid>
           </Box>

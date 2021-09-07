@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from "react";
-import {Icon, IconButton, Grid, Tooltip, Fade, Modal, Backdrop} from "@material-ui/core";
+import {Icon, IconButton, Grid, Fade, Modal, Backdrop, Tooltip} from "@material-ui/core";
 import { HowToVote as HowToVoteIcon, Close as CloseIcon, Done as DoneIcon } from "@material-ui/icons";
 import Image from "next/image";
 import {getVideoImageURL} from "../../utils/YoutubeUtils";
@@ -7,16 +7,18 @@ import Video from "../../types/Video";
 import {useSnackbar} from "notistack";
 import useStyles from "./styles";
 import {useServerManager} from "../ServerManagerProvider";
-import {useCookies} from "react-cookie";
 import ReCAPTCHA from "react-google-recaptcha";
 import clsx from "clsx";
+import {useCookies} from "react-cookie";
 
 interface VideoLinkProps {
   video: Video,
+  cookies: {[key: string]: string}
 }
 
 export default function VideoLink (props: VideoLinkProps): JSX.Element{
 
+  const { cookies } = props;
   const { Number, Link, Title, Author, Id } = props.video;
   const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -24,7 +26,8 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
   const serverManager = useServerManager();
   const [voting, setVoting] = useState<boolean>(false);
   const [isReCAPTCHAOpen, setIsReCAPTCHAOpen] = useState<boolean>(false);
-  const [cookies, setCookie] = useCookies();
+  const [,setCookie] = useCookies();
+
 
   const voted: boolean = useMemo(() => {
     return  Object
@@ -139,22 +142,22 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
             </p>
           </div>
           {
-            voted? (
+            voted ? (
               <Icon>
                 <DoneIcon/>
               </Icon>
-            ) :
-              !allVotes? (
+            ) : allVotes ? null : (
+              <Tooltip title={"Vota por este video aquí"}>
                 <IconButton
                   disabled={voting}
-                  color={"inherit"}
                   onClick={() => setIsReCAPTCHAOpen(true)}
                 >
                   <Icon>
-                    <HowToVoteIcon style={{color: "white"}}/>
+                    <HowToVoteIcon />
                   </Icon>
                 </IconButton>
-              ): null
+              </Tooltip>
+            )
           }
         </div>
       </Grid>
