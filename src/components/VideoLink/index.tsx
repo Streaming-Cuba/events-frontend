@@ -151,10 +151,9 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
                 <IconButton
                   disabled={voting}
                   onClick={() => setIsReCAPTCHAOpen(true)}
+                  className={classes.voteButton}
                 >
-                  <Icon>
-                    <HowToVoteIcon />
-                  </Icon>
+                  <HowToVoteIcon />
                 </IconButton>
               </Tooltip>
             )

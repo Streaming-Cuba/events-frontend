@@ -69,5 +69,9 @@ const useStyles = makeStyles((theme: Theme)=> ({
     width: "75vw",
     height: "calc(75vw * 0.5625)"
   },
+  voteButton: {
+    color: "white",
+    backgroundColor: "transparent",
+  }
 }));
 export default useStyles;
