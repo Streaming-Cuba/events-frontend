@@ -150,11 +150,9 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
                   color={"inherit"}
                   onClick={() => setIsReCAPTCHAOpen(true)}
                 >
-                  <Tooltip title={"Votar por este video"} style={{alignSelf:"flex-start"}}>
-                    <Icon>
-                      <HowToVoteIcon style={{color: "white"}}/>
-                    </Icon>
-                  </Tooltip>
+                  <Icon>
+                    <HowToVoteIcon style={{color: "white"}}/>
+                  </Icon>
                 </IconButton>
               ): null
           }
