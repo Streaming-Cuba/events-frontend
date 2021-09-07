@@ -43,26 +43,28 @@ export default function PremiosLucas2021 (
           <div className={classes.image3}/>
         </Fade>
         <Box className={classes.verticalContainer}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm={12} md={6} xl={6} style={{zIndex:100}}>
-              <h1>
-                Nominados a los Premios Lucas 2021
-              </h1>
+          <Box className={classes.grid}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={12} md={6} xl={6} style={{zIndex:100}}>
+                <h1>
+                  Nominados a los Premios Lucas 2021
+                </h1>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} xl={6} className={classes.textFieldContainer} >
+                <TextField
+                  label="Buscar"
+                  variant="outlined"
+                  color={"secondary"}
+                  className={classes.textField}
+                  value={search}
+                  InputProps={{
+                    className: classes.input
+                  }}
+                  onChange={(e:ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={6} xl={6} className={classes.textFieldContainer} >
-              <TextField
-                label="Buscar"
-                variant="outlined"
-                color={"secondary"}
-                className={classes.textField}
-                value={search}
-                InputProps={{
-                  className: classes.input
-                }}
-                onChange={(e:ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)}
-              />
-            </Grid>
-          </Grid>
+          </Box>
           <Box className={classes.grid}>
             <Grid
               container

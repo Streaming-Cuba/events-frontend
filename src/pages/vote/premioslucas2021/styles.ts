@@ -8,10 +8,7 @@ const useStyles = makeStyles(() => ({
     overflow: "hidden",
   },
   grid: {
-    paddingTop: "10px",
-    paddingLeft: "10px",
-    paddingRight: "5px",
-    paddingBottom:"50px",
+    padding: "10px",
     width: "100%",
     height: "min-content",
     overflow: "hidden",
