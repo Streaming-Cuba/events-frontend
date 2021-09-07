@@ -8,6 +8,7 @@ const useStyles = makeStyles(() => ({
     overflow: "hidden",
   },
   grid: {
+    paddingTop: "10px",
     paddingLeft: "10px",
     paddingRight: "5px",
     paddingBottom:"50px",
@@ -48,6 +49,12 @@ const useStyles = makeStyles(() => ({
   },
   textField: {
     marginRight: "30px",
+  },
+  textFieldContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   },
   verticalContainer: {
     height:"calc(100vh - 4em)",
