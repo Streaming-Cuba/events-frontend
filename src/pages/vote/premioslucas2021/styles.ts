@@ -4,7 +4,7 @@ const useStyles = makeStyles(() => ({
   container: {
     backgroundColor: "black",
     color: "white",
-    height: "100vh",
+    //height: "100vh",
     overflow: "hidden",
   },
   grid: {
@@ -13,8 +13,8 @@ const useStyles = makeStyles(() => ({
     paddingRight: "5px",
     paddingBottom:"50px",
     width: "100%",
-    //height: "100vh",
-    overflow: "auto",
+    height: "min-content",
+    overflow: "hidden",
     //zIndex: 1400
   },
   image1: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     zIndex: 0,
     height:"100%",
     width:"100%",
-    position: "absolute",
+    position: "fixed",
   },
   image2: {
     backgroundImage: "url(\"/images/loslucas_background_2.jpg\")",
@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
     zIndex: 0,
     height:"100%",
     width:"100%",
-    position: "absolute"
+    position: "fixed"
   },
   image3: {
     backgroundImage: "url(\"/images/loslucas_background_3.jpg\")",
@@ -42,7 +42,7 @@ const useStyles = makeStyles(() => ({
     zIndex: 0,
     height:"100%",
     width:"100%",
-    position: "absolute"
+    position: "fixed"
   },
   input: {
     color: "white"
@@ -57,7 +57,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center"
   },
   verticalContainer: {
-    height:"calc(100vh - 4em)",
+    //height:"calc(100vh - 4em)",
     marginTop: "4em",
     display:"flex",
     flexDirection:"column",
