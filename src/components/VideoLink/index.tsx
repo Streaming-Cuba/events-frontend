@@ -115,7 +115,8 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
         </Fade>
       </Modal>
       <Grid item xs={12} sm={4} md={3} xl={2} className={classes.gridLink}>
-        <div className={clsx(classes.blackBackground, {
+        <div className={clsx({
+          [classes.background]: true,
           [classes.greenBackground]: voted,
           [classes.blackBackground]: !voted,
         })}>
