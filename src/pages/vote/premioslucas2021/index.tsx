@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
-import {Box, Fade, Grid, TextField, ThemeProvider} from "@material-ui/core";
+import {Box, Grid, InputAdornment, TextField, ThemeProvider} from "@material-ui/core";
+import {Search as SearchIcon} from "@material-ui/icons"
 import VideoLink from "../../../components/VideoLink";
 import useSetInterval from "../../../utils/useSetInterval";
 import useStyles from "./styles";
@@ -9,6 +10,7 @@ import Event from "../../../types/Event";
 import Video from "../../../types/Video";
 import {darkTheme} from "../../../config";
 import {useCookies} from "react-cookie";
+import CustomFade from "../../../components/CustomFade";
 
 export default function PremiosLucas2021 (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -33,15 +35,15 @@ export default function PremiosLucas2021 (
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        <Fade in={image === 1} timeout={1000}>
+        <CustomFade inProp={image === 1} duration={1000} maxOpacity={0.7}>
           <div className={classes.image1}/>
-        </Fade>
-        <Fade in={image === 2} timeout={1000}>
+        </CustomFade>
+        <CustomFade inProp={image === 2} duration={1000} maxOpacity={0.7}>
           <div className={classes.image2}/>
-        </Fade>
-        <Fade in={image === 3} timeout={1000}>
+        </CustomFade>
+        <CustomFade inProp={image === 3} duration={1000} maxOpacity={0.7}>
           <div className={classes.image3}/>
-        </Fade>
+        </CustomFade>
         <Box className={classes.verticalContainer}>
           <Box className={classes.grid}>
             <Grid container spacing={1}>
@@ -58,7 +60,8 @@ export default function PremiosLucas2021 (
                   className={classes.textField}
                   value={search}
                   InputProps={{
-                    className: classes.input
+                    className: classes.input,
+                    startAdornment: <InputAdornment position={"start"}><SearchIcon/></InputAdornment>
                   }}
                   onChange={(e:ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)}
                 />

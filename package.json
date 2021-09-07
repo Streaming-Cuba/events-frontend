@@ -33,6 +33,7 @@
     "react-redux": "^7.2.3",
     "react-scroll": "^1.8.4",
     "react-scroll-horizontal": "^1.6.6",
+    "react-transition-group": "^4.4.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0"
@@ -43,6 +44,7 @@
     "@types/react-dom": "^17.0.3",
     "@types/react-google-recaptcha": "^2.1.2",
     "@types/react-redux": "^7.1.16",
+    "@types/react-transition-group": "^4.4.2",
     "@types/redux": "^3.6.0",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
