@@ -84,6 +84,7 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
         <ReCAPTCHA
           sitekey={"6LcNay8cAAAAAH43qGJAbO37RjpMDkvxjuZPbPQI"}
           onChange={handleVote}
+          hl="es"
         />
       </Modal>
       <Modal
