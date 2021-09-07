@@ -3,7 +3,7 @@ import {makeStyles, Theme} from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme)=> ({
   gridLink: {
     color: "white",
-    width: "30em",
+    width: "31em",
     marginBottom: "5px",
     height: "8em",
     zIndex: 101,
@@ -72,6 +72,10 @@ const useStyles = makeStyles((theme: Theme)=> ({
   voteButton: {
     color: "white",
     backgroundColor: "transparent",
-  }
+  },
+  voteArea: {
+    minWidth: "3em",
+    display: "flex",
+  },
 }));
 export default useStyles;

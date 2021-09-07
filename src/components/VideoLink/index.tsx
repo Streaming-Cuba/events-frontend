@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from "react";
-import {Icon, IconButton, Grid, Fade, Modal, Backdrop, Tooltip} from "@material-ui/core";
+import {Icon, IconButton, Grid, Fade, Modal, Backdrop, Tooltip, CircularProgress} from "@material-ui/core";
 import { HowToVote as HowToVoteIcon, Close as CloseIcon, Done as DoneIcon } from "@material-ui/icons";
 import Image from "next/image";
 import {getVideoImageURL} from "../../utils/YoutubeUtils";
@@ -74,7 +74,10 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
       <Modal
         open={isReCAPTCHAOpen}
         className={classes.modal}
-        onClose={() => setIsReCAPTCHAOpen(false)}
+        onClose={() => {
+          setIsReCAPTCHAOpen(false);
+          setVoting(false);
+        }}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -142,23 +145,30 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
               {Title}
             </p>
           </div>
-          {
-            voted ? (
-              <Icon>
-                <DoneIcon/>
-              </Icon>
-            ) : allVotes ? null : (
-              <Tooltip title={"Vota por este video aquí"}>
-                <IconButton
-                  disabled={voting}
-                  onClick={() => setIsReCAPTCHAOpen(true)}
-                  className={classes.voteButton}
-                >
-                  <HowToVoteIcon />
-                </IconButton>
-              </Tooltip>
-            )
-          }
+          <div className={classes.voteArea}>
+            {
+              voted ? (
+                <Icon>
+                  <DoneIcon/>
+                </Icon>
+              ) : allVotes ? null : voting? (
+                <CircularProgress/>
+              ) : (
+                <Tooltip title={"Vota por este video aquí"}>
+                  <IconButton
+                    disabled={voting}
+                    onClick={() => {
+                      setIsReCAPTCHAOpen(true);
+                      setVoting(true);
+                    }}
+                    className={classes.voteButton}
+                  >
+                    <HowToVoteIcon />
+                  </IconButton>
+                </Tooltip>
+              )
+            }
+          </div>
         </div>
       </Grid>
     </>
