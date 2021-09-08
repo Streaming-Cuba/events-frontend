@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme)=> ({
     color: "white",
     width: "31em",
     marginBottom: "5px",
-    height: "8em",
+    height: "8.5em",
     zIndex: 101,
   },
   videoLink: {
@@ -36,17 +36,29 @@ const useStyles = makeStyles((theme: Theme)=> ({
   greenBackground: {
     backgroundColor: "rgba(114,196,114,0.5)"
   },
-  textLink: {
+  divText: {
+    wrap:"nowrap",
+    maxWidth: "60%",
     marginLeft: "5px",
+  },
+  textLink: {
     color: "white!important",
     fontWeight: 500,
-    zIndex: 101
+    zIndex: 101,
+    marginTop: 0,
+    marginBottom: 0
   },
   imageLink: {
     borderRadius: "5px",
     zIndex: 101,
     height: "80px",
-    width: "80px"
+    width: "80px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconLink: {
+    fontSize: "80px"
   },
   paper: {
     display: "flex",

@@ -1,6 +1,6 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Icon, IconButton, Grid, Tooltip, CircularProgress} from "@material-ui/core";
-import { HowToVote as HowToVoteIcon, Done as DoneIcon } from "@material-ui/icons";
+import { HowToVote as HowToVoteIcon, Done as DoneIcon, BrokenImage as BrokenImageIcon } from "@material-ui/icons";
 import Image from "next/image";
 import {getVideoImageURL} from "../../utils/YoutubeUtils";
 import Video from "../../types/Video";
@@ -28,7 +28,7 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
       Object
         .keys(cookies)
         .some(cookie => cookie.toString().toLowerCase() === `vote/premioslucas2021/${Id}`.toLowerCase()));
-  }, [cookies]);
+  }, [props]);
 
   return (
     <Grid item xs={12} sm={4} md={3} xl={2} className={classes.gridLink}>
@@ -41,19 +41,31 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
           onClick={() => openVideo(video)}
           className={classes.videoLink}
         >
-          <Image
-            src={getVideoImageURL(Link)}
-            height={80}
-            width={80}
-            className={classes.imageLink}
-          />
-          <p className={classes.textLink}>
-            {Number}
-            <br/>
-            {Author}
-            <br/>
-            {Title}
-          </p>
+          {
+            Link !== null? (
+              <Image
+                src={getVideoImageURL(Link)}
+                height={80}
+                width={80}
+                className={classes.imageLink}
+              />
+            ):(
+              <Icon className={classes.imageLink}>
+                <BrokenImageIcon className={classes.iconLink} color={"secondary"}/>
+              </Icon>
+            )
+          }
+          <div className={classes.divText}>
+            <p className={classes.textLink}>
+              {Number}
+            </p>
+            <p className={classes.textLink}>
+              {Author}
+            </p>
+            <p className={classes.textLink}>
+              {Title}
+            </p>
+          </div>
         </div>
         <div className={classes.voteArea}>
           {

@@ -81,7 +81,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   closeButton: {
     alignSelf: "flex-end",
-    zIndex: 101
+    zIndex: 101,
+    color: "black"
   },
   paper: {
     display: "flex",

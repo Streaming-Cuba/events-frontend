@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useMemo, useState} from "react";
+import React, {ChangeEvent, useCallback, useMemo, useState} from "react";
 import {
   Backdrop,
   Box,
@@ -39,7 +39,6 @@ export default function PremiosLucas2021 (
   const [videoToVote, setVideoToVote] = useState<Video>(null);
   const serverManager = useServerManager();
   const { enqueueSnackbar } = useSnackbar();
-  const [videosToRender, setVideosToRender] = useState<Video[]>(event.groups[0].videos.sort((a, b) => a.Number - b.Number));
 
   const changeImage = () => {
     if (image > 2)
@@ -99,18 +98,6 @@ export default function PremiosLucas2021 (
 
   useSetInterval(() => changeImage(), 10000);
 
-  useEffect(() => {
-    setVideosToRender([]);
-    setVideosToRender(
-      event.groups[0].videos.filter(
-        video =>
-          video.Title?.toLowerCase().includes(search.toLowerCase()) ||
-                video.Author?.toLowerCase().includes(search.toLowerCase()) ||
-                video.Number?.toString().toLowerCase().includes(search.toLowerCase())
-      )
-    );
-  }, [search]);
-
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
@@ -155,7 +142,15 @@ export default function PremiosLucas2021 (
               wrap={"wrap"}
             >
               {
-                videosToRender
+                event.groups[0].videos
+                  .sort((a, b) => a.Number - b.Number)
+                  .filter(
+                    video =>
+                      video.Title?.toLowerCase().includes(search.toLowerCase()) ||
+                                video.Author?.toLowerCase().includes(search.toLowerCase()) ||
+                                video.Number?.toString().toLowerCase().includes(search.toLowerCase())
+
+                  )
                   .map((video, index) =>
                     <VideoLink
                       allVotes={allVotes}
@@ -208,7 +203,7 @@ export default function PremiosLucas2021 (
               className={classes.closeButton}
             >
               <Icon>
-                <CloseIcon/>
+                <CloseIcon />
               </Icon>
             </IconButton>
             <iframe
@@ -217,7 +212,6 @@ export default function PremiosLucas2021 (
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              //title={Title}
             />
           </div>
         </Fade>
