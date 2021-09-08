@@ -127,7 +127,8 @@ function EventById(
                         <EndDateInfo endDate={event.endDate} />
                         <LocationInfo location={event.location} />
                         {/* <CategoryInfo category={event.category} /> */}
-                        {/* <li className={classes.li}>
+                        { event.status.id === 2 &&
+                        <li className={classes.li}>
                           <Button
                             onClick={goToVote}
                             color="primary"
@@ -138,7 +139,8 @@ function EventById(
                           >
                             Vote ya
                           </Button>
-                        </li> */}
+                        </li>
+                        }
                         {/* <li className={classes.li}>
                           <div className={classes.icon}>
                             <svg

@@ -61,12 +61,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection:"column",
   },
   title: {
-    marginBottom: 0
+    marginBottom: 0,
+    fontSize: "xx-large"
   },
   subtitle: {
     marginTop: 0,
     fontStyle: "italic",
     opacity: 0.8,
+    fontSize: "large"
   },
   horizontalContainer: {
     display: "flex",
