@@ -8,9 +8,10 @@ import {
   InputAdornment,
   Modal,
   TextField,
-  ThemeProvider
+  ThemeProvider,
+  Fab
 } from "@material-ui/core";
-import {Close as CloseIcon, Search as SearchIcon} from "@material-ui/icons";
+import {Close as CloseIcon, Search as SearchIcon, ExpandLess as ExpandLessIcon} from "@material-ui/icons";
 import VideoLink from "../../../components/VideoLink";
 import useSetInterval from "../../../utils/useSetInterval";
 import useStyles from "./styles";
@@ -24,6 +25,8 @@ import CustomFade from "../../../components/CustomFade";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useServerManager} from "../../../components/ServerManagerProvider";
 import {useSnackbar} from "notistack";
+import { useScrollTrigger } from "@material-ui/core";
+import {animateScroll} from "react-scroll";
 
 export default function PremiosLucas2021 (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -39,6 +42,10 @@ export default function PremiosLucas2021 (
   const [videoToVote, setVideoToVote] = useState<Video>(null);
   const serverManager = useServerManager();
   const { enqueueSnackbar } = useSnackbar();
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 4,
+  });
 
   const changeImage = () => {
     if (image > 2)
@@ -96,6 +103,10 @@ export default function PremiosLucas2021 (
       .then(r => console.log(r.data.results) );
   }, []);
 
+  const scrollToTop = () => {
+    animateScroll.scrollTo(0, {});
+  };
+
   useSetInterval(() => changeImage(), 10000);
 
   return (
@@ -115,7 +126,7 @@ export default function PremiosLucas2021 (
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={6} xl={6} style={{zIndex:100}}>
                 <h1 className={classes.title}>
-                  Nominados a los Premios Lucas 2021
+                    Nominados a los Premios Lucas 2021
                 </h1>
                 <p className={classes.subtitle}>Solo se puede votar por 10 videos, la votación no es reversible</p>
               </Grid>
@@ -216,6 +227,11 @@ export default function PremiosLucas2021 (
           </div>
         </Fade>
       </Modal>
+      <Fade in={trigger}>
+        <Fab className={classes.fab} onClick={scrollToTop}>
+          <ExpandLessIcon/>
+        </Fab>
+      </Fade>
     </ThemeProvider>
   );
 }

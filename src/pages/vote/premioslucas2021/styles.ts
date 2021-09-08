@@ -97,6 +97,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "75vw",
     height: "calc(75vw * 0.5625)"
   },
+  fab: {
+    position: "fixed",
+    bottom: "2em",
+    right: "2em",
+    zIndex: 1000,
+    transition: "all 0.4s ease 0s",
+  },
 }));
 
 export default useStyles;
