@@ -44,12 +44,9 @@ const useStyles = makeStyles((theme: Theme)=> ({
   },
   imageLink: {
     borderRadius: "5px",
-    zIndex: 101
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    zIndex: 101,
+    height: "80px",
+    width: "80px"
   },
   paper: {
     display: "flex",
@@ -57,10 +54,6 @@ const useStyles = makeStyles((theme: Theme)=> ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 1, 1),
-  },
-  closeButton: {
-    alignSelf: "flex-end",
-    zIndex: 101
   },
   recaptchaDialog: {
     padding: "5px!important"

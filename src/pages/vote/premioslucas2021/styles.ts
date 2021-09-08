@@ -1,6 +1,6 @@
-import {makeStyles} from "@material-ui/core";
+import {makeStyles, Theme} from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     backgroundColor: "black",
     color: "white",
@@ -42,6 +42,7 @@ const useStyles = makeStyles(() => ({
     position: "fixed"
   },
   input: {
+    backgroundColor: "rgba(255,255,255, 0.5)",
     color: "white"
   },
   textField: {
@@ -59,11 +60,39 @@ const useStyles = makeStyles(() => ({
     display:"flex",
     flexDirection:"column",
   },
+  title: {
+    marginBottom: 0
+  },
+  subtitle: {
+    marginTop: 0,
+    fontStyle: "italic",
+    opacity: 0.8,
+  },
   horizontalContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%"
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  closeButton: {
+    alignSelf: "flex-end",
+    zIndex: 101
+  },
+  paper: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(1, 1, 1),
+  },
+  iframeResponsive: {
+    width: "75vw",
+    height: "calc(75vw * 0.5625)"
   },
 }));
 

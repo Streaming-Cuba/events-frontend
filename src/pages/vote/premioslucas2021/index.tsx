@@ -1,6 +1,16 @@
-import React, {ChangeEvent, useState} from "react";
-import {Box, Grid, InputAdornment, TextField, ThemeProvider} from "@material-ui/core";
-import {Search as SearchIcon} from "@material-ui/icons";
+import React, {ChangeEvent, useCallback, useEffect, useMemo, useState} from "react";
+import {
+  Backdrop,
+  Box,
+  Fade,
+  Grid, Icon,
+  IconButton,
+  InputAdornment,
+  Modal,
+  TextField,
+  ThemeProvider
+} from "@material-ui/core";
+import {Close as CloseIcon, Search as SearchIcon} from "@material-ui/icons";
 import VideoLink from "../../../components/VideoLink";
 import useSetInterval from "../../../utils/useSetInterval";
 import useStyles from "./styles";
@@ -11,6 +21,9 @@ import Video from "../../../types/Video";
 import {darkTheme} from "../../../config";
 import {useCookies} from "react-cookie";
 import CustomFade from "../../../components/CustomFade";
+import ReCAPTCHA from "react-google-recaptcha";
+import {useServerManager} from "../../../components/ServerManagerProvider";
+import {useSnackbar} from "notistack";
 
 export default function PremiosLucas2021 (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -20,7 +33,13 @@ export default function PremiosLucas2021 (
   const { event } = props;
   const [image, setImage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
-  const [cookies,] = useCookies();
+  const [cookies, setCookie] = useCookies();
+  const [isReCAPTCHAOpen, setIsReCAPTCHAOpen] = useState<boolean>(false);
+  const [videoModal, setVideoModal] = useState<{isOpen: boolean, url: string}>({isOpen: false, url: null});
+  const [videoToVote, setVideoToVote] = useState<Video>(null);
+  const serverManager = useServerManager();
+  const { enqueueSnackbar } = useSnackbar();
+  const [videosToRender, setVideosToRender] = useState<Video[]>(event.groups[0].videos.sort((a, b) => a.Number - b.Number));
 
   const changeImage = () => {
     if (image > 2)
@@ -29,8 +48,68 @@ export default function PremiosLucas2021 (
       setImage(prevState => prevState+1);
   };
 
+  const startVote = (video: Video) => {
+    setVideoToVote(video);
+    setIsReCAPTCHAOpen(true);
+  };
+
+  const openVideo = (video: Video) => {
+    setVideoModal({isOpen: true, url: video.Link});
+  };
+
+  const handleVote = (token: string) => {
+    setIsReCAPTCHAOpen(false);
+    serverManager
+      .voteByItem(videoToVote.Id, "default", token)
+      .then((response) => {
+        const { data } = response;
+        enqueueSnackbar(`¡Usted ha votado por ${videoToVote.Author} ${videoToVote.Title}!`, {
+          variant: "success",
+        });
+        setCookie(`vote/premioslucas2021/${data.groupItemId}`, Number, {expires: new Date(2031, 12, 31)});
+      })
+      .catch(() => {
+        enqueueSnackbar(
+          "¡Ha ocurrido un error al procesar su voto! Por favor intentelo más tarde.",
+          {
+            variant: "error",
+          }
+        );
+      })
+      .finally(() => {
+        setVideoToVote(null);
+      });
+  };
+
+  const allVotes: boolean = useMemo(()=> {
+    return  Object
+      .keys(cookies)
+      .filter(cookie => cookie.toString().toLowerCase().includes("vote/premioslucas2021".toLowerCase()))
+      .length >= 10;
+  }, [cookies]);
+
+  const searchEndpoint = (query: string) => `/api/search?q=${query}`;
+
+  const onSearchChange = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+    setSearch(event.target.value);
+    axios
+      .get(searchEndpoint(event.target.value))
+      .then(r => console.log(r.data.results) );
+  }, []);
 
   useSetInterval(() => changeImage(), 10000);
+
+  useEffect(() => {
+    setVideosToRender([]);
+    setVideosToRender(
+      event.groups[0].videos.filter(
+        video =>
+          video.Title?.toLowerCase().includes(search.toLowerCase()) ||
+                video.Author?.toLowerCase().includes(search.toLowerCase()) ||
+                video.Number?.toString().toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search]);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -48,9 +127,10 @@ export default function PremiosLucas2021 (
           <Box className={classes.grid}>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={6} xl={6} style={{zIndex:100}}>
-                <h1>
+                <h1 className={classes.title}>
                   Nominados a los Premios Lucas 2021
                 </h1>
+                <p className={classes.subtitle}>Solo se puede votar por 10 videos, la votación no es reversible</p>
               </Grid>
               <Grid item xs={12} sm={12} md={6} xl={6} className={classes.textFieldContainer} >
                 <TextField
@@ -63,7 +143,7 @@ export default function PremiosLucas2021 (
                     className: classes.input,
                     startAdornment: <InputAdornment position={"start"}><SearchIcon/></InputAdornment>
                   }}
-                  onChange={(e:ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)}
+                  onChange={onSearchChange}
                 />
               </Grid>
             </Grid>
@@ -72,21 +152,76 @@ export default function PremiosLucas2021 (
             <Grid
               container
               spacing={1}
+              wrap={"wrap"}
             >
               {
-                event.groups[0].videos
-                  .filter(
-                    video =>
-                      video.Title?.toLowerCase().includes(search.toLowerCase()) ||
-                          video.Author?.toLowerCase().includes(search.toLowerCase()) ||
-                          video.Number?.toString().toLowerCase().includes(search.toLowerCase())
+                videosToRender
+                  .map((video, index) =>
+                    <VideoLink
+                      allVotes={allVotes}
+                      startVote={startVote}
+                      voting={videoToVote?.Id}
+                      openVideo={openVideo}
+                      video={video as Video}
+                      key={index}
+                      cookies={cookies}
+                    />
                   )
-                  .map((video, index) => <VideoLink video={video as Video} key={index} cookies={cookies}/>)
               }
             </Grid>
           </Box>
         </Box>
       </div>
+      <Modal
+        open={isReCAPTCHAOpen}
+        className={classes.modal}
+        onClose={() => {
+          setIsReCAPTCHAOpen(false);
+          setVideoToVote(null);
+        }}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <ReCAPTCHA
+          sitekey={"6LcNay8cAAAAAH43qGJAbO37RjpMDkvxjuZPbPQI"}
+          onChange={handleVote}
+          hl="es"
+        />
+      </Modal>
+      <Modal
+        className={classes.modal}
+        open={videoModal.isOpen}
+        onClose={() => setVideoModal({isOpen: false, url: null})}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={videoModal.isOpen}>
+          <div className={classes.paper}>
+            <IconButton
+              onClick={()=> setVideoModal({isOpen: false, url: null})}
+              className={classes.closeButton}
+            >
+              <Icon>
+                <CloseIcon/>
+              </Icon>
+            </IconButton>
+            <iframe
+              className={classes.iframeResponsive}
+              src={`https://www.youtube.com/embed/${videoModal.url?.split("https://youtu.be/")[1]}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              //title={Title}
+            />
+          </div>
+        </Fade>
+      </Modal>
     </ThemeProvider>
   );
 }
