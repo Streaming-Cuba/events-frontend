@@ -2,7 +2,7 @@ name: Deply to Los Lucas
 
 on:
   push:
-    branches: [ loslucas20201_ui ]
+    branches: [ next_events_list ]
   workflow_dispatch:
 
 
@@ -27,7 +27,7 @@ jobs:
           dynamicFiles: false
           env_file: ".env.local"
           procfile: "web: npm run start:heroku"
-          branch: "loslucas20201_ui"
+          branch: "next_events_list"
           buildpack: "https://github.com/mars/heroku-nextjs"
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}

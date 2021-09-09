@@ -39,6 +39,9 @@ const useStyles = makeStyles(() => ({
     lineHeight: 1.4,
     fontWeight: 700,
     marginBottom: "15px",
+    "&:hover": {
+      cursor: "pointer"
+    },
   },
   details: {
     margin: "-5px -10px",

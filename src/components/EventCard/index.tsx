@@ -1,8 +1,14 @@
 import React from "react";
 import useStyles from "./styles";
+import Event from "../../types/Event";
+import Image from "next/image";
+import {useRouter} from "next/router";
 
-function EventCard() {
+function EventCard(props: {event: Event}): JSX.Element {
   const classes = useStyles();
+
+  const {event} = props;
+  const router = useRouter();
 
   return (
     <div className={classes.inner}>
@@ -11,27 +17,23 @@ function EventCard() {
           {/* <div className="gt-label gt-style-4 gt-position-top-left gt-label-194">
             <span>Featured</span>
           </div> */}
-          <a href="https://demo.gloriathemes.com/eventchamp/demo/event/drama-games-2019/">
-            <img
-              width="952"
-              height="579"
-              src="https://demo.gloriathemes.com/eventchamp/demo/wp-content/uploads/2018/11/event-13-952x579.jpg"
-              className={classes.img}
-              alt=""
-              loading="lazy"
-            />
-          </a>
-          <div className={classes.status}>Showing</div>
+          <Image
+            width="952"
+            height="579"
+            src={event.coverPath}
+            className={classes.img}
+            alt=""
+            loading="lazy"
+          />
+          <div className={classes.status}>{event.statusId === 1? "Próximamente" : "Abierto" }</div>
         </div>
         <div className={classes.title}>
-          <a href="https://demo.gloriathemes.com/eventchamp/demo/event/drama-games-2019/">
-            Drama Games 2020
-          </a>
+          <h3 onClick={() => router.push(`/event/${event.identifier}`)}>
+            {event.name}
+          </h3>
         </div>
         <div className={classes.text}>
-          Lorem ipsum dolor sit amet, voluptua iracundia an pri, his utinam
-          principes dignissim ad. Ne nec dolore oblique nusquam, cu luptatum
-          volutpat delicatissimi has.
+          {event.description.length < 300? event.description : event.description.slice(0, 300).concat("...")}
         </div>
       </div>
     </div>

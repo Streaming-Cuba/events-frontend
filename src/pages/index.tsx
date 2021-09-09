@@ -17,6 +17,7 @@ import EmptySpace from "../components/EmptySpace";
 import Separator from "../components/Separator";
 import EventCard from "../components/EventCard";
 import { InferGetServerSidePropsType } from "next";
+import Event from "../types/Event";
 
 function IndexPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -38,7 +39,7 @@ function IndexPage(
 
   return (
     <>
-      <div style={{ overflowX: "hidden" }}>
+      <div >
         <section className={classes.homeSection}>
           <Carousel items={carouselItems} />
         </section>
@@ -65,25 +66,35 @@ function IndexPage(
         </Separator>
 
         <EmptySpace />
-        {/* <section className={classes.section}>
+        <section className={classes.section}>
           <GridList cellHeight="auto" cols={cols}>
-            <GridListTile>
-              <EventCard />
-            </GridListTile>
-            <GridListTile>
-              <EventCard />
-            </GridListTile>
-            <GridListTile>
-              <EventCard />
-            </GridListTile>
-            <GridListTile>
-              <EventCard />
-            </GridListTile>
-            <GridListTile>
-              <EventCard />
-            </GridListTile>
+            {
+              carouselItems
+                .filter(item => item.statusId && (item.statusId === 1 || item.statusId === 2))
+                .map((item, index) => (
+                  <GridListTile key={index}>
+                    <EventCard event={item as Event}/>
+                  </GridListTile>
+                ))
+            }
+            {
+              /*
+               <GridListTile>
+               <EventCard />
+             </GridListTile>
+             <GridListTile>
+               <EventCard />
+             </GridListTile>
+             <GridListTile>
+               <EventCard />
+             </GridListTile>
+             <GridListTile>
+               <EventCard />
+             </GridListTile>
+                */
+            }
           </GridList>
-        </section> */}
+        </section>
       </div>
     </>
   );
