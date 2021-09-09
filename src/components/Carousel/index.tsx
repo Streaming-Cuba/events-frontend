@@ -62,9 +62,10 @@ function Carousel(props: { items: any[] }) {
               <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
               </OutlinedButton>
-              {/* <OutlinedButton href={`/vote/${item.identifier}`}>
+              { typeof item.status === "object" && item.status.id === 2 &&
+              <OutlinedButton href={`/vote/${item.identifier}`}>
                 Votar
-              </OutlinedButton> */}
+              </OutlinedButton> }
             </div>
           </div>
         </div>

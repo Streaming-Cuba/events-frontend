@@ -65,11 +65,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 10,
   },
   title: {
-    fontSize: '4.615rem',
+    fontSize: '4rem',
     lineHeight: 1.4,
     fontWeight: 700,
     color: '#fff',
-    
+
     userSelect: 'none',
 
     [theme.breakpoints.down("sm")]: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     userSelect: 'none',
     color: '#fff',
-    marginBottom: '15px',
+    marginBottom: '5px',
 
     [theme.breakpoints.down("sm")]: {
       fontSize: '1.5rem',
@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     transition: '.3s opacity',
     zIndex: 10,
 
-    bottom: '10%',
+    bottom: '2%',
     width: '100%',
     top: 'auto',
   },
