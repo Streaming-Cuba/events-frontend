@@ -25,7 +25,7 @@ function Carousel(props: { items: any[] }) {
 
   const [active, setActive] = useState(0);
 
-  const { items } = props;
+  const  items  = props.items.filter(item => item.statusId && (item.statusId === 1 || item.statusId === 2));
 
   useEffect(() => {
     const intervalId = setInterval(nextItem, 6000);
@@ -40,38 +40,36 @@ function Carousel(props: { items: any[] }) {
   };
 
   const renderChildrens = () => {
-    return items
-      .filter(item => item.statusId && (item.statusId === 1 || item.statusId === 2))
-      .map((item, index) => {
-        return (
-          <div
-            key={item.id}
-            className={classes.carouselItem}
-            style={{
-              backgroundImage: `url(${item.coverPath})`,
-              opacity: index === active ? 1 : 0,
-            }}
-          >
-            <div className={classes.carouselItemOpacity} />
-            <div className={classes.carouselItemContent}>
-              <div className={classes.title}>{item.name}</div>
-              <div className={classes.subtitle}>{item.subtitle}</div>
-              {typeof item.status === "object" && item.status.id === 2 &&
+    return items.map((item, index) => {
+      return (
+        <div
+          key={item.id}
+          className={classes.carouselItem}
+          style={{
+            backgroundImage: `url(${item.coverPath})`,
+            opacity: index === active ? 1 : 0,
+          }}
+        >
+          <div className={classes.carouselItemOpacity} />
+          <div className={classes.carouselItemContent}>
+            <div className={classes.title}>{item.name}</div>
+            <div className={classes.subtitle}>{item.subtitle}</div>
+            {typeof item.status === "object" && item.status.id === 2 &&
             <div className={classes.categories}>
               <Chip label="Musica cubana" className={classes.category} />
             </div> }
-              <div className={classes.actions}>
-                <OutlinedButton href={`/event/${item.identifier}`}>
+            <div className={classes.actions}>
+              <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
-                </OutlinedButton>
-                {/* <OutlinedButton href={`/vote/${item.identifier}`}>
+              </OutlinedButton>
+              {/* <OutlinedButton href={`/vote/${item.identifier}`}>
                 Votar
               </OutlinedButton> */}
-              </div>
             </div>
           </div>
-        );
-      });
+        </div>
+      );
+    });
   };
 
   const goTo = (index: number) => {
@@ -79,18 +77,16 @@ function Carousel(props: { items: any[] }) {
   };
 
   const renderNavigationOptions = () => {
-    return items
-      .filter(item => item.statusId && (item.statusId === 1 || item.statusId === 2))
-      .map((item, index) => (
-        <span
-          key={item.id}
-          onClick={() => goTo(index)}
-          className={clsx(classes.bullet, {
-            [classes.bulletActive]: index === active,
-          })}
-          role="button"
-        />
-      ));
+    return items.map((item, index) => (
+      <span
+        key={item.id}
+        onClick={() => goTo(index)}
+        className={clsx(classes.bullet, {
+          [classes.bulletActive]: index === active,
+        })}
+        role="button"
+      />
+    ));
   };
 
   return (
