@@ -127,7 +127,7 @@ function EventById(
                         <EndDateInfo endDate={event.endDate} />
                         <LocationInfo location={event.location} />
                         {/* <CategoryInfo category={event.category} /> */}
-                        { event.status.id === 2 &&
+                        { typeof event.status === "object" && event.status.id === 2 &&
                         <li className={classes.li}>
                           <Button
                             onClick={goToVote}
