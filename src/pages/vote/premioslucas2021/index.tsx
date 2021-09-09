@@ -126,7 +126,7 @@ export default function PremiosLucas2021 (
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={6} xl={6} style={{zIndex:100}}>
                 <h1 className={classes.title}>
-                    Nominados a los Premios Lucas 2021
+                  Votación por el video clip más popular Premios Lucas ciclo 2020-2021
                 </h1>
                 <p className={classes.subtitle}>Solo se puede votar por 10 videos, la votación no es reversible</p>
               </Grid>
