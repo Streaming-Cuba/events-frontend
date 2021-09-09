@@ -12,7 +12,8 @@ interface Event {
     id: number
     name: string,
     description: string,
-  };
+  }| string;
+  statusId: number;
   organizer: string | null;
   category: null;
   tags: null;
