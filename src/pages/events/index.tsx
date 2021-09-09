@@ -9,8 +9,12 @@ import React, { useMemo } from "react";
 import EmptySpace from "../../components/EmptySpace";
 import EventCard from "../../components/EventCard";
 import TitleBar from "../../components/TitleBar";
+import {InferGetServerSidePropsType} from "next";
+import Event from "../../types/Event";
 
-function Events() {
+function Events(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+): JSX.Element {
   const classes = useStyles();
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -23,36 +27,21 @@ function Events() {
     return 4;
   }, [sm, md, lg]);
 
+  const { events } = props;
+
   return (
     <div>
-      <TitleBar></TitleBar>
-
+      <TitleBar/>
       <section className={classes.section}>
         <GridList cellHeight="auto" cols={cols}>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
-          <GridListTile>
-            <EventCard />
-          </GridListTile>
+          {
+            events
+              .map((item, index) => (
+                <GridListTile key={index}>
+                  <EventCard event={item as Event}/>
+                </GridListTile>
+              ))
+          }
         </GridList>
       </section>
 
@@ -69,3 +58,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default Events;
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event`);
+  const data = await res.json();
+
+  return {
+    props: {
+      events: data || [],
+    },
+  };
+}
