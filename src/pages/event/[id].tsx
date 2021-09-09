@@ -34,7 +34,7 @@ import CategoryInfo from "../../components/EventDetailsInfo/CategoryInfo";
 
 function EventById(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
-) {
+): JSX.Element {
   const router = useRouter();
 
   const { event } = props;
@@ -127,7 +127,8 @@ function EventById(
                         <EndDateInfo endDate={event.endDate} />
                         <LocationInfo location={event.location} />
                         {/* <CategoryInfo category={event.category} /> */}
-                        {/* <li className={classes.li}>
+                        { event.status.id === 2 &&
+                        <li className={classes.li}>
                           <Button
                             onClick={goToVote}
                             color="primary"
@@ -138,7 +139,8 @@ function EventById(
                           >
                             Vote ya
                           </Button>
-                        </li> */}
+                        </li>
+                        }
                         {/* <li className={classes.li}>
                           <div className={classes.icon}>
                             <svg
@@ -377,9 +379,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: "100%",
     height: "auto",
   },
-  detailsSection: {    
+  detailsSection: {
     padding: "0 0 0 15px",
-    
+
     [theme.breakpoints.down("sm")]: {
       padding: 0,
     },

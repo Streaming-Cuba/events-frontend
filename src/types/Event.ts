@@ -8,7 +8,11 @@ interface Event {
   description: string | null;
   startDate: string | null;
   endDate: string | null;
-  status: null;
+  status: {
+    id: number
+    name: string,
+    description: string,
+  };
   organizer: string | null;
   category: null;
   tags: null;

@@ -45,7 +45,7 @@ function Navbar() {
                   style={{ display: "flex", alignItems: "center" }}
                 >
                   <img
-                    style={{ maxWidth: "80px", marginTop: "20px" }}
+                    style={{ maxWidth: "80px", marginTop: "5px" }}
                     src="https://res.cloudinary.com/streaming-cuba/image/upload/v1619921447/events/STREAMING_EVENTOS_MAS_GRANDE_1_cst2ib.png"
                   />
                   {/* <Logo /> */}
