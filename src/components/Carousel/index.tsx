@@ -1,9 +1,8 @@
 import clsx from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { Chip } from "@material-ui/core";
 import { OutlinedButton } from "../Buttons";
-import Image from "next/image";
 
 // const data = [
 //   {
@@ -29,7 +28,7 @@ function Carousel(props: { items: any[] }) {
   const { items } = props;
 
   useEffect(() => {
-    let intervalId = setInterval(nextItem, 6000);
+    const intervalId = setInterval(nextItem, 6000);
     return () => {
       clearInterval(intervalId);
     };
@@ -55,9 +54,10 @@ function Carousel(props: { items: any[] }) {
           <div className={classes.carouselItemContent}>
             <div className={classes.title}>{item.name}</div>
             <div className={classes.subtitle}>{item.subtitle}</div>
-            {/* <div className={classes.categories}>
+            {typeof item.status === "object" && item.status.id === 2 &&
+            <div className={classes.categories}>
               <Chip label="Musica cubana" className={classes.category} />
-            </div> */}
+            </div> }
             <div className={classes.actions}>
               <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
