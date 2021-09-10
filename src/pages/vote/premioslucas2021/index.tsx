@@ -21,7 +21,6 @@ import Event from "../../../types/Event";
 import Video from "../../../types/Video";
 import {darkTheme} from "../../../config";
 import {useCookies} from "react-cookie";
-import CustomFade from "../../../components/CustomFade";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useServerManager} from "../../../components/ServerManagerProvider";
 import {useSnackbar} from "notistack";
@@ -112,7 +111,7 @@ export default function PremiosLucas2021 (
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        <div className={classes.image1}/>
+        <div className={classes.background}/>
         <Box className={classes.verticalContainer}>
           <Box className={classes.grid}>
             <Grid container spacing={1}>
