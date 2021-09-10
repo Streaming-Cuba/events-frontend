@@ -47,10 +47,7 @@ function EventById(
 
   const goToVote = () => {
     router.push({
-      pathname: "/vote/[id]",
-      query: {
-        id: event.identifier,
-      },
+      pathname: `/vote/${event.identifier}`,
     });
   };
 
