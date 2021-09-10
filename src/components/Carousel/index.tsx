@@ -47,6 +47,8 @@ function Carousel(props: { items: any[] }) {
           className={classes.carouselItem}
           style={{
             backgroundImage: `url(${item.coverPath})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
             opacity: index === active ? 1 : 0,
           }}
         >
