@@ -21,7 +21,6 @@ import Event from "../../../types/Event";
 import Video from "../../../types/Video";
 import {darkTheme} from "../../../config";
 import {useCookies} from "react-cookie";
-import CustomFade from "../../../components/CustomFade";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useServerManager} from "../../../components/ServerManagerProvider";
 import {useSnackbar} from "notistack";
