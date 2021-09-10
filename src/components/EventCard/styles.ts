@@ -12,9 +12,10 @@ const useStyles = makeStyles(() => ({
   image: {
     position: "relative",
     marginBottom: "20px",
+    backgroundColor: "black"
   },
   img: {
-    width: '100%',
+    width: "100%",
     maxWidth: "400px",
     maxHeight: "245px",
     display: "block",
