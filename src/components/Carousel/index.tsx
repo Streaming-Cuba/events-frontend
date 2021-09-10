@@ -54,17 +54,20 @@ function Carousel(props: { items: any[] }) {
           <div className={classes.carouselItemContent}>
             <div className={classes.title}>{item.name}</div>
             <div className={classes.subtitle}>{item.subtitle}</div>
-            {typeof item.status === "object" && item.status.id === 2 &&
+            {/*
             <div className={classes.categories}>
               <Chip label="Musica cubana" className={classes.category} />
-            </div> }
+            </div> */}
             <div className={classes.actions}>
               <OutlinedButton href={`/event/${item.identifier}`}>
                 Detalles
               </OutlinedButton>
-              {/* <OutlinedButton href={`/vote/${item.identifier}`}>
-                Votar
-              </OutlinedButton> */}
+              {
+                typeof item.statusId === "number" && item.statusId === 2 &&
+                <OutlinedButton href={`/vote/${item.identifier}`}>
+                  Votar
+                </OutlinedButton>
+              }
             </div>
           </div>
         </div>
