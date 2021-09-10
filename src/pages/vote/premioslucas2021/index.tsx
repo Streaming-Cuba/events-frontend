@@ -112,7 +112,7 @@ export default function PremiosLucas2021 (
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        <div className={classes.image1}/>
+        <div className={classes.background}/>
         <Box className={classes.verticalContainer}>
           <Box className={classes.grid}>
             <Grid container spacing={1}>

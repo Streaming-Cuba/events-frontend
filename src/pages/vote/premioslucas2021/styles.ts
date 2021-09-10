@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflow: "hidden",
     //zIndex: 1400
   },
-  image1: {
+  background: {
     backgroundImage: "url(\"/images/lucas_2021_ps.png\")",
     backgroundPosition: "center",
     backgroundSize: "cover",
