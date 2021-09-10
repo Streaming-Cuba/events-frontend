@@ -15,34 +15,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     //zIndex: 1400
   },
   image1: {
-    backgroundImage: "url(\"/images/loslucas_background_1.jpg\")",
+    backgroundImage: "url(\"/images/lucas_2021_ps.png\")",
     backgroundPosition: "center",
-    backgroundSize: "cover",
+    backgroundSize: "contain",
     zIndex: 0,
     height:"100%",
     width:"100%",
     position: "fixed",
   },
-  image2: {
-    backgroundImage: "url(\"/images/loslucas_background_2.jpg\")",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    zIndex: 0,
-    height:"100%",
-    width:"100%",
-    position: "fixed"
-  },
-  image3: {
-    backgroundImage: "url(\"/images/loslucas_background_3.jpg\")",
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    zIndex: 0,
-    height:"100%",
-    width:"100%",
-    position: "fixed"
-  },
   input: {
-    backgroundColor: "rgba(255,255,255, 0.5)",
+    backgroundColor: "rgba(255,255,255, 0.2)",
     color: "white"
   },
   textField: {

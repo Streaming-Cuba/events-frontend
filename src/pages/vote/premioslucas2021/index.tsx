@@ -112,15 +112,7 @@ export default function PremiosLucas2021 (
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        <CustomFade inProp={image === 1} duration={1000} maxOpacity={0.7}>
-          <div className={classes.image1}/>
-        </CustomFade>
-        <CustomFade inProp={image === 2} duration={1000} maxOpacity={0.7}>
-          <div className={classes.image2}/>
-        </CustomFade>
-        <CustomFade inProp={image === 3} duration={1000} maxOpacity={0.7}>
-          <div className={classes.image3}/>
-        </CustomFade>
+        <div className={classes.image1}/>
         <Box className={classes.verticalContainer}>
           <Box className={classes.grid}>
             <Grid container spacing={1}>
