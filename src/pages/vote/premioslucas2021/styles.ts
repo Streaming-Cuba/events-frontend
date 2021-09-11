@@ -15,13 +15,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     //zIndex: 1400
   },
   background: {
-    backgroundImage: "url(\"/images/lucas_2021_ps.png\")",
+    backgroundImage: "url(\"/images/lucas-2021-ps-lg.jpg\")",
     backgroundPosition: "center",
     backgroundSize: "cover",
     zIndex: 0,
     height:"100%",
     width:"100%",
     position: "fixed",
+    opacity: 0.6
   },
   input: {
     backgroundColor: "rgba(255,255,255, 0.2)",
