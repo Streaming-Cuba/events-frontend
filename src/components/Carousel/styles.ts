@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   carouselItem: {
-    backgroundSize: "cover",
-    backgroundPosition: "center",
     backgroundColor: "#000",
     display: "flex",
     alignItems: "center",
@@ -39,6 +37,13 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
 
     transition: "all 3s cubic-bezier(0, 0, 0.2, 1) 0s",
+  },
+  carouselBackground: {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+    height: "100%",
+    position: "absolute",
   },
   carouselImage: {
     position: "absolute",
@@ -59,10 +64,16 @@ const useStyles = makeStyles((theme) => ({
   },
   carouselItemContent: {
     maxWidth: "900px",
-    margin: "0 auto",
+    margin: "5em auto",
     textAlign: "center",
     position: "relative",
     zIndex: 10,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: "-webkit-fill-available",
+    marginBottom: "5%",
   },
   title: {
     fontSize: "4rem",
@@ -97,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
   },
   actions: {
-    marginTop: "15em",
+    //marginTop: "15em",
   },
   pagination: {
     position: "absolute",
@@ -105,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
     transition: ".3s opacity",
     zIndex: 10,
 
-    bottom: "2%",
+    bottom: "1%",
     width: "100%",
     top: "auto",
   },

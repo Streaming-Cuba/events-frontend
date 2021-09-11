@@ -42,31 +42,33 @@ function Carousel(props: { items: any[] }) {
   const renderChildrens = () => {
     return items.map((item, index) => {
       return (
-        <div
-          key={item.id}
-          className={classes.carouselItem}
-          style={{
-            backgroundImage: "url(\"/images/lucas_2021_ps.png\")",
-            opacity: index === active ? 1 : 0,
-          }}
-        >
+        <div key={item.id} className={classes.carouselItem}>
+          <div
+            className={classes.carouselBackground}
+            style={{
+              backgroundImage: "url(\"/images/lucas-2021-ps-lg.jpg\")",
+              opacity: index === active ? 0.6 : 0,
+            }}
+          />
           <div className={classes.carouselItemOpacity} />
           <div className={classes.carouselItemContent}>
-            <div className={classes.title}>{item.name}</div>
-            <div className={classes.subtitle}>{item.subtitle}</div>
+            <div>
+              <div className={classes.title}>{item.name}</div>
+              <div className={classes.subtitle}>{item.subtitle}</div>
+            </div>
             {/*
             <div className={classes.categories}>
               <Chip label="Musica cubana" className={classes.category} />
             </div> */}
             <div className={classes.actions}>
               <OutlinedButton href={`/event/${item.identifier}`}>
-                Detalles
+                    Detalles
               </OutlinedButton>
               {
                 typeof item.statusId === "number" && item.statusId === 2 &&
-                <OutlinedButton href={`/vote/${item.identifier}`}>
-                  Votar
-                </OutlinedButton>
+                    <OutlinedButton href={`/vote/${item.identifier}`}>
+                      Votar
+                    </OutlinedButton>
               }
             </div>
           </div>
