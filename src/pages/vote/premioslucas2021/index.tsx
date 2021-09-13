@@ -111,7 +111,7 @@ export default function PremiosLucas2021 (
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        <div className={classes.background}/>
+        <div className={classes.background} style={{ backgroundImage: `url(${event.coverPath})`}}/>
         <Box className={classes.verticalContainer}>
           <Box className={classes.grid}>
             <Grid container spacing={1}>
