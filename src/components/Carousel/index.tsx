@@ -46,7 +46,7 @@ function Carousel(props: { items: any[] }) {
           <div
             className={classes.carouselBackground}
             style={{
-              backgroundImage: "url(\"/images/lucas-2021-ps-lg.jpg\")",
+              backgroundImage: `url(${item.coverPath})`,
               opacity: index === active ? 0.6 : 0,
             }}
           />

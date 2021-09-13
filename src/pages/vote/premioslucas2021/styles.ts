@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     //zIndex: 1400
   },
   background: {
-    backgroundImage: "url(\"/images/lucas-2021-ps-lg.jpg\")",
     backgroundPosition: "center",
     backgroundSize: "cover",
     zIndex: 0,
