@@ -25,7 +25,7 @@ function Carousel(props: { items: any[] }) {
 
   const [active, setActive] = useState(0);
 
-  const  items  = props.items.filter(item => item.statusId && (item.statusId === 1 || item.statusId === 2));
+  const  items  = props.items.filter(item => item.identifier && item.identifier === "premioslucas2021");
 
   useEffect(() => {
     const intervalId = setInterval(nextItem, 6000);
