@@ -71,7 +71,7 @@ export default function PremiosLucas2021 (
         enqueueSnackbar(`¡Usted ha votado por ${videoToVote.Author} ${videoToVote.Title}!`, {
           variant: "success",
         });
-        setCookie(`vote/premioslucas2021/${data.groupItemId}`, Number, {expires: new Date(2031, 12, 31)});
+        setCookie(`vote/finalistaspremioslucas2021/${data.groupItemId}`, Number, {expires: new Date(2031, 12, 31)});
       })
       .catch(() => {
         enqueueSnackbar(
@@ -85,12 +85,11 @@ export default function PremiosLucas2021 (
         setVideoToVote(null);
       });
   };
-
   const allVotes: boolean = useMemo(()=> {
     return  Object
       .keys(cookies)
-      .filter(cookie => cookie.toString().toLowerCase().includes("vote/premioslucas2021".toLowerCase()))
-      .length >= 10;
+      .filter(cookie => cookie.toString().toLowerCase().includes("vote/finalistaspremioslucas2021".toLowerCase()))
+      .length >= 5;
   }, [cookies]);
 
   const searchEndpoint = (query: string) => `/api/search?q=${query}`;
