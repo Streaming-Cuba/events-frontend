@@ -27,7 +27,7 @@ export default function VideoLink (props: VideoLinkProps): JSX.Element{
     setVoted(
       Object
         .keys(cookies)
-        .some(cookie => cookie.toString().toLowerCase() === `vote/premioslucas2021/${Id}`.toLowerCase()));
+        .some(cookie => cookie.toString().toLowerCase() === `vote/finalistaspremioslucas2021/${Id}`.toLowerCase()));
   }, [props]);
 
   return (
