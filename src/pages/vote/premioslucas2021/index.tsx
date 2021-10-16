@@ -118,7 +118,7 @@ export default function PremiosLucas2021 (
                 <h1 className={classes.title}>
                   Votación por el video clip más popular Premios Lucas ciclo 2020-2021
                 </h1>
-                <p className={classes.subtitle}>Solo se puede votar por 10 videos, la votación no es reversible</p>
+                <p className={classes.subtitle}>Solo se puede votar por 5 videos, la votación no es reversible</p>
               </Grid>
               <Grid item xs={12} sm={12} md={6} xl={6} className={classes.textFieldContainer} >
                 <TextField
