@@ -58,7 +58,7 @@ function VoteByEvent(
     const temp = router.query.category;
 
     if (typeof temp === "string") {
-      var index = parseInt(temp);
+      const index = parseInt(temp);
       if (isNaN(index)) return 0;
       return index;
     }
@@ -181,7 +181,7 @@ function VoteByEvent(
       })
       .catch(() => {
         setSpecialVoteDialog(false);
-      })
+      });
   };
 
   return (
@@ -426,7 +426,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const event = eventResponse.data;
     let categoryIndex = 0;
     if (typeof category === "string") {
-      var index = parseInt(category);
+      const index = parseInt(category);
       if (!isNaN(index)) categoryIndex = index;
     }
 

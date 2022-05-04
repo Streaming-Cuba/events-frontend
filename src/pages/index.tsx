@@ -1,17 +1,13 @@
 import React, { useMemo } from "react";
 
 import {
-  Container,
   GridList,
   GridListTile,
   makeStyles,
   Theme,
   useMediaQuery,
-  Typography,
 } from "@material-ui/core";
 import {} from "@material-ui/styles";
-import clsx from "clsx";
-import { NextSeo } from "next-seo";
 import Carousel from "../components/Carousel";
 import EmptySpace from "../components/EmptySpace";
 import Separator from "../components/Separator";
@@ -21,7 +17,7 @@ import Event from "../types/Event";
 
 function IndexPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
-) {
+): JSX.Element {
   const classes = useStyles();
 
   const { carouselItems } = props;

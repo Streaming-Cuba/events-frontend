@@ -34,7 +34,7 @@ class MyApp extends React.Component<MyAppProps> {
   componentDidCatch() {
     this.setState({
       error: false
-    })
+    });
   }
 
   render() {

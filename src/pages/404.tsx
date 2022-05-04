@@ -1,8 +1,9 @@
+import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { Warning } from "@material-ui/icons";
 import { NextSeo } from "next-seo";
 
-function Custom404() {
+function Custom404(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -36,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   container: {
-    width: '100%',
-    paddingRight: '15px',
-    paddingLeft: '15px',
-    marginRight: 'auto',
-    marginLeft: 'auto',
+    width: "100%",
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    marginRight: "auto",
+    marginLeft: "auto",
   },
   alignCenter: {
     textAlign: "center",
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
 
     "&::before": {
-      content: '""',
+      content: "\"\"",
       display: "block",
       height: "1px",
       width: "125px",
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
       opacity: ".15",
     },
     "&::after": {
-      content: '""',
+      content: "\"\"",
       display: "block",
       height: "1px",
       width: "125px",
