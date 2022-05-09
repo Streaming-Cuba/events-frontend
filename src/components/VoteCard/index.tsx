@@ -12,9 +12,7 @@ function VoteCard(props: VoteCardProps): JSX.Element {
   const classes = useStyles();
 
   const { data, disableVote } = props;
-  useEffect(() => {
-    data.metadata = JSON.parse(data.metadataJson);
-  }, []);
+  data.metadata = JSON.parse(data.metadataJson);
  
 
   const onVote = (e: MouseEvent<HTMLButtonElement>) => {
@@ -51,15 +49,15 @@ function VoteCard(props: VoteCardProps): JSX.Element {
           </div>
         )}
       </div>
-      <div className={classes.grow} />
+      {/* <div className={classes.grow} /> */}
       <div className={classes.actions}>
-        {data.metadata?.url && (
+        {/* {data.metadata?.url && (
           <Tooltip title="Escuchar">
             <IconButton onClick={openExternalUrl} className={classes.action}>
               <HeadphonesIcon />
             </IconButton>
           </Tooltip>
-        )}
+        )} */}
         {!disableVote && (
           <Tooltip title="Votar">
             <IconButton onClick={onVote} className={classes.action}>
