@@ -10,8 +10,7 @@
     "start:heroku": "next start -p $PORT",
     "start": "next start",
     "eslint:fix": "eslint --fix src/**/*.{ts,tsx}",
-    "eslint:check": "eslint src/**",
-    "preinstall": "npx npm-force-resolutions"
+    "eslint:check": "eslint src/**"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",

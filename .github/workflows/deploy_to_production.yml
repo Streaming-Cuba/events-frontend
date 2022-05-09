@@ -21,18 +21,19 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
         with:
-         node-version: 14.x
+         node-version: 16.x
          
       - name: Installing dependencies 🏗
-        run: npm install 
+        run: yarn 
 
       - name: Create env variables
         run: |
           echo "NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}" >> .env.local
           echo "NEXT_PUBLIC_GOOGLE_ANALYTICS=${{ secrets.GOOGLE_ANALYTICS_ID }}" >> .env.local
+          echo "NEXT_PUBLIC_SITE_KEY"=${{ secrets.NEXT_PUBLIC_SITE_KEY }} >> .env.local
         
       - name: Building 🛠
-        run: npm run build
+        run: yarn build
 
       - name: Copying build assets
         uses: garygrossgarten/github-action-scp@release
