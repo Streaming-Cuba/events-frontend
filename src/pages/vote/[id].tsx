@@ -15,11 +15,14 @@ import {
   TextField,
   Modal,
   Backdrop,
+  InputAdornment,
+  IconButton,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import Event from "../../types/Event";
-
+import Group from "../../types/Group";
+import { Search as SearchIcon, CloudDownload as CloudDownloadIcon } from "@material-ui/icons";
 import Link from "../../components/Link";
 import TitleBar from "../../components/TitleBar";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
@@ -52,6 +55,7 @@ function VoteByEvent(
   const [voteType, setVoteType] = useState("default");
   const [isReCAPTCHAOpen, setIsReCAPTCHAOpen] = useState<boolean>(false);
   const [voteId, setVoteId] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
 
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -101,7 +105,7 @@ function VoteByEvent(
         enqueueSnackbar(`¡Gracias por votar en ${event.name}!`, {
           variant: "success",
         });
-        setCookie(`vote/${data.groupId}`, "vote");
+        setCookie(`vote/${event.identifier}/${data.groupId}`, "vote");
       })
       .catch(() => {
         enqueueSnackbar(
@@ -117,32 +121,49 @@ function VoteByEvent(
       });
   };
 
+  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
   const renderSubgroups = () => {
     const subgroup = event.groups[category];
-
     return subgroup.childGroups.map((group) => {
-      const existVote = cookies[`vote/${group.id}`];
+      const existVote = cookies[`vote/${event.identifier}/${group.id}`];
       return (
         <div key={group.id}>
-          <Separator
+          { category != 0 && <Separator
             title={group.name}
             text={group.description}
             innerMarginSize="small"
           >
             <MusicIcon />
-          </Separator>
+          </Separator>}
 
           <GridList cellHeight="auto" cols={cols} className={classes.list}>
             {group.items &&
-              group.items.map((item) => (
-                <GridListTile key={item.id} className={classes.tile}>
-                  <VoteCard
-                    data={item}
-                    onVote={startVote}
-                    disableVote={existVote}
-                  />
-                </GridListTile>
-              ))}
+              group.items
+                .filter(
+                  (item) =>
+                    item.name.toLowerCase().includes(search.toLowerCase()) ||
+                    item.metadata?.interpreter
+                      ?.toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    item.metadata?.productor
+                      ?.toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    item.metadata?.productorHome
+                      ?.toLowerCase()
+                      .includes(search.toLowerCase())
+                )
+                .map((item) => (
+                  <GridListTile key={item.id} className={classes.tile}>
+                    <VoteCard
+                      data={item}
+                      onVote={startVote}
+                      disableVote={existVote}
+                    />
+                  </GridListTile>
+                ))}
           </GridList>
           <EmptySpace />
         </div>
@@ -163,6 +184,20 @@ function VoteByEvent(
       { shallow: true }
     );
   };
+
+  useEffect(() => {
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          category: 0,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+  }, []);
 
   const cancelSpecialVote = () => {
     const queries = router.query;
@@ -191,6 +226,10 @@ function VoteByEvent(
       });
   };
 
+  const openPdf = () => {
+    window.open("https://media.streamingcuba.com/events/cubadisco-2022/CUBADISCO_2022.pdf", "_blank");
+  };
+
   return (
     <>
       <NextSeo
@@ -198,7 +237,7 @@ function VoteByEvent(
         description={event.description}
         openGraph={{
           title: event.name,
-          description: "Vote ya en el evento Cubadisco 2021",
+          description: "Vote ya en el evento Cubadisco 2022",
           images: [{ url: event.coverPath }],
         }}
       />
@@ -260,7 +299,7 @@ function VoteByEvent(
         </DialogActions>
       </Dialog>
 
-      <div>
+      <div style={{minHeight: "100vh"}}>
         <TitleBar title={event.name as string} background={event.coverPath}>
           <Link href="/" color="inherit">
             Inicio
@@ -270,9 +309,35 @@ function VoteByEvent(
         </TitleBar>
 
         <div className={classes.categoriesFilter}>
-          <Typography color="primary" variant="h4">
-            Seleccione el área
-          </Typography>
+          <div className={classes.textFieldContainer}>
+            <Typography
+              align="center"
+              color="primary"
+              variant="h4"
+              className={classes.filterTitle}
+            >
+              Seleccione el área
+            </Typography>
+            {category === 0 && <TextField
+              label="Buscar"
+              variant="outlined"
+              color={"primary"}
+              className={classes.textField}
+              value={search}
+              InputProps={{
+                className: classes.input,
+                startAdornment: (
+                  <InputAdornment position={"start"}>
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={onSearchChange}
+            />}
+            <IconButton onClick={openPdf}>
+              <CloudDownloadIcon />
+            </IconButton>
+          </div>
           <div className={classes.chipsList}>
             {event.groups.map((group, index) => (
               <Chip
@@ -285,6 +350,7 @@ function VoteByEvent(
               />
             ))}
           </div>
+
           <EmptySpace size={1} />
         </div>
 
@@ -442,6 +508,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  textField: {
+    margin: "10px",
+  },
+  filterTitle: {
+    // marginLeft: "auto",
+    // marginRight: "auto",
+    width: "-webkit-fill-available",
+  },
+  textFieldContainer: {
+    marginTop: "20px",
+    marginBottom: "20px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "right",
+    alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
+  },
+  input: {
+    backgroundColor: "rgba(255,255,255, 0.2)",
+    color: "black",
+  },
 }));
 
 export default VoteByEvent;
@@ -467,6 +556,24 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         notFound: true,
         props: {},
       };
+
+    const allItemsGroup: Group = {
+      "id": 33,
+      "name": "TODOS",
+      "description": null,
+      "childGroups": [],
+      "items": [],
+      "videos": [],
+    };
+    event.groups.forEach((group) => {
+      group.childGroups.forEach((childGroup) => {
+        // childGroup.items.forEach((item) => {
+        //   allItemsGroup.childGroups[0].items.push(item);
+        // });
+        allItemsGroup.childGroups.push(childGroup);
+      });
+    });
+    event.groups.unshift(allItemsGroup);
 
     return {
       props: {
