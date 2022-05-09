@@ -1,7 +1,5 @@
 import React from "react";
 import { theme } from "../config";
-import { GetStaticProps } from "next";
-import { NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
@@ -17,10 +15,9 @@ import "../assets/styles/styles.css";
 import "../assets/styles/font.css";
 import { SnackbarProvider } from "notistack";
 import ServerManagerProvider from "../components/ServerManagerProvider";
-import { FamilyTree } from "mdi-material-ui";
 
 class MyApp extends React.Component<MyAppProps> {
-  componentDidMount() {
+  componentDidMount(): void {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement?.removeChild(jssStyles);
@@ -31,13 +28,13 @@ class MyApp extends React.Component<MyAppProps> {
     error: false,
   };
 
-  componentDidCatch() {
+  componentDidCatch(): void {
     this.setState({
       error: false
     });
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <>
         <Head>
@@ -227,6 +224,6 @@ interface MyAppProps {
 
 export default MyApp;
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  //TODO: Send it to GOogle Analytics
-}
+// export function reportWebVitals(metric: NextWebVitalsMetric): void {
+//   //TODO: Send it to GOogle Analytics
+// }

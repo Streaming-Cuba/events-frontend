@@ -8,7 +8,7 @@ interface CustomFdeProps {
     maxOpacity?: number
     minOpacity?: number
 }
-const CustomFade = ({children, inProp, duration = 1000, maxOpacity = 1, minOpacity = 0}: CustomFdeProps) => {
+const CustomFade = ({children, inProp, duration = 1000, maxOpacity = 1, minOpacity = 0}: CustomFdeProps): JSX.Element => {
 
   const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out`,

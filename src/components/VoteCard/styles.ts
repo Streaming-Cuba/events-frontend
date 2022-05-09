@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: "7px 7px 30px 7px",
     maxWidth: "350px",
-    minWidth: '316px',
+    minWidth: "316px",
     minHeight: "400px",
   },
   grow: {
@@ -29,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
   img: {
     display: "block",
     width: "100%",
-    minWidth: '316px',
+    minWidth: "316px",
     maxHeight: "220px",
     marginLeft: "auto",
     marginRight: "auto",
     transform: "initial",
     transition: "all 0.5s ease-in-out",
+    objectFit: "cover",
   },
   status: {
     color: theme.palette.primary.main,
@@ -54,9 +55,9 @@ const useStyles = makeStyles((theme) => ({
     transition: "all 0.5s ease-in-out",
   },
   title: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
 
 
     color: theme.palette.primary.main,
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     lineHeight: 1.4,
     marginBottom: "5px",
-    minHeight: '44px',
+    minHeight: "44px",
   },
   subtitle: {
     color: theme.palette.primary.light,

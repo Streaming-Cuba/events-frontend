@@ -74,7 +74,7 @@ function Footer() {
       </div>
       <div className={classes.copyright}>
         <div className={clsx(classes.container, classes.copyrightContent)}>
-          <a href="https://streamingcuba.com" className={classes.logo}>
+          <a href="https://eventos.streamingcuba.com" className={classes.logo}>
             <span>StreamingCuba</span>
           </a>
           <p>

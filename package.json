@@ -9,7 +9,7 @@
     "build": "next build",
     "start:heroku": "next start -p $PORT",
     "start": "next start",
-    "eslint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "eslint:fix": "eslint --fix src/**/*.{ts,tsx}",
     "eslint:check": "eslint src/**"
   },
   "dependencies": {

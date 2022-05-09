@@ -25,7 +25,7 @@ class ServerManager {
     institution: string,
     email: string
   ): Promise<AxiosResponse> {
-    const url = `/subscriber`;
+    const url = "/subscriber";
     return this.apiAxios.post(url, {
       name,
       institution,

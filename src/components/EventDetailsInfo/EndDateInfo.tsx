@@ -1,7 +1,8 @@
+import React from "react";
 import * as DateUtils from "../../utils/DateUtils";
 import useStyles from "./styles";
 
-function EndDateInfo(props: EndDateInfoProps) {
+function EndDateInfo(props: EndDateInfoProps): JSX.Element {
   const classes = useStyles();
 
   const { endDate } = props;

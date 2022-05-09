@@ -3,7 +3,7 @@ import axios from "axios";
 import Event from "../../../types/Event";
 import Video from "../../../types/Video";
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default (req: NextApiRequest, res: NextApiResponse): void => {
 
   const videos: Video[] = [];
   axios

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useScrollTrigger } from '@material-ui/core';
-import clsx from 'clsx';
+import React from "react";
+import { useScrollTrigger } from "@material-ui/core";
+import clsx from "clsx";
 
 interface Props {
   children: React.ReactElement;

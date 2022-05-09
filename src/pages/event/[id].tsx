@@ -3,7 +3,6 @@ import clsx from "clsx";
 import {
   makeStyles,
   Theme,
-  Breadcrumbs,
   IconButton,
   Typography,
   Grid,
@@ -13,14 +12,8 @@ import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import {
   HeartOutline as HeartOutlinedIcon,
-  StarOutline as StarOutlineIcon,
-  Facebook as FacebookIcon,
-  Youtube as YoutubeIcon,
-  Twitter as TwitterIcon,
-  Instagram as InstagramIcon,
 } from "mdi-material-ui";
 import Event from "../../types/Event";
-import * as DateUtils from "../../utils/DateUtils";
 
 import Link from "../../components/Link";
 import TitleBar from "../../components/TitleBar";
@@ -30,7 +23,6 @@ import axios from "axios";
 import StartDateInfo from "../../components/EventDetailsInfo/StartDate";
 import EndDateInfo from "../../components/EventDetailsInfo/EndDateInfo";
 import LocationInfo from "../../components/EventDetailsInfo/LocationInfo";
-import CategoryInfo from "../../components/EventDetailsInfo/CategoryInfo";
 
 function EventById(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
