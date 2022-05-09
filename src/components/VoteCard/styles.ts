@@ -33,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "220px",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: "10px",
     transform: "initial",
     transition: "all 0.5s ease-in-out",
-    objectFit: "cover",
+    objectFit: "contain",
   },
   status: {
     color: theme.palette.primary.main,
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     transform: "initial",
     transition: "all 0.5s ease-in-out",
+    backgroundColor: theme.palette.background.default,
   },
   title: {
     display: "flex",

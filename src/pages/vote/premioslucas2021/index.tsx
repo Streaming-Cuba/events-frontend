@@ -92,13 +92,8 @@ export default function PremiosLucas2021 (
       .length >= 5;
   }, [cookies]);
 
-  const searchEndpoint = (query: string) => `/api/search?q=${query}`;
-
   const onSearchChange = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
     setSearch(event.target.value);
-    axios
-      .get(searchEndpoint(event.target.value))
-      .then(r => console.log(r.data.results) );
   }, []);
 
   const scrollToTop = () => {
