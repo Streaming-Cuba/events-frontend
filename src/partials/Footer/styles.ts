@@ -8,6 +8,7 @@ export default makeStyles((theme: Theme) => ({
     backgroundPosition: "center",
     color: "#fff",
     position: "absolute",
+    width: "100%",
   },
   container: {
     width: "100%",
