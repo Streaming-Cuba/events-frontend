@@ -1,3 +1,4 @@
+import React from "react";
 import useStyles from "./styles";
 
 function EmptySpace(props: EmptySpaceProps) {

@@ -1,7 +1,7 @@
-import * as DateUtils from "../../utils/DateUtils";
+import React from "react";
 import useStyles from "./styles";
 
-function CategoryInfo(props: CategoryInfoProps) {
+function CategoryInfo(props: CategoryInfoProps): JSX.Element {
   const classes = useStyles();
   const { category } = props;
 

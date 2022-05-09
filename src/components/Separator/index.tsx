@@ -1,6 +1,7 @@
+import React from "react";
 import useStyles from "./styles";
 
-function Separator(props: SeparatorProps) {
+function Separator(props: SeparatorProps): JSX.Element {
   const classes = useStyles();
 
   const innerMarginSize = props.innerMarginSize || "small";

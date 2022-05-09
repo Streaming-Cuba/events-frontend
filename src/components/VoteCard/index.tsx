@@ -1,5 +1,5 @@
-import React, { MouseEvent, MouseEventHandler } from "react";
-import clsx from 'clsx';
+import React, { MouseEvent, MouseEventHandler, useEffect } from "react";
+import clsx from "clsx";
 import {
   Headphones as HeadphonesIcon,
   Vote as VoteIcon,
@@ -8,10 +8,14 @@ import { Card, IconButton, Tooltip } from "@material-ui/core";
 import Item from "../../types/Item";
 import useStyles from "./styles";
 
-function VoteCard(props: VoteCardProps) {
+function VoteCard(props: VoteCardProps): JSX.Element {
   const classes = useStyles();
 
   const { data, disableVote } = props;
+  useEffect(() => {
+    data.metadata = JSON.parse(data.metadataJson);
+  }, []);
+ 
 
   const onVote = (e: MouseEvent<HTMLButtonElement>) => {
     if (props.onVote) props.onVote(e, data.id);

@@ -4,7 +4,7 @@ import ServerManager from "../../apis/server";
 const serverManager = new ServerManager();
 const AxiosProviderStateContext = React.createContext(serverManager);
 
-function ServerManagerProvider(props: any) {
+function ServerManagerProvider(props: any): JSX.Element {
   return (
     <AxiosProviderStateContext.Provider value={serverManager}>
       {props.children}

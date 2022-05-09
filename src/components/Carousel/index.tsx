@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
-import { Chip } from "@material-ui/core";
 import { OutlinedButton } from "../Buttons";
 
 // const data = [
@@ -20,12 +19,12 @@ import { OutlinedButton } from "../Buttons";
 //   // { id: 3, title: 'ASdaguaca 2020', image: '/images/event2.webp', identifier: "evento2" },
 // ];
 
-function Carousel(props: { items: any[] }) {
+function Carousel(props: { items: any[] }): JSX.Element {
   const classes = useStyles();
 
   const [active, setActive] = useState(0);
 
-  const  items  = props.items.filter(item => item.identifier && item.identifier === "premioslucas2021");
+  const  items  = props.items.filter(item => item.identifier && item.identifier === "cubadisco2022");
 
   useEffect(() => {
     const intervalId = setInterval(nextItem, 6000);

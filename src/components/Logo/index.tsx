@@ -1,6 +1,7 @@
+import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-function Logo(props: { color?: string }) {
+function Logo({ props }: { props: { color?: string; }; }): JSX.Element {
   const classes = useStyles();
   return (
     <span className={classes.logo}>
@@ -56,7 +57,7 @@ function Logo(props: { color?: string }) {
 const useStyles = makeStyles(() => ({
   logo: {
     width: "120px",
-    userSelect: 'none',
+    userSelect: "none",
   },
 }));
 

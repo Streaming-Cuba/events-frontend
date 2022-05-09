@@ -182,7 +182,7 @@ export default function PremiosLucas2021 (
         }}
       >
         <ReCAPTCHA
-          sitekey={"6LcNay8cAAAAAH43qGJAbO37RjpMDkvxjuZPbPQI"}
+          sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
           onChange={handleVote}
           hl="es"
         />

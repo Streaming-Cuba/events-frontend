@@ -1,6 +1,7 @@
+import React from "react";
 import useStyles from "./styles";
 
-function LocationInfo(props: LocationInfoProps) {
+function LocationInfo(props: LocationInfoProps): JSX.Element {
   const classes = useStyles();
   const { location } = props;
   if (!location) return null;

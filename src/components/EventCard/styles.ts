@@ -11,8 +11,7 @@ const useStyles = makeStyles(() => ({
   },
   image: {
     position: "relative",
-    marginBottom: "20px",
-    backgroundColor: "black"
+    // backgroundColor: "black"
   },
   img: {
     width: "100%",
@@ -20,6 +19,8 @@ const useStyles = makeStyles(() => ({
     maxHeight: "245px",
     display: "block",
     borderRadius: "5px",
+    objectFit: "cover",
+    margin: "0"
   },
   status: {
     position: "absolute",

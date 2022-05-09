@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState, MouseEvent } from "react";
-import clsx from "clsx";
 import {
   Button,
   makeStyles,
@@ -14,6 +13,8 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Modal,
+  Backdrop,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -23,7 +24,7 @@ import Link from "../../components/Link";
 import TitleBar from "../../components/TitleBar";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { Music as MusicIcon } from "mdi-material-ui";
-import { VariantType, useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import { useCookies } from "react-cookie";
 
 import axios from "axios";
@@ -31,10 +32,11 @@ import EmptySpace from "../../components/EmptySpace";
 import Separator from "../../components/Separator";
 import VoteCard from "../../components/VoteCard";
 import { useServerManager } from "../../components/ServerManagerProvider";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function VoteByEvent(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
-) {
+): JSX.Element {
   const { event } = props;
   const router = useRouter();
   const classes = useStyles();
@@ -48,6 +50,8 @@ function VoteByEvent(
   const [institution, setInstitution] = useState("");
   const [email, setEmail] = useState("");
   const [voteType, setVoteType] = useState("default");
+  const [isReCAPTCHAOpen, setIsReCAPTCHAOpen] = useState<boolean>(false);
+  const [voteId, setVoteId] = useState<number>(0);
 
   const sm = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const md = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
@@ -81,14 +85,17 @@ function VoteByEvent(
     return 4;
   }, [sm, md, lg]);
 
-  useEffect(() => {
-    console.log(event);
-  }, []);
+  const startVote = (e: MouseEvent, id: number) => {
+    e.preventDefault();
+    setVoting(true);
+    setVoteId(id);
+    setIsReCAPTCHAOpen(true);
+  };
 
-  const handleVote = (e: MouseEvent, id: number) => {
+  const handleVote = (token: string) => {
     setVoting(true);
     serverManager
-      .voteByItem(id, voteType, "")
+      .voteByItem(voteId, voteType, token)
       .then((response) => {
         const { data } = response;
         enqueueSnackbar(`¡Gracias por votar en ${event.name}!`, {
@@ -96,7 +103,7 @@ function VoteByEvent(
         });
         setCookie(`vote/${data.groupId}`, "vote");
       })
-      .catch((error) => {
+      .catch(() => {
         enqueueSnackbar(
           "¡Ha ocurrido un error al procesar su voto! Por favor intentelo más tarde.",
           {
@@ -106,6 +113,7 @@ function VoteByEvent(
       })
       .finally(() => {
         setVoting(false);
+        setIsReCAPTCHAOpen(false);
       });
   };
 
@@ -130,7 +138,7 @@ function VoteByEvent(
                 <GridListTile key={item.id} className={classes.tile}>
                   <VoteCard
                     data={item}
-                    onVote={handleVote}
+                    onVote={startVote}
                     disableVote={existVote}
                   />
                 </GridListTile>
@@ -177,7 +185,6 @@ function VoteByEvent(
       .createSubscriber(name, institution, email)
       .then(() => {
         setVoteType("special");
-
       })
       .catch(() => {
         setSpecialVoteDialog(false);
@@ -195,6 +202,25 @@ function VoteByEvent(
           images: [{ url: event.coverPath }],
         }}
       />
+
+      <Modal
+        open={isReCAPTCHAOpen}
+        className={classes.modal}
+        onClose={() => {
+          setIsReCAPTCHAOpen(false);
+        }}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <ReCAPTCHA
+          sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+          onChange={(token: string) => handleVote(token)}
+          hl="es"
+        />
+      </Modal>
 
       <Dialog open={specialVoteDialog}>
         <DialogTitle>Indentifíquese antes de votar</DialogTitle>
@@ -226,7 +252,8 @@ function VoteByEvent(
             onClick={submitSpecialVote}
             color="primary"
             variant="contained"
-            autoFocus disableElevation
+            autoFocus
+            disableElevation
           >
             Continuar
           </Button>
@@ -409,6 +436,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& > svg": {
       fill: theme.palette.primary.main,
     },
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 

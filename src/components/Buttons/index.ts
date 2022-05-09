@@ -1,5 +1,5 @@
-import OutlinedButton from './OutlinedButton';
+import OutlinedButton from "./OutlinedButton";
 
 export {
   OutlinedButton
-}
+};

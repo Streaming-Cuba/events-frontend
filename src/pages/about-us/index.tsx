@@ -5,7 +5,7 @@ import Link from "../../components/Link";
 import TitleBar from "../../components/TitleBar";
 import EmptySpace from "../../components/EmptySpace";
 import Separator from "../../components/Separator";
-function AboutUs() {
+function AboutUs(): JSX.Element {
   const classes = useStyles();
 
   return (

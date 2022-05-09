@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@material-ui/core";
 import { NavigateNext as NavigateNextIcon } from "@material-ui/icons";
 import useStyles from "./styles";
 
-function TitleBar(props: TitleBarProps) {
+function TitleBar(props: TitleBarProps): JSX.Element {
   const classes = useStyles();
 
   const { background } = props;
