@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     transform: "initial",
     transition: "all 0.5s ease-in-out",
-    objectFit: "cover",
+    objectFit: "contain",
   },
   status: {
     color: theme.palette.primary.main,

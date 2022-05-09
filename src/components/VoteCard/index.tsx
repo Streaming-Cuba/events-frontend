@@ -12,9 +12,7 @@ function VoteCard(props: VoteCardProps): JSX.Element {
   const classes = useStyles();
 
   const { data, disableVote } = props;
-  useEffect(() => {
-    data.metadata = JSON.parse(data.metadataJson);
-  }, []);
+  data.metadata = JSON.parse(data.metadataJson);
  
 
   const onVote = (e: MouseEvent<HTMLButtonElement>) => {
